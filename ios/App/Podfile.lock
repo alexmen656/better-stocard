@@ -3,6 +3,8 @@ PODS:
     - CapacitorCordova
   - CapacitorCommunityBarcodeScanner (4.0.1):
     - Capacitor
+  - CapacitorCommunityScreenBrightness (7.0.0):
+    - Capacitor
   - CapacitorCordova (7.4.4)
   - CapacitorPassToWallet (4.0.1):
     - Capacitor
@@ -12,6 +14,7 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCommunityBarcodeScanner (from `../../node_modules/@capacitor-community/barcode-scanner`)"
+  - "CapacitorCommunityScreenBrightness (from `../../node_modules/@capacitor-community/screen-brightness`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - CapacitorPassToWallet (from `../../node_modules/capacitor-pass-to-wallet`)
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
@@ -21,6 +24,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorCommunityBarcodeScanner:
     :path: "../../node_modules/@capacitor-community/barcode-scanner"
+  CapacitorCommunityScreenBrightness:
+    :path: "../../node_modules/@capacitor-community/screen-brightness"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorPassToWallet:
@@ -31,10 +36,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 358dd1c3fdd71d969547b17e159fd8a7736cb45f
   CapacitorCommunityBarcodeScanner: 100051f49caad62966f331cbdf6844a3e51db8e9
+  CapacitorCommunityScreenBrightness: 508f3d0f79024cd8da7d063f456870a4a1932723
   CapacitorCordova: bf648a636f3c153f652d312ae145fb508b6ffced
   CapacitorPassToWallet: 0bfab52d0b3f0918dc45e1355f1fb954a7c93b7b
   CapacitorPreferences: 65107ed7437d96ee72583df5763985e3c0ff2bc2
 
-PODFILE CHECKSUM: 14ce17589fa4d41d2a3643c52d106d0d55deb674
+PODFILE CHECKSUM: d7e9500d2ea81a6aee3f5728d073b092f41a3334
 
 COCOAPODS: 1.16.2

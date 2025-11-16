@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 
 interface Props {
     card: {
@@ -38,6 +39,16 @@ function generateCardNumber(): string {
 function generateMemberNumber(): string {
     return `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 9000 + 1000)}`
 }
+
+onMounted(async () => {
+    try {
+        setTimeout(async () => {
+            await ScreenBrightness.setBrightness({ brightness: 1.0 });
+        }, 500);
+    } catch (error) {
+        console.error('Error setting screen brightness:', error);
+    }
+});
 </script>
 
 <template>
