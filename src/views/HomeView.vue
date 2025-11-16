@@ -6,6 +6,7 @@ import { Preferences } from '@capacitor/preferences';
 interface Card {
   id: number
   name: string
+  logo: string
   bgColor: string
   textColor: string
 }
@@ -43,17 +44,17 @@ const getCards = async () => {
 
 const setCards = async () => {
   const cards2 = ref<Card[]>([
-    { id: 1, name: 'COOP', bgColor: '#E53935', textColor: '#FFFFFF' },
-    { id: 2, name: 'ESSELUNGA', bgColor: '#1565C0', textColor: '#FFFFFF' },
-    { id: 3, name: 'Carrefour', bgColor: '#0D47A1', textColor: '#FFFFFF' },
-    { id: 4, name: '🌼CONAD', bgColor: '#E53935', textColor: '#FFFFFF' },
-    { id: 5, name: 'Media•World', bgColor: '#C62828', textColor: '#FFFFFF' },
-    { id: 6, name: 'IKEA FAMILY', bgColor: '#FF9800', textColor: '#FFFFFF' },
-    { id: 7, name: 'DECATHLON', bgColor: '#42A5F5', textColor: '#FFFFFF' },
-    { id: 8, name: 'TIGOTA', bgColor: '#26A69A', textColor: '#FFFFFF' },
-    { id: 9, name: 'OVS', bgColor: '#212121', textColor: '#FFFFFF' },
-    { id: 10, name: 'TUFI', bgColor: '#F5F5F5', textColor: '#E91E63' },
-    { id: 11, name: 'Lidl', bgColor: '#F5F5F5', textColor: '#E91E63' },
+    { id: 1, name: 'COOP', logo: 'coop.fr', bgColor: '#E53935', textColor: '#FFFFFF' },
+    { id: 2, name: 'ESSELUNGA', logo: 'esselunga.com', bgColor: '#1565C0', textColor: '#FFFFFF' },
+    { id: 3, name: 'Carrefour', logo: 'carrefour.com', bgColor: '#0D47A1', textColor: '#FFFFFF' },
+    { id: 4, name: '🌼CONAD', logo: 'conad.com', bgColor: '#E53935', textColor: '#FFFFFF' },
+    { id: 5, name: 'Media•World', logo: 'mediaworld.com', bgColor: '#C62828', textColor: '#FFFFFF' },
+    { id: 6, name: 'IKEA FAMILY', logo: 'ikea.com', bgColor: '#FF9800', textColor: '#FFFFFF' },
+    { id: 7, name: 'DECATHLON', logo: 'decathlon.com', bgColor: '#42A5F5', textColor: '#FFFFFF' },
+    { id: 8, name: 'TIGOTA', logo: 'tigota.com', bgColor: '#26A69A', textColor: '#FFFFFF' },
+    { id: 9, name: 'OVS', logo: 'ovs.com', bgColor: '#212121', textColor: '#FFFFFF' },
+    { id: 10, name: 'TUFI', logo: 'tufi.com', bgColor: '#F5F5F5', textColor: '#E91E63' },
+    { id: 11, name: 'Lidl', logo: 'lidl.com', bgColor: '#F5F5F5', textColor: '#E91E63' },
   ]);
 
   await Preferences.set({
@@ -79,13 +80,14 @@ onMounted(async () => {
       <div v-for="card in cards" :key="card.id" class="card"
         :style="{ backgroundColor: card.bgColor, color: card.textColor }" @click="openCard(card)">
         <div class="card-name"><!--{{ card.name }}-->
-          <img
-            :src="'https://cdn.brandfetch.io/' + card.name.toLowerCase().replace(/\s+/g, '-') + '.com?c=1idPcHNqxG9p9gPyoFm'"
-            alt="" style="max-width: 200px; max-height: 100px; object-fit: contain;">
+          <!--<img
+            :src="'https://cdn.brandfetch.io/' + card.name.toLowerCase().replace(/\s+/g, '-').replace('•', '') + '.com?c=1idPcHNqxG9p9gPyoFm'"
+            alt="" style="max-width: 200px; max-height: 100px; object-fit: contain;">-->
+          <img :src="'https://cdn.brandfetch.io/' + card.logo + '?c=1idPcHNqxG9p9gPyoFm'" alt=""
+            style="max-width: 200px; max-height: 100px; object-fit: contain;">
         </div>
       </div>
     </div>
-
     <!--
     <h2>Testing Brandfetch</h2>
     <img src="https://cdn.brandfetch.io/apple.com?c=1idPcHNqxG9p9gPyoFm" alt="Logo by Brandfetch" />
