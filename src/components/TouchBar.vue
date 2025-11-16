@@ -1,25 +1,29 @@
 <template>
     <nav class="bottom-nav">
-        <button class="nav-item active">
+        <button class="nav-item" :class="route.path === '/' ? 'active' : ''" @click="$router.push('/')">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3" y="3" width="7" height="5" rx="1" fill="#FF6B6B" />
-                <rect x="3" y="10" width="7" height="5" rx="1" fill="#FF6B6B" />
-                <rect x="3" y="17" width="7" height="5" rx="1" fill="#FF6B6B" />
-                <rect x="12" y="3" width="9" height="2" rx="1" fill="#FF6B6B" />
-                <rect x="12" y="10" width="9" height="2" rx="1" fill="#FF6B6B" />
-                <rect x="12" y="17" width="9" height="2" rx="1" fill="#FF6B6B" />
+                <rect x="3" y="3" width="7" height="5" rx="1" :fill="route.path === '/' ? '#FF6B6B' : '#999'" />
+                <rect x="3" y="10" width="7" height="5" rx="1" :fill="route.path === '/' ? '#FF6B6B' : '#999'" />
+                <rect x="3" y="17" width="7" height="5" rx="1" :fill="route.path === '/' ? '#FF6B6B' : '#999'" />
+                <rect x="12" y="3" width="9" height="2" rx="1" :fill="route.path === '/' ? '#FF6B6B' : '#999'" />
+                <rect x="12" y="10" width="9" height="2" rx="1" :fill="route.path === '/' ? '#FF6B6B' : '#999'" />
+                <rect x="12" y="17" width="9" height="2" rx="1" :fill="route.path === '/' ? '#FF6B6B' : '#999'" />
             </svg>
             <span>Cards</span>
         </button>
-        <button class="nav-item" @click="$router.push('/settings')">
+        <button class="nav-item" :class="route.path === '/settings' ? 'active' : ''" @click="$router.push('/settings')">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L2 7V17C2 20.31 7.03 23.25 12 24C16.97 23.25 22 20.31 22 17V7L12 2Z" stroke="#999"
-                    stroke-width="2" fill="none" />
+                <path d="M12 2L2 7V17C2 20.31 7.03 23.25 12 24C16.97 23.25 22 20.31 22 17V7L12 2Z"
+                    :stroke="route.path === '/settings' ? '#FF6B6B' : '#999'" stroke-width="2" fill="none" />
             </svg>
             <span>Settings</span>
         </button>
     </nav>
 </template>
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+const route = useRoute()
+</script>
 <style scoped>
 .bottom-nav {
     position: fixed;
@@ -43,7 +47,7 @@
     border: none;
     cursor: pointer;
     padding: 8px 24px;
-    color: #999999;
+    color: #999;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.5px;

@@ -1,4 +1,5 @@
 # Planned features:
+
     - Adding cards
     - Adding cards to Apple Wallet
     - Screen should get really bright in show mode
@@ -8,4 +9,4 @@
     - Automatic card provides detection like: DM, Payback, whatever
     - Search function
     - Apple watch app (if time)
-    
+    - Multi lang (if time)
