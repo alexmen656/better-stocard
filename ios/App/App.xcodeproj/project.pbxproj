@@ -375,6 +375,7 @@
 				DEVELOPMENT_TEAM = AS5BHHK5AW;
 				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Pocketz;
+				"INFOPLIST_KEY_CFBundleDisplayName[sdk=iphoneos*]" = Pocketz;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
