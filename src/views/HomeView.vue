@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import CardDetail from '@/components/CardDetail.vue'
 
 interface Card {
   id: number
@@ -20,6 +21,16 @@ const cards = ref<Card[]>([
   { id: 9, name: 'OVS', bgColor: '#212121', textColor: '#FFFFFF' },
   { id: 10, name: 'TUFI', bgColor: '#F5F5F5', textColor: '#E91E63' },
 ])
+
+const selectedCard = ref<Card | null>(null)
+
+function openCard(card: Card) {
+  selectedCard.value = card
+}
+
+function closeCard() {
+  selectedCard.value = null
+}
 </script>
 
 <template>
@@ -31,10 +42,11 @@ const cards = ref<Card[]>([
     <div class="section-title">ALL CARDS</div>
     <div class="cards-grid">
       <div v-for="card in cards" :key="card.id" class="card"
-        :style="{ backgroundColor: card.bgColor, color: card.textColor }">
+        :style="{ backgroundColor: card.bgColor, color: card.textColor }" @click="openCard(card)">
         <div class="card-name">{{ card.name }}</div>
       </div>
     </div>
+    <CardDetail v-if="selectedCard" :card="selectedCard" @close="closeCard" />
     <nav class="bottom-nav">
       <button class="nav-item active">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
