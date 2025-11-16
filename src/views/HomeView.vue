@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import CardDetail from '@/components/CardDetail.vue'
+import { Preferences } from '@capacitor/preferences';
 
 interface Card {
   id: number
@@ -9,7 +10,8 @@ interface Card {
   textColor: string
 }
 
-const cards = ref<Card[]>([
+const cards = ref<Card[]>([]);
+/*const cards = ref<Card[]>([
   { id: 1, name: 'COOP', bgColor: '#E53935', textColor: '#FFFFFF' },
   { id: 2, name: 'ESSELUNGA', bgColor: '#1565C0', textColor: '#FFFFFF' },
   { id: 3, name: 'Carrefour', bgColor: '#0D47A1', textColor: '#FFFFFF' },
@@ -21,7 +23,7 @@ const cards = ref<Card[]>([
   { id: 9, name: 'OVS', bgColor: '#212121', textColor: '#FFFFFF' },
   { id: 10, name: 'TUFI', bgColor: '#F5F5F5', textColor: '#E91E63' },
   { id: 11, name: 'Lidl', bgColor: '#F5F5F5', textColor: '#E91E63' },
-])
+])*/
 
 const selectedCard = ref<Card | null>(null)
 
@@ -32,13 +34,45 @@ function openCard(card: Card) {
 function closeCard() {
   selectedCard.value = null
 }
+
+const getCards = async () => {
+  const { value } = await Preferences.get({ key: 'cards' });
+  const cards = JSON.parse(value)
+  return cards;
+};
+
+const setCards = async () => {
+  const cards2 = ref<Card[]>([
+    { id: 1, name: 'COOP', bgColor: '#E53935', textColor: '#FFFFFF' },
+    { id: 2, name: 'ESSELUNGA', bgColor: '#1565C0', textColor: '#FFFFFF' },
+    { id: 3, name: 'Carrefour', bgColor: '#0D47A1', textColor: '#FFFFFF' },
+    { id: 4, name: '🌼CONAD', bgColor: '#E53935', textColor: '#FFFFFF' },
+    { id: 5, name: 'Media•World', bgColor: '#C62828', textColor: '#FFFFFF' },
+    { id: 6, name: 'IKEA FAMILY', bgColor: '#FF9800', textColor: '#FFFFFF' },
+    { id: 7, name: 'DECATHLON', bgColor: '#42A5F5', textColor: '#FFFFFF' },
+    { id: 8, name: 'TIGOTA', bgColor: '#26A69A', textColor: '#FFFFFF' },
+    { id: 9, name: 'OVS', bgColor: '#212121', textColor: '#FFFFFF' },
+    { id: 10, name: 'TUFI', bgColor: '#F5F5F5', textColor: '#E91E63' },
+    { id: 11, name: 'Lidl', bgColor: '#F5F5F5', textColor: '#E91E63' },
+  ]);
+
+  await Preferences.set({
+    key: 'cards',
+    value: JSON.stringify(cards2.value),
+  });
+};
+
+onMounted(async () => {
+  //await setCards();
+  cards.value = await getCards();
+});
 </script>
 
 <template>
   <div class="app-container">
     <header class="header">
       <h1 class="title">Cards</h1>
-      <button class="add-button">+</button>
+      <button class="add-button" @click="$router.push('/create-card')">+</button>
     </header>
     <div class="section-title">ALL CARDS</div>
     <div class="cards-grid">
