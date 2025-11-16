@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Preferences } from '@capacitor/preferences'
 
-interface Card {
+interface Company {
     id: number
     name: string
+    logo: string
     bgColor: string
     textColor: string
+}
+
+interface Card extends Company {
     barcode?: string
     cardNumber?: string
     memberNumber?: string
@@ -15,22 +19,58 @@ interface Card {
 
 const router = useRouter()
 const step = ref<'select-company' | 'enter-barcode'>('select-company')
-const selectedCompany = ref<{ name: string; bgColor: string; textColor: string } | null>(null)
+const selectedCompany = ref<Company | null>(null)
 const barcode = ref('')
 
+const extractColorFromImage = (logoUrl: string): Promise<string> => {
+    return new Promise((resolve) => {
+        const img = new Image()
+        img.crossOrigin = 'anonymous'
+        img.onload = () => {
+            const canvas = document.createElement('canvas')
+            canvas.width = img.width
+            canvas.height = img.height
+            const ctx = canvas.getContext('2d')
+            if (ctx) {
+                ctx.drawImage(img, 0, 0)
+                const x = Math.floor(img.width - 1)
+                const y = Math.floor(img.height / 2)
+                const imageData = ctx.getImageData(x, y, 1, 1)
+                const data = imageData.data
+                const color = `rgb(${data[0]}, ${data[1]}, ${data[2]})`
+                resolve(color)
+            }
+        }
+        img.onerror = () => {
+            resolve('#E53935')
+        }
+        img.src = logoUrl
+    })
+}
+
+const getTextColor = (rgbColor: string): string => {
+    const match = rgbColor.match(/\d+/g)
+    if (!match || match.length < 3) return '#FFFFFF'
+    const r = parseInt(match[0])
+    const g = parseInt(match[1])
+    const b = parseInt(match[2])
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+    return luminance > 0.5 ? '#000000' : '#FFFFFF'
+}
+
 //static for now
-const companies = ref([
-    { name: 'COOP', bgColor: '#E53935', textColor: '#FFFFFF' },
-    { name: 'ESSELUNGA', bgColor: '#1565C0', textColor: '#FFFFFF' },
-    { name: 'Carrefour', bgColor: '#0D47A1', textColor: '#FFFFFF' },
-    { name: 'CONAD', bgColor: '#E53935', textColor: '#FFFFFF' },
-    { name: 'Media•World', bgColor: '#C62828', textColor: '#FFFFFF' },
-    { name: 'IKEA FAMILY', bgColor: '#FF9800', textColor: '#FFFFFF' },
-    { name: 'DECATHLON', bgColor: '#42A5F5', textColor: '#FFFFFF' },
-    { name: 'TIGOTA', bgColor: '#26A69A', textColor: '#FFFFFF' },
-    { name: 'OVS', bgColor: '#212121', textColor: '#FFFFFF' },
-    { name: 'TUFI', bgColor: '#F5F5F5', textColor: '#E91E63' },
-    { name: 'Lidl', bgColor: '#0066B2', textColor: '#FFFFFF' },
+const companies = ref<Company[]>([
+    { id: 1, name: 'COOP', logo: 'coop.fr', bgColor: '#E53935', textColor: '#FFFFFF' },
+    { id: 2, name: 'ESSELUNGA', logo: 'esselunga.com', bgColor: '#1565C0', textColor: '#FFFFFF' },
+    { id: 3, name: 'Carrefour', logo: 'carrefour.com', bgColor: '#0D47A1', textColor: '#FFFFFF' },
+    { id: 4, name: '🌼CONAD', logo: 'conad.com', bgColor: '#E53935', textColor: '#FFFFFF' },
+    { id: 5, name: 'Media•World', logo: 'mediaworld.com', bgColor: '#C62828', textColor: '#FFFFFF' },
+    { id: 6, name: 'IKEA FAMILY', logo: 'ikea.com', bgColor: '#FF9800', textColor: '#FFFFFF' },
+    { id: 7, name: 'DECATHLON', logo: 'decathlon.com', bgColor: '#42A5F5', textColor: '#FFFFFF' },
+    { id: 8, name: 'TIGOTA', logo: 'tigota.com', bgColor: '#26A69A', textColor: '#FFFFFF' },
+    { id: 9, name: 'OVS', logo: 'ovs.com', bgColor: '#212121', textColor: '#FFFFFF' },
+    { id: 10, name: 'TUFI', logo: 'tufi.com', bgColor: '#F5F5F5', textColor: '#E91E63' },
+    { id: 11, name: 'Lidl', logo: 'lidl.com', bgColor: '#F5F5F5', textColor: '#E91E63' },
 ])
 
 const isFormValid = computed(() => {
@@ -42,7 +82,16 @@ const isFormValid = computed(() => {
     return false
 })
 
-function selectCompany(company: { name: string; bgColor: string; textColor: string }) {
+onMounted(async () => {
+    for (const company of companies.value) {
+        const logoUrl = `https://cdn.brandfetch.io/${company.logo}?c=1idPcHNqxG9p9gPyoFm`
+        const bgColor = await extractColorFromImage(logoUrl)
+        company.bgColor = bgColor
+        company.textColor = getTextColor(bgColor)
+    }
+})
+
+function selectCompany(company: Company) {
     selectedCompany.value = company
     step.value = 'enter-barcode'
 }
@@ -59,14 +108,19 @@ function goBack() {
 async function saveCard() {
     if (!selectedCompany.value || !barcode.value.trim()) return
 
+    const logoUrl = `https://cdn.brandfetch.io/${selectedCompany.value.logo}?c=1idPcHNqxG9p9gPyoFm`
+    const bgColor = await extractColorFromImage(logoUrl)
+    const textColor = getTextColor(bgColor)
+
     const cardNumber = `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)}`
     const memberNumber = `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 9000 + 1000)}`
 
     const newCard: Card = {
         id: Date.now(),
         name: selectedCompany.value.name,
-        bgColor: selectedCompany.value.bgColor,
-        textColor: selectedCompany.value.textColor,
+        logo: selectedCompany.value.logo,
+        bgColor: bgColor,
+        textColor: textColor,
         barcode: barcode.value,
         cardNumber: cardNumber,
         memberNumber: memberNumber,
@@ -104,7 +158,8 @@ async function saveCard() {
                 <button v-for="company in companies" :key="company.name" class="company-card"
                     :style="{ backgroundColor: company.bgColor, color: company.textColor }"
                     @click="selectCompany(company)">
-                    {{ company.name }}
+                    <img :src="'https://cdn.brandfetch.io/' + company.logo + '?c=1idPcHNqxG9p9gPyoFm'" alt=""
+                        style="max-width: 100px; max-height: 60px; object-fit: contain;">
                 </button>
             </div>
         </div>
@@ -112,7 +167,8 @@ async function saveCard() {
             <div class="selected-company">
                 <div class="company-preview"
                     :style="{ backgroundColor: selectedCompany?.bgColor, color: selectedCompany?.textColor }">
-                    {{ selectedCompany?.name }}
+                    <img :src="'https://cdn.brandfetch.io/' + selectedCompany?.logo + '?c=1idPcHNqxG9p9gPyoFm'" alt=""
+                        style="max-width: 150px; max-height: 80px; object-fit: contain;">
                 </div>
             </div>
             <div class="form-section">

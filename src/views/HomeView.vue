@@ -11,6 +11,42 @@ interface Card {
   textColor: string
 }
 
+const extractColorFromImage = (logoUrl: string): Promise<string> => {
+  return new Promise((resolve) => {
+    const img = new Image()
+    img.crossOrigin = 'anonymous'
+    img.onload = () => {
+      const canvas = document.createElement('canvas')
+      canvas.width = img.width
+      canvas.height = img.height
+      const ctx = canvas.getContext('2d')
+      if (ctx) {
+        ctx.drawImage(img, 0, 0)
+        const x = Math.floor(img.width - 1)
+        const y = Math.floor(img.height / 2)
+        const imageData = ctx.getImageData(x, y, 1, 1)
+        const data = imageData.data
+        const color = `rgb(${data[0]}, ${data[1]}, ${data[2]})`
+        resolve(color)
+      }
+    }
+    img.onerror = () => {
+      resolve('#E53935')
+    }
+    img.src = logoUrl
+  })
+}
+
+const getTextColor = (rgbColor: string): string => {
+  const match = rgbColor.match(/\d+/g)
+  if (!match || match.length < 3) return '#FFFFFF'
+  const r = parseInt(match[0])
+  const g = parseInt(match[1])
+  const b = parseInt(match[2])
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+  return luminance > 0.5 ? '#000000' : '#FFFFFF'
+}
+
 const cards = ref<Card[]>([]);
 /*const cards = ref<Card[]>([
   { id: 1, name: 'COOP', bgColor: '#E53935', textColor: '#FFFFFF' },
@@ -38,8 +74,16 @@ function closeCard() {
 
 const getCards = async () => {
   const { value } = await Preferences.get({ key: 'cards' });
-  const cards = JSON.parse(value)
-  return cards;
+  const cardsData = JSON.parse(value)
+
+  for (const card of cardsData) {
+    const logoUrl = `https://cdn.brandfetch.io/${card.logo}?c=1idPcHNqxG9p9gPyoFm`
+    const bgColor = await extractColorFromImage(logoUrl)
+    card.bgColor = bgColor
+    card.textColor = getTextColor(bgColor)
+  }
+
+  return cardsData;
 };
 
 const setCards = async () => {
