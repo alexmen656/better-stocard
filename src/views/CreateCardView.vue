@@ -53,9 +53,9 @@ const extractColorFromImage = (logoUrl: string): Promise<string> => {
 const getTextColor = (rgbColor: string): string => {
     const match = rgbColor.match(/\d+/g)
     if (!match || match.length < 3) return '#FFFFFF'
-    const r = parseInt(match[0])
-    const g = parseInt(match[1])
-    const b = parseInt(match[2])
+    const r = parseInt(match[0]!)
+    const g = parseInt(match[1]!)
+    const b = parseInt(match[2]!)
     const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
     return luminance > 0.5 ? '#000000' : '#FFFFFF'
 }
