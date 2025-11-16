@@ -72,6 +72,21 @@ function closeCard() {
   selectedCard.value = null
 }
 
+function updateCard(updatedCard: Card) {
+  const cardIndex = cards.value.findIndex(c => c.id === updatedCard.id)
+  if (cardIndex !== -1) {
+    cards.value[cardIndex] = updatedCard
+    saveCards()
+  }
+}
+
+async function saveCards() {
+  await Preferences.set({
+    key: 'cards',
+    value: JSON.stringify(cards.value),
+  });
+}
+
 const getCards = async (): Promise<Card[]> => {
   const { value } = await Preferences.get({ key: 'cards' });
   if (!value) return []
@@ -167,7 +182,7 @@ onMounted(async () => {
     <img src="https://cdn.brandfetch.io/ikea.com?c=1idPcHNqxG9p9gPyoFm" alt="Logo by Brandfetch" />
     -->
 
-    <CardDetail v-if="selectedCard" :card="selectedCard" @close="closeCard" />
+    <CardDetail v-if="selectedCard" :card="selectedCard" @close="closeCard" @updateCard="updateCard" />
     <nav class="bottom-nav">
       <button class="nav-item active">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

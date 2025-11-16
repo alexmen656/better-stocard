@@ -6,18 +6,30 @@ PODS:
   - CapacitorCommunityScreenBrightness (7.0.0):
     - Capacitor
   - CapacitorCordova (7.4.4)
+  - CapacitorFilesystem (7.1.4):
+    - Capacitor
+    - IONFilesystemLib (~> 1.0.1)
   - CapacitorPassToWallet (4.0.1):
     - Capacitor
   - CapacitorPreferences (7.0.2):
     - Capacitor
+  - CapacitorStorage (1.2.5):
+    - Capacitor
+  - IONFilesystemLib (1.0.1)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCommunityBarcodeScanner (from `../../node_modules/@capacitor-community/barcode-scanner`)"
   - "CapacitorCommunityScreenBrightness (from `../../node_modules/@capacitor-community/screen-brightness`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
   - CapacitorPassToWallet (from `../../node_modules/capacitor-pass-to-wallet`)
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
+  - "CapacitorStorage (from `../../node_modules/@capacitor/storage`)"
+
+SPEC REPOS:
+  trunk:
+    - IONFilesystemLib
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -28,19 +40,26 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor-community/screen-brightness"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
+  CapacitorFilesystem:
+    :path: "../../node_modules/@capacitor/filesystem"
   CapacitorPassToWallet:
     :path: "../../node_modules/capacitor-pass-to-wallet"
   CapacitorPreferences:
     :path: "../../node_modules/@capacitor/preferences"
+  CapacitorStorage:
+    :path: "../../node_modules/@capacitor/storage"
 
 SPEC CHECKSUMS:
   Capacitor: 358dd1c3fdd71d969547b17e159fd8a7736cb45f
   CapacitorCommunityBarcodeScanner: 100051f49caad62966f331cbdf6844a3e51db8e9
   CapacitorCommunityScreenBrightness: 508f3d0f79024cd8da7d063f456870a4a1932723
   CapacitorCordova: bf648a636f3c153f652d312ae145fb508b6ffced
+  CapacitorFilesystem: f9bd850c41e048180e5dc0cbb90f2033ede9d2cc
   CapacitorPassToWallet: 0bfab52d0b3f0918dc45e1355f1fb954a7c93b7b
   CapacitorPreferences: 65107ed7437d96ee72583df5763985e3c0ff2bc2
+  CapacitorStorage: 5525ad0c4925b07029da1d2724bb479449e218d9
+  IONFilesystemLib: 89258b8e3e85465da93127d25d7ce37f977e8a6f
 
-PODFILE CHECKSUM: d7e9500d2ea81a6aee3f5728d073b092f41a3334
+PODFILE CHECKSUM: 9eb259ccbff9e1d387535315a425d0384af7d329
 
 COCOAPODS: 1.16.2

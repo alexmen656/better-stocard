@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
+import { Filesystem, Directory } from '@capacitor/filesystem';
 
 interface Props {
     card: {
@@ -11,15 +12,24 @@ interface Props {
         barcode?: string
         cardNumber?: string
         memberNumber?: string
+        photoFront?: string
+        photoBack?: string
     }
 }
 
 const props = defineProps<Props>()
 const emit = defineEmits<{
     close: []
+    updateCard: [card: any]
 }>()
 
 const barcodePattern = ref(generateBarcodePattern())
+const showMenu = ref(false)
+const showPhotosSection = ref(false)
+const photoFront = ref(props.card.photoFront || '')
+const photoBack = ref(props.card.photoBack || '')
+const fileInputFront = ref<HTMLInputElement | null>(null)
+const fileInputBack = ref<HTMLInputElement | null>(null)
 
 function generateBarcodePattern(): number[] {
     const pattern = []
@@ -42,6 +52,7 @@ function generateMemberNumber(): string {
 
 onMounted(async () => {
     try {
+        await loadPhotos()
         setTimeout(async () => {
             await ScreenBrightness.setBrightness({ brightness: 1.0 });
         }, 500);
@@ -49,6 +60,136 @@ onMounted(async () => {
         console.error('Error setting screen brightness:', error);
     }
 });
+
+function handlePhotoFrontChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0]
+    if (file) {
+        const reader = new FileReader()
+        reader.onload = async (e) => {
+            photoFront.value = e.target?.result as string
+            await savePhotos()
+        }
+        reader.readAsDataURL(file)
+    }
+}
+
+function handlePhotoBackChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0]
+    if (file) {
+        const reader = new FileReader()
+        reader.onload = async (e) => {
+            photoBack.value = e.target?.result as string
+            await savePhotos()
+        }
+        reader.readAsDataURL(file)
+    }
+}
+
+async function savePhotos() {
+    try {
+        const cardFolderId = `card_${props.card.id}`
+
+        await Filesystem.mkdir({
+            path: cardFolderId,
+            directory: Directory.Data,
+            recursive: true,
+        })
+
+        if (photoFront.value) {
+            await Filesystem.writeFile({
+                path: `${cardFolderId}/front.jpg`,
+                data: photoFront.value,
+                directory: Directory.Data,
+            })
+        }
+
+        if (photoBack.value) {
+            await Filesystem.writeFile({
+                path: `${cardFolderId}/back.jpg`,
+                data: photoBack.value,
+                directory: Directory.Data,
+            })
+        }
+
+        updateCardPhoto()
+    } catch (error) {
+        console.error('Error saving photos:', error)
+    }
+}
+
+async function loadPhotos() {
+    try {
+        const cardFolderId = `card_${props.card.id}`
+
+        try {
+            const frontData = await Filesystem.readFile({
+                path: `${cardFolderId}/front.jpg`,
+                directory: Directory.Data,
+            })
+            photoFront.value = `data:image/jpeg;base64,${frontData.data}`
+        } catch {
+            photoFront.value = ''
+        }
+
+        try {
+            const backData = await Filesystem.readFile({
+                path: `${cardFolderId}/back.jpg`,
+                directory: Directory.Data,
+            })
+            photoBack.value = `data:image/jpeg;base64,${backData.data}`
+        } catch {
+            photoBack.value = ''
+        }
+    } catch (error) {
+        console.error('Error loading photos:', error)
+    }
+}
+
+function updateCardPhoto() {
+    emit('updateCard', {
+        ...props.card,
+        photoFront: photoFront.value,
+        photoBack: photoBack.value
+    })
+}
+
+function triggerPhotoFrontUpload() {
+    fileInputFront.value?.click()
+}
+
+function triggerPhotoBackUpload() {
+    fileInputBack.value?.click()
+}
+
+async function removePhotoFront() {
+    try {
+        const cardFolderId = `card_${props.card.id}`
+        await Filesystem.deleteFile({
+            path: `${cardFolderId}/front.jpg`,
+            directory: Directory.Data,
+        })
+
+        photoFront.value = ''
+        updateCardPhoto()
+    } catch (error) {
+        console.error('Error removing front photo:', error)
+    }
+}
+
+async function removePhotoBack() {
+    try {
+        const cardFolderId = `card_${props.card.id}`
+        await Filesystem.deleteFile({
+            path: `${cardFolderId}/back.jpg`,
+            directory: Directory.Data,
+        })
+
+        photoBack.value = ''
+        updateCardPhoto()
+    } catch (error) {
+        console.error('Error removing back photo:', error)
+    }
+}
 </script>
 
 <template>
@@ -62,40 +203,116 @@ onMounted(async () => {
                     </svg>
                 </button>
                 <h1 class="detail-title">{{ card.name }}</h1>
-                <button class="menu-button">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="6" r="1.5" fill="#000" />
-                        <circle cx="12" cy="12" r="1.5" fill="#000" />
-                        <circle cx="12" cy="18" r="1.5" fill="#000" />
-                    </svg>
-                </button>
-            </header>
-            <div class="card-content">
-                <div class="card-display" :style="{ backgroundColor: card.bgColor, color: card.textColor }">
-                    <div class="card-logo">
-                        <div class="logo-placeholder">
-                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none"
+                <div class="menu-wrapper">
+                    <button class="menu-button" @click="showMenu = !showMenu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="6" r="1.5" fill="#000" />
+                            <circle cx="12" cy="12" r="1.5" fill="#000" />
+                            <circle cx="12" cy="18" r="1.5" fill="#000" />
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" v-if="showMenu">
+                        <button class="menu-item" @click="showPhotosSection = true; showMenu = false">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
-                                    d="M30 50L40 40L50 50M40 40V60M20 30C20 25.5817 23.5817 22 28 22H52C56.4183 22 60 25.5817 60 30V50C60 54.4183 56.4183 58 52 58H28C23.5817 58 20 54.4183 20 50V30Z"
-                                    :stroke="card.textColor" stroke-width="3" stroke-linecap="round"
-                                    stroke-linejoin="round" />
+                                    d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                                    stroke="currentColor" stroke-width="2" />
+                                <circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2" />
                             </svg>
-                        </div>
-                        <div class="card-brand-name">{{ card.name }}</div>
+                            Add Photos
+                        </button>
                     </div>
                 </div>
-                <div class="barcode-section">
-                    <div class="barcode">
-                        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" class="barcode-svg">
-                            <g>
-                                <rect v-for="(bar, index) in barcodePattern" :key="index" :x="index * 4" y="0"
-                                    :width="bar ? 3 : 1" height="60" fill="#000" />
-                            </g>
-                        </svg>
+            </header>
+            <div class="card-content">
+                <div v-if="showPhotosSection" class="photos-section">
+                    <div class="photos-header">
+                        <h2>Card Photos</h2>
+                        <button class="close-photos-btn" @click="showPhotosSection = false">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 6L6 18M6 6l12 12" stroke="#000" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
                     </div>
-                    <div class="card-number">{{ cardNumber }}</div>
-                    <div class="member-number">{{ memberNumber }}</div>
+                    <div class="photo-upload-container">
+                        <div class="photo-item">
+                            <h3>Front</h3>
+                            <div v-if="photoFront" class="photo-preview">
+                                <img :src="photoFront" alt="Front" />
+                                <button class="remove-photo-btn" @click="removePhotoFront">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18 6L6 18M6 6l12 12" stroke="#FF4444" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <button v-else class="upload-btn" @click="triggerPhotoFrontUpload">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 5v14M5 12h14" stroke="#999" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                <span>Upload Photo</span>
+                            </button>
+                            <input ref="fileInputFront" type="file" accept="image/*" @change="handlePhotoFrontChange"
+                                style="display: none" />
+                        </div>
+                        <div class="photo-item">
+                            <h3>Back</h3>
+                            <div v-if="photoBack" class="photo-preview">
+                                <img :src="photoBack" alt="Back" />
+                                <button class="remove-photo-btn" @click="removePhotoBack">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18 6L6 18M6 6l12 12" stroke="#FF4444" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <button v-else class="upload-btn" @click="triggerPhotoBackUpload">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 5v14M5 12h14" stroke="#999" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                <span>Upload Photo</span>
+                            </button>
+                            <input ref="fileInputBack" type="file" accept="image/*" @change="handlePhotoBackChange"
+                                style="display: none" />
+                        </div>
+                    </div>
+                </div>
+                <div v-if="!showPhotosSection">
+                    <div class="card-display" :style="{ backgroundColor: card.bgColor, color: card.textColor }">
+                        <div class="card-logo">
+                            <div class="logo-placeholder">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M30 50L40 40L50 50M40 40V60M20 30C20 25.5817 23.5817 22 28 22H52C56.4183 22 60 25.5817 60 30V50C60 54.4183 56.4183 58 52 58H28C23.5817 58 20 54.4183 20 50V30Z"
+                                        :stroke="card.textColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="card-brand-name">{{ card.name }}</div>
+                        </div>
+                    </div>
+                    <div class="barcode-section">
+                        <div class="barcode">
+                            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" class="barcode-svg">
+                                <g>
+                                    <rect v-for="(bar, index) in barcodePattern" :key="index" :x="index * 4" y="0"
+                                        :width="bar ? 3 : 1" height="60" fill="#000" />
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="card-number">{{ cardNumber }}</div>
+                        <div class="member-number">{{ memberNumber }}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -132,6 +349,8 @@ onMounted(async () => {
     bottom: 0;
     background-color: #F5F5F5;
     animation: slideUp 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes slideUp {
@@ -167,18 +386,67 @@ onMounted(async () => {
     padding: 0;
 }
 
+.menu-wrapper {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 100;
+    overflow: hidden;
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-item {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background-color: #F5F5F5;
+}
+
 .detail-title {
     font-size: 18px;
     font-weight: 600;
     color: #000;
 }
 
-/* Card Content */
 .card-content {
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .card-display {
@@ -249,6 +517,121 @@ onMounted(async () => {
     font-size: 16px;
     color: #999;
     letter-spacing: 0.5px;
+}
+
+.photos-section {
+    animation: fadeIn 0.2s ease-out;
+}
+
+.photos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #E0E0E0;
+}
+
+.photos-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+}
+
+.close-photos-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.photo-upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.photo-item {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.photo-item h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.photo-preview {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.photo-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.remove-photo-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s;
+}
+
+.remove-photo-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.upload-btn {
+    width: 100%;
+    padding: 30px 20px;
+    border: 2px dashed #D0D0D0;
+    border-radius: 8px;
+    background-color: #FAFAFA;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+    transition: all 0.2s;
+}
+
+.upload-btn:hover {
+    border-color: #999;
+    background-color: #F5F5F5;
+}
+
+.upload-btn:active {
+    background-color: #EFEFEF;
 }
 
 @media (min-width: 768px) {
