@@ -244,12 +244,22 @@ async function saveCard() {
 </template>
 
 <style scoped>
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
 .create-card-container {
     min-height: 100vh;
     background-color: #F5F5F5;
     display: flex;
     flex-direction: column;
     padding-bottom: 20px;
+    /*padding-top: max(0px, env(safe-area-inset-top));*/
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .header {
@@ -262,6 +272,7 @@ async function saveCard() {
     position: sticky;
     top: 0;
     z-index: 10;
+    padding-top: calc(15px + max(0px, env(safe-area-inset-top)));
 }
 
 .back-button {

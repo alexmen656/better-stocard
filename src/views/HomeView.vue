@@ -196,6 +196,10 @@ onMounted(async () => {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .app-container {
@@ -203,6 +207,8 @@ onMounted(async () => {
   background-color: #F5F5F5;
   padding-bottom: 70px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .header {
@@ -212,6 +218,7 @@ onMounted(async () => {
   padding: 20px 20px 10px 20px;
   background-color: #FFFFFF;
   border-bottom: 1px solid #E0E0E0;
+  padding-top: calc(15px + max(0px, env(safe-area-inset-top)));
 }
 
 .title {

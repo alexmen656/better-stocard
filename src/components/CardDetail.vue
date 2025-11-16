@@ -133,7 +133,6 @@ function generateMemberNumber(): string {
     }
 }
 
-/* Header */
 .detail-header {
     display: flex;
     justify-content: space-between;
@@ -141,6 +140,7 @@ function generateMemberNumber(): string {
     padding: 15px 20px;
     background-color: #FFFFFF;
     border-bottom: 1px solid #E0E0E0;
+    padding-top: calc(15px + max(0px, env(safe-area-inset-top)));
 }
 
 .back-button,
