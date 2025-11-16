@@ -20,6 +20,7 @@ const cards = ref<Card[]>([
   { id: 8, name: 'TIGOTA', bgColor: '#26A69A', textColor: '#FFFFFF' },
   { id: 9, name: 'OVS', bgColor: '#212121', textColor: '#FFFFFF' },
   { id: 10, name: 'TUFI', bgColor: '#F5F5F5', textColor: '#E91E63' },
+  { id: 11, name: 'Lidl', bgColor: '#F5F5F5', textColor: '#E91E63' },
 ])
 
 const selectedCard = ref<Card | null>(null)
@@ -43,9 +44,21 @@ function closeCard() {
     <div class="cards-grid">
       <div v-for="card in cards" :key="card.id" class="card"
         :style="{ backgroundColor: card.bgColor, color: card.textColor }" @click="openCard(card)">
-        <div class="card-name">{{ card.name }}</div>
+        <div class="card-name"><!--{{ card.name }}-->
+          <img
+            :src="'https://cdn.brandfetch.io/' + card.name.toLowerCase().replace(/\s+/g, '-') + '.com?c=1idPcHNqxG9p9gPyoFm'"
+            alt="" style="max-width: 200px; max-height: 100px; object-fit: contain;">
+        </div>
       </div>
     </div>
+
+    <!--
+    <h2>Testing Brandfetch</h2>
+    <img src="https://cdn.brandfetch.io/apple.com?c=1idPcHNqxG9p9gPyoFm" alt="Logo by Brandfetch" />
+    <img src="https://cdn.brandfetch.io/decathlon.com?c=1idPcHNqxG9p9gPyoFm" alt="Logo by Brandfetch" />
+    <img src="https://cdn.brandfetch.io/ikea.com?c=1idPcHNqxG9p9gPyoFm" alt="Logo by Brandfetch" />
+    -->
+
     <CardDetail v-if="selectedCard" :card="selectedCard" @close="closeCard" />
     <nav class="bottom-nav">
       <button class="nav-item active">
