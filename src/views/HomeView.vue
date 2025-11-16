@@ -209,6 +209,9 @@ onMounted(async () => {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   -webkit-user-select: none;
   user-select: none;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .header {
@@ -255,19 +258,23 @@ onMounted(async () => {
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  padding: 0 20px;
+  gap: 12px;
+  padding: 0 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card {
-  aspect-ratio: 1.5;
-  border-radius: 8px;
+  aspect-ratio: 1.4;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: transform 0.2s;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-width: 0;
 }
 
 .card:active {
@@ -278,8 +285,13 @@ onMounted(async () => {
   font-size: 24px;
   font-weight: 700;
   text-align: center;
-  padding: 20px;
+  padding: 16px;
   letter-spacing: 1px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bottom-nav {
