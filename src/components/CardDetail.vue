@@ -8,6 +8,7 @@ interface Props {
     card: {
         id: number
         name: string
+        logo: string
         bgColor: string
         textColor: string
         barcode?: string
@@ -43,6 +44,7 @@ async function addToWallet() {
     try {
         const cardPayload = {
             name: props.card.name,
+            logo: props.card.logo,
             bgColor: props.card.bgColor,
             textColor: props.card.textColor,
             barcode: props.card.barcode || cardNumber.value.replace(/\s/g, ''),

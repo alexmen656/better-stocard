@@ -34,19 +34,35 @@ const loadCertificates = () => {
     }
 };
 
-const loadImages = () => {
+const loadImages = (customImages = {}) => {
     try {
         const modelsPath = join(__dirname, './models');
 
         return {
             'icon.png': readFileSync(join(modelsPath, 'icon.png')),
             'icon@2x.png': readFileSync(join(modelsPath, 'icon@2x.png')),
-            'logo.png': readFileSync(join(modelsPath, 'icon.png')),
-            'logo@2x.png': readFileSync(join(modelsPath, 'icon@2x.png'))
+            ...customImages
         };
     } catch (error) {
         console.error('Error loading images:', error);
         throw error;
+    }
+};
+
+const fetchBrandLogo = async (brandDomain) => {
+    try {
+        const logoUrl = `https://cdn.brandfetch.io/${brandDomain}?c=1idPcHNqxG9p9gPyoFm`;
+        const response = await fetch(logoUrl);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch logo: ${response.statusText}`);
+        }
+
+        const buffer = Buffer.from(await response.arrayBuffer());
+        return buffer;
+    } catch (error) {
+        console.error('Error fetching brand logo:', error);
+        return readFileSync(join(__dirname, './models/icon.png'));
     }
 };
 
@@ -82,7 +98,20 @@ async function generatePass(cardData) {
     console.log('Generating pass for card:', cardData.name);
 
     const certificates = loadCertificates();
-    const images = loadImages();
+
+    let logoBuffer = null;
+    if (cardData.logo) {
+        logoBuffer = await fetchBrandLogo(cardData.logo);
+    }
+
+    const customImages = {};
+    if (logoBuffer) {
+        customImages['logo.png'] = logoBuffer;
+        customImages['logo@2x.png'] = logoBuffer;
+    }
+
+    //images are not whowing up maybe because of wrong sizes
+    const images = loadImages(customImages);
 
     let bgColor = normalizeColor(cardData.bgColor) || 'rgb(60, 65, 76)';
     let textColor = normalizeColor(cardData.textColor) || 'rgb(255, 255, 255)';
@@ -207,6 +236,7 @@ app.listen(PORT, () => {
     console.log(`\n📝 Expected POST body format:`);
     console.log(`{
   "name": "Store Name",
+  "logo": "example.com",
   "bgColor": "rgb(255, 0, 0)",
   "textColor": "rgb(255, 255, 255)",
   "barcode": "1234567890",
