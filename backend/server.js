@@ -20,12 +20,12 @@ app.use(express.json());
 
 const loadCertificates = () => {
     try {
-        const certsPath = join(__dirname, './certs');
+        const certsPath = join(__dirname, './certs')
 
         return {
             wwdr: readFileSync(join(certsPath, 'AppleWWDRCAG4.pem')),
-            signerCert: readFileSync(join(certsPath, 'signerCert.pem')),
-            signerKey: readFileSync(join(certsPath, 'signerKey.pem')),
+            signerCert: readFileSync(join(certsPath, 'pass.pem')),
+            signerKey: readFileSync(join(certsPath, 'my-key.key')),
             signerKeyPassphrase: process.env.SIGNER_PASSPHRASE || ''
         };
     } catch (error) {
