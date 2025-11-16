@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Preferences } from '@capacitor/preferences'
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner'
 
 interface Company {
     id: number
@@ -21,6 +22,7 @@ const router = useRouter()
 const step = ref<'select-company' | 'enter-barcode'>('select-company')
 const selectedCompany = ref<Company | null>(null)
 const barcode = ref('')
+const isScanning = ref(false)
 
 const extractColorFromImage = (logoUrl: string): Promise<string> => {
     return new Promise((resolve) => {
@@ -124,6 +126,23 @@ function selectCompany(company: Company) {
     step.value = 'enter-barcode'
 }
 
+async function startScanning() {
+    try {
+        isScanning.value = true
+        await BarcodeScanner.checkPermission({ force: true })
+
+        const result = await BarcodeScanner.startScan()
+
+        if (result && result.hasContent) {
+            barcode.value = result.content
+            isScanning.value = false
+        }
+    } catch (error) {
+        console.error('Scanning error:', error)
+        isScanning.value = false
+    }
+}
+
 function goBack() {
     if (step.value === 'enter-barcode') {
         step.value = 'select-company'
@@ -206,12 +225,12 @@ async function saveCard() {
                 <p class="form-hint">You can enter the barcode or card number manually. Scanning will be added later.
                 </p>
             </div>
-            <button class="scan-button" disabled>
+            <button class="scan-button" @click="startScanning" :disabled="isScanning">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 3h6v6H3V3zm12 0h6v6h-6V3zM3 15h6v6H3v-6zm10-5h2v4h-2v-4zm4-2h2v2h-2v-2zm0 6h2v2h-2v-2z"
                         fill="currentColor" />
                 </svg>
-                Scan (Coming Soon)
+                {{ isScanning ? 'Scanning...' : 'Scan Barcode' }}
             </button>
         </div>
         <div class="action-buttons">
@@ -359,11 +378,11 @@ async function saveCard() {
     padding: 14px;
     font-size: 14px;
     font-weight: 600;
-    color: #999;
+    color: #FF6B6B;
     background-color: #FFFFFF;
-    border: 2px solid #E0E0E0;
+    border: 2px solid #FF6B6B;
     border-radius: 8px;
-    cursor: not-allowed;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -371,10 +390,11 @@ async function saveCard() {
     transition: all 0.2s;
 }
 
-.scan-button:not(:disabled) {
-    color: #FF6B6B;
-    border-color: #FF6B6B;
-    cursor: pointer;
+.scan-button:disabled {
+    color: #999;
+    border-color: #E0E0E0;
+    background-color: #F5F5F5;
+    cursor: not-allowed;
 }
 
 .scan-button:not(:disabled):active {
