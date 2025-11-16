@@ -6,6 +6,8 @@ const { PKPass } = pkg;
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import sharp from 'sharp';
+import axios from 'axios';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -52,17 +54,63 @@ const loadImages = (customImages = {}) => {
 const fetchBrandLogo = async (brandDomain) => {
     try {
         const logoUrl = `https://cdn.brandfetch.io/${brandDomain}?c=1idPcHNqxG9p9gPyoFm`;
-        const response = await fetch(logoUrl);
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch logo: ${response.statusText}`);
+        const response = await axios.get(logoUrl, {
+            responseType: 'stream',
+            headers: {
+                'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36',
+                'Referer': 'https://your-website.com'
+            }
+        });
+
+        console.log(`Status: ${response.status}`);
+        console.log(`Content-Type: ${response.headers['content-type']}`);
+
+        const contentType = response.headers['content-type'];
+
+        if (contentType?.includes('svg')) {
+            console.log('SVG recognised - will be skipped');
+            return null;
         }
 
-        const buffer = Buffer.from(await response.arrayBuffer());
-        return buffer;
+        const chunks = [];
+        for await (const chunk of response.data) {
+            chunks.push(chunk);
+        }
+
+        const buffer = Buffer.concat(chunks);
+
+        try {
+            const metadata = await sharp(buffer).metadata();
+
+            if (!metadata.format || !['jpeg', 'png', 'webp', 'gif', 'tiff'].includes(metadata.format)) {
+                console.log(`unsupported Format: ${metadata.format}`);
+                return null;
+            }
+
+            const pngBuffer = await sharp(buffer)
+                .png()
+                .resize(180, 180, {
+                    fit: 'contain',
+                    background: { r: 0, g: 0, b: 0, alpha: 0 }
+                })
+                .toBuffer();
+
+            return pngBuffer;
+        } catch (sharpError) {
+            console.warn(`Sharp-Error for ${brandDomain}:`, sharpError.message);
+            return null;
+        }
     } catch (error) {
-        console.error('Error fetching brand logo:', error);
-        return readFileSync(join(__dirname, './models/icon.png'));
+        if (error.response) {
+            console.warn(`Logo fetch failed for ${brandDomain}: HTTP ${error.response.status}`);
+        } else if (error.code === 'ECONNABORTED') {
+            console.warn(`Timeout loading logo for ${brandDomain}`);
+        } else {
+            console.warn(`Error loading logo for ${brandDomain}:`, error.message);
+        }
+        return null;
     }
 };
 
