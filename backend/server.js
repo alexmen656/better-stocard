@@ -68,7 +68,7 @@ async function generatePass() {
         {
             description: 'Ionic Pass',
             serialNumber: '81592CQ7838',
-            passTypeIdentifier: 'pass.io.ionic.example',
+            passTypeIdentifier: 'pass.sk.polan.alex.control-center',
             teamIdentifier: 'AS5BHHK5AW',
             organizationName: 'Apple Inc.',
             foregroundColor: 'rgb(255, 255, 255)',
