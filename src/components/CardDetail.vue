@@ -17,7 +17,8 @@ interface Props {
         photoBack?: string
     }
 }
-async function get(url: string): Promise<string> {
+
+/*async function get(url: string): Promise<string> {
     const response = await fetch(url);
     const blob = await response.blob();
     const base64 = await blobToBase64(blob);
@@ -25,7 +26,7 @@ async function get(url: string): Promise<string> {
         throw new Error(`Unable to get ${url}`);
     }
     return base64;
-}
+}*/
 
 function blobToBase64(blob: Blob): Promise<string | ArrayBuffer | null> {
     return new Promise((resolve, reject) => {
@@ -39,8 +40,43 @@ function blobToBase64(blob: Blob): Promise<string | ArrayBuffer | null> {
 }
 
 async function addToWallet() {
-    const pass = await get('https://better-stocard.reelmia.com/generate-pass')
-    CapacitorPassToWallet.addToWallet({ base64: pass });
+    try {
+        const cardPayload = {
+            name: props.card.name,
+            bgColor: props.card.bgColor,
+            textColor: props.card.textColor,
+            barcode: props.card.barcode || cardNumber.value.replace(/\s/g, ''),
+            cardNumber: cardNumber.value,
+            memberNumber: memberNumber.value
+        };
+
+        const response = await fetch('https://better-stocard.reelmia.com/generate-pass', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(cardPayload)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to generate pass: ${response.statusText}`);
+        }
+
+        const blob = await response.blob();
+        const base64 = await blobToBase64(blob);
+
+        if (!base64 || base64 instanceof ArrayBuffer) {
+            throw new Error('Unable to convert pass to base64');
+        }
+
+        //backend failed with 500 error
+        //console.log('base64', base64);
+
+        await CapacitorPassToWallet.addToWallet({ base64: base64 });
+    } catch (error) {
+        console.error('Error adding to wallet:', error);
+        alert('Failed to add card to wallet. Please try again.');
+    }
 }
 
 const props = defineProps<Props>()
