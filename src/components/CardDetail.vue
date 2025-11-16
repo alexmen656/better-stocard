@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Filesystem, Directory } from '@capacitor/filesystem';
+import { CapacitorPassToWallet } from 'capacitor-pass-to-wallet';
 
 interface Props {
     card: {
@@ -15,6 +16,31 @@ interface Props {
         photoFront?: string
         photoBack?: string
     }
+}
+async function get(url: string): Promise<string> {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const base64 = await blobToBase64(blob);
+    if (!base64 || base64 instanceof ArrayBuffer) {
+        throw new Error(`Unable to get ${url}`);
+    }
+    return base64;
+}
+
+function blobToBase64(blob: Blob): Promise<string | ArrayBuffer | null> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.readAsDataURL(blob);
+    });
+}
+
+async function addToWallet() {
+    const pass = await get('https://better-stocard.reelmia.com/generate-pass')
+    CapacitorPassToWallet.addToWallet({ base64: pass });
 }
 
 const props = defineProps<Props>()
@@ -313,6 +339,7 @@ async function removePhotoBack() {
                         <div class="card-number">{{ cardNumber }}</div>
                         <div class="member-number">{{ memberNumber }}</div>
                     </div>
+                    <button @click="addToWallet">Add to Wallet</button>
                 </div>
             </div>
         </div>
