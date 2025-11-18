@@ -19,10 +19,12 @@ interface Card extends Company {
 }
 
 const router = useRouter()
-const step = ref<'select-company' | 'enter-barcode'>('select-company')
+const step = ref<'select-company' | 'enter-barcode' | 'custom-card'>('select-company')
 const selectedCompany = ref<Company | null>(null)
 const barcode = ref('')
 const isScanning = ref(false)
+const searchQuery = ref('')
+const customCompanyName = ref('')
 
 const BRAND_FETCH_TOKEN = '1idPcHNqxG9p9gPyoFm'
 const SCANNER_ACTIVE_CLASS = 'scanner-active'
@@ -149,11 +151,42 @@ const companies = ref<Company[]>([
     { id: 40, name: 'Roller', logo: 'roller.de', bgColor: '#FF6600', textColor: '#FFFFFF' }
 ])
 
+const sortedCompanies = computed(() => {
+    return [...companies.value].sort((a, b) => a.name.localeCompare(b.name))
+})
+
+const filteredCompanies = computed(() => {
+    if (!searchQuery.value.trim()) {
+        return sortedCompanies.value
+    }
+    const query = searchQuery.value.toLowerCase()
+    return sortedCompanies.value.filter((company) =>
+        company.name.toLowerCase().includes(query)
+    )
+})
+
+const groupedCompanies = computed(() => {
+    const groups: Record<string, Company[]> = {}
+    filteredCompanies.value.forEach((company) => {
+        const firstChar = company.name.charAt(0).toUpperCase()
+        const letter = /[A-Z]/.test(firstChar) ? firstChar : '#'
+        if (!groups[letter]) {
+            groups[letter] = []
+        }
+        groups[letter].push(company)
+    })
+    return Object.keys(groups)
+        .sort()
+        .map((letter) => ({ letter, companies: groups[letter] }))
+})
+
 const isFormValid = computed(() => {
     if (step.value === 'select-company') {
         return selectedCompany.value !== null
     } else if (step.value === 'enter-barcode') {
         return barcode.value.trim().length > 0
+    } else if (step.value === 'custom-card') {
+        return customCompanyName.value.trim().length > 0
     }
     return false
 })
@@ -176,6 +209,22 @@ onUnmounted(() => {
 
 function selectCompany(company: Company) {
     selectedCompany.value = company
+    step.value = 'enter-barcode'
+}
+
+function createCustomCard() {
+    step.value = 'custom-card'
+}
+
+function proceedWithCustomCard() {
+    if (!customCompanyName.value.trim()) return
+    selectedCompany.value = {
+        id: Date.now(),
+        name: customCompanyName.value.trim(),
+        logo: '',
+        bgColor: '#FF6B6B',
+        textColor: '#FFFFFF',
+    }
     step.value = 'enter-barcode'
 }
 
@@ -223,6 +272,10 @@ function goBack() {
     if (step.value === 'enter-barcode') {
         step.value = 'select-company'
         barcode.value = ''
+        selectedCompany.value = null
+    } else if (step.value === 'custom-card') {
+        step.value = 'select-company'
+        customCompanyName.value = ''
     } else {
         router.back()
     }
@@ -231,9 +284,14 @@ function goBack() {
 async function saveCard() {
     if (!selectedCompany.value || !barcode.value.trim()) return
 
-    const logoUrl = getLogoUrl(selectedCompany.value.logo, 64)
-    const bgColor = await extractColorFromImage(logoUrl)
-    const textColor = getTextColor(bgColor)
+    let bgColor = selectedCompany.value.bgColor
+    let textColor = selectedCompany.value.textColor
+
+    if (selectedCompany.value.logo) {
+        const logoUrl = getLogoUrl(selectedCompany.value.logo, 64)
+        bgColor = await extractColorFromImage(logoUrl)
+        textColor = getTextColor(bgColor)
+    }
 
     const cardNumber = `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)}`
     const memberNumber = `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 9000 + 1000)}`
@@ -272,19 +330,47 @@ async function saveCard() {
                         stroke-linejoin="round" />
                 </svg>
             </button>
-            <h1 class="title">{{ step === 'select-company' ? 'Select Company' : 'Add Card' }}</h1>
+            <h1 class="title">{{
+                step === 'select-company' ? 'Select Company' : step === 'custom-card' ? 'Custom Card' : 'Add Card'
+                }}</h1>
             <div style="width: 24px"></div>
         </header>
         <div v-if="step === 'select-company'" class="step-content">
-            <div class="step-title">Choose a Company</div>
-            <div class="companies-grid">
-                <button v-for="company in companies" :key="company.name" class="company-card"
-                    :style="{ backgroundColor: company.bgColor, color: company.textColor }"
-                    @click="selectCompany(company)">
-                    <img :src="getLogoUrl(company.logo)" alt=""
-                        style="max-width: 100px; max-height: 60px; object-fit: contain;">
-                </button>
+            <div class="search-section">
+                <input v-model="searchQuery" type="text" class="search-input" placeholder="Search companies..." />
             </div>
+            <button class="custom-card-button" @click="createCustomCard">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                Create Custom Card
+            </button>
+            <div class="companies-list">
+                <div v-for="group in groupedCompanies" :key="group.letter" class="company-group">
+                    <div class="section-header">{{ group.letter }}</div>
+                    <div class="companies-grid">
+                        <button v-for="company in group.companies" :key="company.id" class="company-card"
+                            :style="{ backgroundColor: company.bgColor, color: company.textColor }"
+                            @click="selectCompany(company)">
+                            <img :src="getLogoUrl(company.logo)" alt=""
+                                style="max-width: 100px; max-height: 60px; object-fit: contain;">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else-if="step === 'custom-card'" class="step-content">
+            <div class="step-title">Create a Custom Card</div>
+            <div class="form-section">
+                <label for="customName" class="form-label">Company Name</label>
+                <input id="customName" v-model="customCompanyName" type="text" class="form-input"
+                    placeholder="Enter company name" @keyup.enter="isFormValid && proceedWithCustomCard()" />
+                <p class="form-hint">Enter the name of the company or store for your custom card.</p>
+            </div>
+            <button :disabled="!isFormValid" :class="['btn', 'btn-primary', { disabled: !isFormValid }]"
+                @click="proceedWithCustomCard">
+                Continue
+            </button>
         </div>
         <div v-else-if="step === 'enter-barcode'" class="step-content">
             <div class="selected-company">
@@ -310,11 +396,11 @@ async function saveCard() {
                 {{ isScanning ? 'Scanning...' : 'Scan Barcode' }}
             </button>
         </div>
-        <div class="action-buttons">
-            <button v-if="step === 'enter-barcode'" class="btn btn-secondary" @click="goBack">Back</button>
+        <div class="action-buttons" v-if="step === 'enter-barcode'">
+            <button class="btn btn-secondary" @click="goBack">Back</button>
             <button :disabled="!isFormValid" :class="['btn', 'btn-primary', { disabled: !isFormValid }]"
                 @click="saveCard">
-                {{ step === 'select-company' ? 'Next' : 'Save Card' }}
+                Save Card
             </button>
         </div>
     </div>
@@ -381,6 +467,67 @@ async function saveCard() {
     font-weight: 600;
     color: #000;
     margin-bottom: 20px;
+}
+
+.search-section {
+    margin-bottom: 16px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #FF6B6B;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.custom-card-button {
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #FF6B6B;
+    background-color: #FFFFFF;
+    border: 2px solid #FF6B6B;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+    margin-bottom: 24px;
+}
+
+.custom-card-button:active {
+    transform: scale(0.98);
+    background-color: #FFF5F5;
+}
+
+.companies-list {
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+}
+
+.company-group {
+    margin-bottom: 24px;
+}
+
+.section-header {
+    font-size: 18px;
+    font-weight: 700;
+    color: #FF6B6B;
+    margin-bottom: 12px;
+    padding-left: 4px;
 }
 
 .companies-grid {
