@@ -10,6 +10,15 @@ body {
   user-select: none;
 }
 
+body.scanner-active {
+  background: transparent !important;
+}
+
+body.scanner-active #app {
+  opacity: 0;
+  pointer-events: none;
+}
+
 #app {
   width: 100%;
   height: 100%;
@@ -20,7 +29,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Disable pinch zoom */
 input,
 textarea,
 select {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Preferences } from '@capacitor/preferences'
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner'
@@ -23,6 +23,52 @@ const step = ref<'select-company' | 'enter-barcode'>('select-company')
 const selectedCompany = ref<Company | null>(null)
 const barcode = ref('')
 const isScanning = ref(false)
+
+const BRAND_FETCH_TOKEN = '1idPcHNqxG9p9gPyoFm'
+const SCANNER_ACTIVE_CLASS = 'scanner-active'
+
+const getLogoUrl = (domain: string, size = 256) =>
+    `https://cdn.brandfetch.io/${domain}?c=${BRAND_FETCH_TOKEN}&format=png&w=${size}&h=${size}&fit=contain`
+
+const withDocument = (fn: (doc: Document) => void) => {
+    if (typeof document !== 'undefined') {
+        fn(document)
+    }
+}
+
+const setScannerUiState = (active: boolean) => {
+    withDocument((doc) => {
+        doc.body.classList.toggle(SCANNER_ACTIVE_CLASS, active)
+    })
+}
+
+const stopNativeScanner = async () => {
+    const wasActive =
+        isScanning.value ||
+        (typeof document !== 'undefined' && document.body.classList.contains(SCANNER_ACTIVE_CLASS))
+
+    setScannerUiState(false)
+
+    if (!wasActive) {
+        isScanning.value = false
+        return
+    }
+
+    try {
+        await BarcodeScanner.showBackground()
+    } catch (error) {
+        console.warn('showBackground failed', error)
+    }
+
+    try {
+        await BarcodeScanner.stopScan()
+    } catch (error) {
+        console.warn('stopScan failed', error)
+    }
+
+    isScanning.value = false
+}
+
 
 const extractColorFromImage = (logoUrl: string): Promise<string> => {
     return new Promise((resolve) => {
@@ -114,11 +160,18 @@ const isFormValid = computed(() => {
 
 onMounted(async () => {
     for (const company of companies.value) {
-        const logoUrl = `https://cdn.brandfetch.io/${company.logo}?c=1idPcHNqxG9p9gPyoFm`
+        const logoUrl = getLogoUrl(company.logo, 64)
         const bgColor = await extractColorFromImage(logoUrl)
         company.bgColor = bgColor
         company.textColor = getTextColor(bgColor)
     }
+    await BarcodeScanner.prepare()
+})
+
+onUnmounted(() => {
+    stopNativeScanner().catch((error) => {
+        console.error('Error cleaning up scanner:', error)
+    })
 })
 
 function selectCompany(company: Company) {
@@ -127,19 +180,42 @@ function selectCompany(company: Company) {
 }
 
 async function startScanning() {
+    if (isScanning.value) return
+
+    let scannerActivated = false
+
     try {
         isScanning.value = true
-        await BarcodeScanner.checkPermission({ force: true })
+        const permission = await BarcodeScanner.checkPermission({ force: true })
+
+        if (!permission.granted) {
+            if (permission.denied) {
+                await BarcodeScanner.openAppSettings()
+            } else {
+                console.warn('Camera permission not granted')
+            }
+            return
+        }
+
+        await BarcodeScanner.prepare()
+        await BarcodeScanner.hideBackground()
+        setScannerUiState(true)
+        scannerActivated = true
 
         const result = await BarcodeScanner.startScan()
 
-        if (result && result.hasContent) {
+        if (result?.hasContent) {
             barcode.value = result.content
-            isScanning.value = false
         }
     } catch (error) {
         console.error('Scanning error:', error)
-        isScanning.value = false
+    } finally {
+        if (scannerActivated) {
+            await stopNativeScanner()
+        } else {
+            isScanning.value = false
+            setScannerUiState(false)
+        }
     }
 }
 
@@ -155,7 +231,7 @@ function goBack() {
 async function saveCard() {
     if (!selectedCompany.value || !barcode.value.trim()) return
 
-    const logoUrl = `https://cdn.brandfetch.io/${selectedCompany.value.logo}?c=1idPcHNqxG9p9gPyoFm`
+    const logoUrl = getLogoUrl(selectedCompany.value.logo, 64)
     const bgColor = await extractColorFromImage(logoUrl)
     const textColor = getTextColor(bgColor)
 
@@ -205,7 +281,7 @@ async function saveCard() {
                 <button v-for="company in companies" :key="company.name" class="company-card"
                     :style="{ backgroundColor: company.bgColor, color: company.textColor }"
                     @click="selectCompany(company)">
-                    <img :src="'https://cdn.brandfetch.io/' + company.logo + '?c=1idPcHNqxG9p9gPyoFm'" alt=""
+                    <img :src="getLogoUrl(company.logo)" alt=""
                         style="max-width: 100px; max-height: 60px; object-fit: contain;">
                 </button>
             </div>
@@ -214,7 +290,7 @@ async function saveCard() {
             <div class="selected-company">
                 <div class="company-preview"
                     :style="{ backgroundColor: selectedCompany?.bgColor, color: selectedCompany?.textColor }">
-                    <img :src="'https://cdn.brandfetch.io/' + selectedCompany?.logo + '?c=1idPcHNqxG9p9gPyoFm'" alt=""
+                    <img :src="selectedCompany ? getLogoUrl(selectedCompany.logo) : ''" alt=""
                         style="max-width: 150px; max-height: 80px; object-fit: contain;">
                 </div>
             </div>
@@ -222,7 +298,8 @@ async function saveCard() {
                 <label for="barcode" class="form-label">Card Number / Barcode</label>
                 <input id="barcode" v-model="barcode" type="text" class="form-input"
                     placeholder="Enter barcode or card number" @keyup.enter="isFormValid && saveCard()" />
-                <p class="form-hint">You can enter the barcode or card number manually. Scanning will be added later.
+                <p class="form-hint">Enter the barcode manually or use the scanner below to capture it with your
+                    camera.
                 </p>
             </div>
             <button class="scan-button" @click="startScanning" :disabled="isScanning">
