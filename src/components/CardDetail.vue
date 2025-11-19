@@ -3,8 +3,6 @@ import { onMounted, ref } from 'vue'
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { CapacitorPassToWallet } from 'capacitor-pass-to-wallet';
-//import AppleWalletBadge from './icons/AppleWalletBadge.vue';
-//import VueBarcode from 'vue-barcode';
 import VueBarcode from '@chenfengyuan/vue-barcode';
 
 interface Props {
@@ -21,16 +19,6 @@ interface Props {
         photoBack?: string
     }
 }
-
-/*async function get(url: string): Promise<string> {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    const base64 = await blobToBase64(blob);
-    if (!base64 || base64 instanceof ArrayBuffer) {
-        throw new Error(`Unable to get ${url}`);
-    }
-    return base64;
-}*/
 
 function blobToBase64(blob: Blob): Promise<string | ArrayBuffer | null> {
     return new Promise((resolve, reject) => {
@@ -90,21 +78,15 @@ const emit = defineEmits<{
 const barcodePattern = ref(props.card.barcode)
 const showMenu = ref(false)
 const showPhotosSection = ref(false)
+const showPhotosGallery = ref(false)
+const expandPhotos = ref(false)
+const selectedPhotoModal = ref<string | null>(null)
 const photoFront = ref(props.card.photoFront || '')
 const photoBack = ref(props.card.photoBack || '')
 const fileInputFront = ref<HTMLInputElement | null>(null)
 const fileInputBack = ref<HTMLInputElement | null>(null)
-
-const cardNumber = ref(props.card.cardNumber || '')// || generateCardNumber()
-const memberNumber = ref(props.card.memberNumber || '') // || generateMemberNumber()
-
-/*function generateCardNumber(): string {
-    return `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)}`
-}
-
-function generateMemberNumber(): string {
-    return `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 9000 + 1000)}`
-}*/
+const cardNumber = ref(props.card.cardNumber || '')
+const memberNumber = ref(props.card.memberNumber || '')
 
 onMounted(async () => {
     try {
@@ -246,6 +228,18 @@ async function removePhotoBack() {
         console.error('Error removing back photo:', error)
     }
 }
+
+function openPhotoModal(photo: string) {
+    selectedPhotoModal.value = photo
+}
+
+function closePhotoModal() {
+    selectedPhotoModal.value = null
+}
+
+function hasPhotos(): boolean {
+    return !!(photoFront.value || photoBack.value)
+}
 </script>
 
 <template>
@@ -359,18 +353,48 @@ async function removePhotoBack() {
                     </div>
                     <div class="barcode-section">
                         <div class="barcode">
-                            <!--   <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" class="barcode-svg">
-                                <g>
-                                    <rect v-for="(bar, index) in barcodePattern" :key="index" :x="index * 4" y="0"
-                                        :width="bar ? 3 : 1" height="60" fill="#000" />
-                                </g>
-                            </svg>-->
                             <vue-barcode :value="barcodePattern"
                                 :options="{ format: 'CODE128', lineColor: '#000', width: 2, height: 70, displayValue: false }"
                                 class="barcode-svg" />
                         </div>
                         <div class="card-number">{{ cardNumber }}</div>
                         <!--<div class="member-number">{{ memberNumber }}</div>-->
+                    </div>
+                    <div v-if="hasPhotos()" class="photos-gallery-section">
+                        <button class="photos-gallery-header" @click="expandPhotos = !expandPhotos">
+                            <span class="photos-gallery-title">Card Photos</span>
+                            <svg class="expand-icon" :class="{ expanded: expandPhotos }" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <transition name="expand">
+                            <div v-if="expandPhotos" class="photos-gallery-content">
+                                <div class="photos-grid">
+                                    <div v-if="photoFront" class="photo-gallery-item">
+                                        <img :src="photoFront" alt="Front" @click="openPhotoModal(photoFront)" />
+                                        <span class="photo-label">Front</span>
+                                    </div>
+                                    <div v-if="photoBack" class="photo-gallery-item">
+                                        <img :src="photoBack" alt="Back" @click="openPhotoModal(photoBack)" />
+                                        <span class="photo-label">Back</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </transition>
+                    </div>
+                    <div v-if="selectedPhotoModal" class="photo-modal-overlay" @click="closePhotoModal()">
+                        <div class="photo-modal" @click.stop>
+                            <button class="close-modal-btn" @click="closePhotoModal()">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 6L6 18M6 6l12 12" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <img :src="selectedPhotoModal" alt="Full size photo" class="modal-photo" />
+                        </div>
                     </div>
                     <div class="add-to-wallet-section">
                         <button class="add-to-wallet-btn" @click="addToWallet">
@@ -709,6 +733,155 @@ async function removePhotoBack() {
 
 .upload-btn:active {
     background-color: #EFEFEF;
+}
+
+.photos-gallery-section {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.photos-gallery-header {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    transition: background-color 0.2s;
+}
+
+.photos-gallery-header:hover {
+    background-color: #F9F9F9;
+}
+
+.photos-gallery-title {
+    display: flex;
+    align-items: center;
+}
+
+.expand-icon {
+    transition: transform 0.3s ease;
+    color: #666;
+}
+
+.expand-icon.expanded {
+    transform: rotate(180deg);
+}
+
+.photos-gallery-content {
+    padding: 0 20px 20px 20px;
+    border-top: 1px solid #E8E8E8;
+}
+
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.photo-gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.photo-gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.photo-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-label {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.photo-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.photo-modal {
+    position: relative;
+    width: 90%;
+    max-width: 90vh;
+    height: auto;
+    max-height: 90vh;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    z-index: 100;
+}
+
+.close-modal-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.modal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.expand-enter-active,
+.expand-leave-active {
+    transition: all 0.3s ease;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.expand-enter-from,
+.expand-leave-to {
+    max-height: 0;
+    opacity: 0;
 }
 
 @media (min-width: 768px) {
