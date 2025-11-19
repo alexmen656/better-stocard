@@ -102,7 +102,7 @@ const SCAN_FORMATS: BarcodeFormat[] = [
     BarcodeFormat.UpcE,
 ]
 
-/*const getInitials = (name: string): string => {
+const getInitials = (name: string): string => {
     const trimmed = name.trim()
 
     if (trimmed.length <= 5) {
@@ -116,7 +116,7 @@ const SCAN_FORMATS: BarcodeFormat[] = [
     }
 
     return words.map(w => w.charAt(0)).join('').toUpperCase().substring(0, 2)
-}*/
+}
 
 const extractColorFromImage = (logoUrl: string): Promise<string> => {
     return new Promise((resolve) => {
@@ -331,7 +331,7 @@ async function saveCard() {
             </button>
             <h1 class="title">{{
                 step === 'select-company' ? 'Select Company' : step === 'custom-card' ? 'Custom Card' : 'Add Card'
-                }}</h1>
+            }}</h1>
             <div style="width: 24px"></div>
         </header>
         <div v-if="step === 'select-company'" class="step-content">
@@ -369,7 +369,10 @@ async function saveCard() {
             <div class="selected-company">
                 <div class="company-preview"
                     :style="{ backgroundColor: selectedCompany?.bgColor, color: selectedCompany?.textColor }">
-                    <img :src="selectedCompany ? getLogoUrl(selectedCompany.logo) : ''" alt=""
+                    <div v-if="selectedCompany?.logo === ''" class="preview-initials">
+                        {{ getInitials(selectedCompany?.name || '') }}
+                    </div>
+                    <img v-else :src="selectedCompany ? getLogoUrl(selectedCompany.logo) : ''" alt=""
                         style="max-width: 150px; max-height: 80px; object-fit: contain;">
                 </div>
             </div>
@@ -589,6 +592,15 @@ async function saveCard() {
     font-size: 24px;
     font-weight: 700;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+}
+
+.preview-initials {
+    font-size: 48px;
+    font-weight: 700;
 }
 
 .form-section {

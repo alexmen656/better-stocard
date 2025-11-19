@@ -1,6 +1,18 @@
-# better-stocard
+# Pocketz
 
-This template should help get you started developing with Vue 3 in Vite.
+## What is Pocketz? (About the project)
+
+Pocketz is a simple card manager which transforms physical cards into digital ones, inspired by Stocard.
+One of the main features is that zou can add cards from Pocketz also to Apple Wallet. Also it is very simple and clean, it does what it should nothing more.
+
+## Demo
+
+Youtube Link
+
+## Special Features
+
+- Apple Wallet support
+- Barcode Scanner for easier adding method
 
 ## Recommended IDE Setup
 
@@ -9,7 +21,7 @@ This template should help get you started developing with Vue 3 in Vite.
 ## Recommended Browser Setup
 
 - Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
+  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
   - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
 - Firefox:
   - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)

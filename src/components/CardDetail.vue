@@ -360,13 +360,8 @@ function getInitials(name: string): string {
                                 {{ getInitials(card.name) }}
                             </div>
                             <div v-else class="logo-placeholder">
-                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M30 50L40 40L50 50M40 40V60M20 30C20 25.5817 23.5817 22 28 22H52C56.4183 22 60 25.5817 60 30V50C60 54.4183 56.4183 58 52 58H28C23.5817 58 20 54.4183 20 50V30Z"
-                                        :stroke="card.textColor" stroke-width="3" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
+                                <img :src="'https://cdn.brandfetch.io/' + card.logo + '?c=1idPcHNqxG9p9gPyoFm'" alt=""
+                                    style="max-width: 120px; max-height: 100px; object-fit: contain;">
                             </div>
                             <div class="card-brand-name">{{ card.name }}</div>
                         </div>
