@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { CapacitorPassToWallet } from 'capacitor-pass-to-wallet';
+//import AppleWalletBadge from './icons/AppleWalletBadge.vue';
 
 interface Props {
     card: {
@@ -377,7 +378,9 @@ async function removePhotoBack() {
                         <div class="card-number">{{ cardNumber }}</div>
                         <div class="member-number">{{ memberNumber }}</div>
                     </div>
-                    <button @click="addToWallet">Add to Wallet</button>
+                    <button class="add-to-wallet-btn" @click="addToWallet">
+                        <img src="./icons/wallet.svg" alt="Add to Wallet" style="width: 200px; height: auto;" />
+                    </button>
                 </div>
             </div>
         </div>
@@ -385,6 +388,11 @@ async function removePhotoBack() {
 </template>
 
 <style scoped>
+.add-to-wallet-btn {
+    border: none;
+    background-color: transparent;
+}
+
 .card-detail-overlay {
     position: fixed;
     top: 0;
