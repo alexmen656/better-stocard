@@ -10,3 +10,8 @@
     - Search function
     - Apple watch app (if time)
     - Multi lang (if time)
+
+for week 2:
+
+- offline mode
+- big barcode mode

@@ -72,7 +72,6 @@ const stopNativeScanner = async () => {
     isScanning.value = false
 }
 
-
 const extractColorFromImage = (logoUrl: string): Promise<string> => {
     return new Promise((resolve) => {
         const img = new Image()
@@ -253,7 +252,7 @@ async function saveCard() {
         textColor = getTextColor(bgColor)
     }
 
-    const cardNumber = `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)}`
+    const cardNumber = barcode.value; //`${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)}`
     const memberNumber = `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 9000 + 1000)}`
 
     const newCard: Card = {
@@ -262,7 +261,7 @@ async function saveCard() {
         logo: selectedCompany.value.logo,
         bgColor: bgColor,
         textColor: textColor,
-        barcode: barcode.value,
+        barcode: barcode.value.replace(/\s+/g, ''),
         cardNumber: cardNumber,
         memberNumber: memberNumber,
     }
@@ -292,7 +291,7 @@ async function saveCard() {
             </button>
             <h1 class="title">{{
                 step === 'select-company' ? 'Select Company' : step === 'custom-card' ? 'Custom Card' : 'Add Card'
-            }}</h1>
+                }}</h1>
             <div style="width: 24px"></div>
         </header>
         <div v-if="step === 'select-company'" class="step-content">

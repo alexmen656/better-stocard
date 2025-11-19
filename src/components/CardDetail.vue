@@ -87,7 +87,7 @@ const emit = defineEmits<{
     updateCard: [card: any]
 }>()
 
-const barcodePattern = ref(generateBarcodePattern())
+const barcodePattern = ref(props.card.barcode)//generateBarcodePattern()
 const showMenu = ref(false)
 const showPhotosSection = ref(false)
 const photoFront = ref(props.card.photoFront || '')
@@ -95,24 +95,24 @@ const photoBack = ref(props.card.photoBack || '')
 const fileInputFront = ref<HTMLInputElement | null>(null)
 const fileInputBack = ref<HTMLInputElement | null>(null)
 
-function generateBarcodePattern(): number[] {
+/*function generateBarcodePattern(): number[] {
     const pattern = []
     for (let i = 0; i < 50; i++) {
         pattern.push(Math.random() > 0.5 ? 1 : 0)
     }
     return pattern
-}
+}*/
 
-const cardNumber = ref(props.card.cardNumber || generateCardNumber())
-const memberNumber = ref(props.card.memberNumber || generateMemberNumber())
+const cardNumber = ref(props.card.cardNumber || '')// || generateCardNumber()
+const memberNumber = ref(props.card.memberNumber || '') // || generateMemberNumber()
 
-function generateCardNumber(): string {
+/*function generateCardNumber(): string {
     return `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)}`
 }
 
 function generateMemberNumber(): string {
     return `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 9000 + 1000)}`
-}
+}*/
 
 onMounted(async () => {
     try {
