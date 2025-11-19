@@ -17,6 +17,7 @@ interface Card extends Company {
     barcode?: string
     cardNumber?: string
     memberNumber?: string
+    isCustomCard?: boolean
 }
 
 const router = useRouter()
@@ -100,6 +101,22 @@ const SCAN_FORMATS: BarcodeFormat[] = [
     BarcodeFormat.UpcA,
     BarcodeFormat.UpcE,
 ]
+
+/*const getInitials = (name: string): string => {
+    const trimmed = name.trim()
+
+    if (trimmed.length <= 5) {
+        return trimmed.toUpperCase()
+    }
+
+    const words = trimmed.split(/\s+/)
+
+    if (words.length === 1) {
+        return trimmed.substring(0, 2).toUpperCase()
+    }
+
+    return words.map(w => w.charAt(0)).join('').toUpperCase().substring(0, 2)
+}*/
 
 const extractColorFromImage = (logoUrl: string): Promise<string> => {
     return new Promise((resolve) => {
@@ -264,17 +281,20 @@ async function saveCard() {
 
     let bgColor = selectedCompany.value.bgColor
     let textColor = selectedCompany.value.textColor
+    let isCustomCard = false
 
     if (selectedCompany.value.logo) {
         const logoUrl = getLogoUrl(selectedCompany.value.logo, 64)
         bgColor = await extractColorFromImage(logoUrl)
         textColor = getTextColor(bgColor)
+    } else {
+        isCustomCard = true
     }
 
     const cardNumber = barcode.value; //`${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)}`
     const memberNumber = `${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 9000 + 1000)}`
 
-    const newCard: Card = {
+    const newCard: any = {
         id: Date.now(),
         name: selectedCompany.value.name,
         logo: selectedCompany.value.logo,
@@ -283,6 +303,7 @@ async function saveCard() {
         barcode: barcode.value.replace(/\s+/g, ''),
         cardNumber: cardNumber,
         memberNumber: memberNumber,
+        isCustomCard: isCustomCard,
     }
 
     const { value } = await Preferences.get({ key: 'cards' })
@@ -310,7 +331,7 @@ async function saveCard() {
             </button>
             <h1 class="title">{{
                 step === 'select-company' ? 'Select Company' : step === 'custom-card' ? 'Custom Card' : 'Add Card'
-            }}</h1>
+                }}</h1>
             <div style="width: 24px"></div>
         </header>
         <div v-if="step === 'select-company'" class="step-content">

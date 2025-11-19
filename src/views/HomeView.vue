@@ -11,6 +11,7 @@ interface Card {
   logo: string
   bgColor: string
   textColor: string
+  isCustomCard?: boolean
 }
 
 const extractColorFromImage = (logoUrl: string): Promise<string> => {
@@ -49,6 +50,22 @@ const getTextColor = (rgbColor: string): string => {
   return luminance > 0.5 ? '#000000' : '#FFFFFF'
 }
 
+const getInitials = (name: string): string => {
+  const trimmed = name.trim()
+
+  if (trimmed.length <= 5) {
+    return trimmed.toUpperCase()
+  }
+
+  const words = trimmed.split(/\s+/)
+
+  if (words.length === 1) {
+    return trimmed.substring(0, 2).toUpperCase()
+  }
+
+  return words.map(w => w.charAt(0)).join('').toUpperCase().substring(0, 2)
+}
+
 const cards = ref<Card[]>([]);
 const selectedCard = ref<Card | null>(null)
 
@@ -81,10 +98,12 @@ const getCards = async (): Promise<Card[]> => {
   const cardsData = JSON.parse(value)
 
   for (const card of cardsData) {
-    const logoUrl = `https://cdn.brandfetch.io/${card.logo}?c=1idPcHNqxG9p9gPyoFm`
-    const bgColor = await extractColorFromImage(logoUrl)
-    card.bgColor = bgColor
-    card.textColor = getTextColor(bgColor)
+    if (!card.isCustomCard && card.logo) {
+      const logoUrl = `https://cdn.brandfetch.io/${card.logo}?c=1idPcHNqxG9p9gPyoFm`
+      const bgColor = await extractColorFromImage(logoUrl)
+      card.bgColor = bgColor
+      card.textColor = getTextColor(bgColor)
+    }
   }
 
   return cardsData;
@@ -103,7 +122,10 @@ onMounted(async () => {
       <div v-for="card in cards" :key="card.id" class="card"
         :style="{ backgroundColor: card.bgColor, color: card.textColor }" @click="openCard(card)">
         <div class="card-name">
-          <img :src="'https://cdn.brandfetch.io/' + card.logo + '?c=1idPcHNqxG9p9gPyoFm'" alt=""
+          <div v-if="card.isCustomCard" class="card-initials">
+            {{ getInitials(card.name) }}
+          </div>
+          <img v-else :src="'https://cdn.brandfetch.io/' + card.logo + '?c=1idPcHNqxG9p9gPyoFm'" alt=""
             style="max-width: 200px; max-height: 100px; object-fit: contain;">
         </div>
       </div>
@@ -179,6 +201,14 @@ onMounted(async () => {
   letter-spacing: 1px;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-initials {
+  font-size: 32px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;

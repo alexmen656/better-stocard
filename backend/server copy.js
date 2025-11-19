@@ -197,7 +197,7 @@ async function generatePass(cardData) {
     if (cardData.memberNumber) {
         pass.primaryFields.push({
             key: 'member',
-            label: 'Card Number',//Member Number
+            label: 'Member Number',
             value: cardData.memberNumber,
             textAlignment: 'PKTextAlignmentLeft',
         });
@@ -206,7 +206,7 @@ async function generatePass(cardData) {
     if (cardData.cardNumber) {
         pass.secondaryFields.push({
             key: 'cardNumber',
-            label: 'Company',// Card Number
+            label: 'Card Number',
             value: cardData.cardNumber,
             textAlignment: 'PKTextAlignmentLeft',
         });

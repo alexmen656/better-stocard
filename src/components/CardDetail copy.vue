@@ -40,8 +40,8 @@ async function addToWallet() {
             bgColor: props.card.bgColor,
             textColor: props.card.textColor,
             barcode: props.card.barcode || cardNumber.value.replace(/\s/g, ''),
-            cardNumber: props.card.name,//cardNumber.value,
-            memberNumber: cardNumber.value //memberNumber.value
+            cardNumber: cardNumber.value,
+            memberNumber: memberNumber.value
         };
 
         const response = await fetch('https://better-stocard.reelmia.com/generate-pass', {
@@ -87,7 +87,7 @@ const photoBack = ref(props.card.photoBack || '')
 const fileInputFront = ref<HTMLInputElement | null>(null)
 const fileInputBack = ref<HTMLInputElement | null>(null)
 const cardNumber = ref(props.card.cardNumber || '')
-//const memberNumber = ref(props.card.memberNumber || '')
+const memberNumber = ref(props.card.memberNumber || '')
 
 onMounted(async () => {
     try {
