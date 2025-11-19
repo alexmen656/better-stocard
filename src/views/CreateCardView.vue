@@ -3,6 +3,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Preferences } from '@capacitor/preferences'
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner'
+import companies2 from './companies.json'
 
 interface Company {
     id: number
@@ -108,48 +109,7 @@ const getTextColor = (rgbColor: string): string => {
     return luminance > 0.5 ? '#000000' : '#FFFFFF'
 }
 
-//static for now
-const companies = ref<Company[]>([
-    { id: 1, name: 'COOP', logo: 'coop.fr', bgColor: '#E53935', textColor: '#FFFFFF' },
-    { id: 2, name: 'ESSELUNGA', logo: 'esselunga.com', bgColor: '#1565C0', textColor: '#FFFFFF' },
-    { id: 3, name: 'Carrefour', logo: 'carrefour.com', bgColor: '#0D47A1', textColor: '#FFFFFF' },
-    { id: 4, name: '🌼CONAD', logo: 'conad.com', bgColor: '#E53935', textColor: '#FFFFFF' },
-    { id: 5, name: 'Media•World', logo: 'mediaworld.com', bgColor: '#C62828', textColor: '#FFFFFF' },
-    { id: 6, name: 'IKEA FAMILY', logo: 'ikea.com', bgColor: '#FF9800', textColor: '#FFFFFF' },
-    { id: 7, name: 'DECATHLON', logo: 'decathlon.com', bgColor: '#42A5F5', textColor: '#FFFFFF' },
-    { id: 8, name: 'TIGOTA', logo: 'tigota.com', bgColor: '#26A69A', textColor: '#FFFFFF' },
-    { id: 9, name: 'OVS', logo: 'ovs.com', bgColor: '#212121', textColor: '#FFFFFF' },
-    { id: 10, name: 'TUFI', logo: 'tufi.com', bgColor: '#F5F5F5', textColor: '#E91E63' },
-    { id: 11, name: 'Lidl', logo: 'lidl.com', bgColor: '#F5F5F5', textColor: '#E91E63' },
-    { id: 12, name: 'REWE', logo: 'rewe.de', bgColor: '#E30613', textColor: '#FFFFFF' },
-    { id: 13, name: 'ALDI SÜD', logo: 'aldi-sued.de', bgColor: '#003087', textColor: '#FFFFFF' },
-    { id: 14, name: 'ALDI NORD', logo: 'aldi-nord.de', bgColor: '#003087', textColor: '#FFFFFF' },
-    { id: 15, name: 'EDEKA', logo: 'edeka.de', bgColor: '#00539F', textColor: '#FFFFFF' },
-    { id: 16, name: 'PENNY', logo: 'penny.de', bgColor: '#E30613', textColor: '#FFFFFF' },
-    { id: 17, name: 'ROSSMANN', logo: 'rossmann.de', bgColor: '#E30613', textColor: '#FFFFFF' },
-    { id: 18, name: 'DM', logo: 'dm.de', bgColor: '#009639', textColor: '#FFFFFF' },
-    { id: 19, name: 'OBI', logo: 'obi.de', bgColor: '#FF6600', textColor: '#FFFFFF' },
-    { id: 20, name: 'SATURN', logo: 'saturn.de', bgColor: '#FF0000', textColor: '#FFFFFF' },
-    { id: 21, name: 'MEDIAMARKT', logo: 'mediamarkt.de', bgColor: '#FF0000', textColor: '#FFFFFF' },
-    { id: 22, name: 'MÜLLER', logo: 'mueller.de', bgColor: '#FF6600', textColor: '#FFFFFF' },
-    { id: 23, name: 'BAUHAUS', logo: 'bauhaus.info', bgColor: '#FF0000', textColor: '#FFFFFF' },
-    { id: 24, name: 'Kaufland', logo: 'kaufland.de', bgColor: '#0033A0', textColor: '#FFFFFF' },
-    { id: 25, name: 'Globus', logo: 'globus.de', bgColor: '#E30613', textColor: '#FFFFFF' },
-    { id: 26, name: 'real', logo: 'real.de', bgColor: '#00703C', textColor: '#FFFFFF' },
-    { id: 27, name: 'Thalia', logo: 'thalia.de', bgColor: '#5C2E91', textColor: '#FFFFFF' },
-    { id: 28, name: 'H&M', logo: 'hm.com', bgColor: '#FF0000', textColor: '#FFFFFF' },
-    { id: 29, name: 'C&A', logo: 'c-and-a.com', bgColor: '#005BAB', textColor: '#FFFFFF' },
-    { id: 30, name: 'Peek & Cloppenburg', logo: 'pundc.de', bgColor: '#212121', textColor: '#FFFFFF' },
-    { id: 31, name: 'Douglas', logo: 'douglas.de', bgColor: '#E30613', textColor: '#FFFFFF' },
-    { id: 32, name: 'Fressnapf', logo: 'fressnapf.de', bgColor: '#FF6600', textColor: '#FFFFFF' },
-    { id: 33, name: 'ZooRoyal', logo: 'zooroyal.de', bgColor: '#009639', textColor: '#FFFFFF' },
-    { id: 35, name: 'Hagebau', logo: 'hagebau.de', bgColor: '#FF6600', textColor: '#FFFFFF' },
-    { id: 36, name: 'Deichmann', logo: 'deichmann.com', bgColor: '#FF0000', textColor: '#FFFFFF' },
-    { id: 37, name: 'NKD', logo: 'nkd.com', bgColor: '#FF6600', textColor: '#FFFFFF' },
-    { id: 38, name: 'Sconto', logo: 'sconto.de', bgColor: '#FF6600', textColor: '#FFFFFF' },
-    { id: 39, name: 'Mömax', logo: 'moemax.de', bgColor: '#FF6600', textColor: '#FFFFFF' },
-    { id: 40, name: 'Roller', logo: 'roller.de', bgColor: '#FF6600', textColor: '#FFFFFF' }
-])
+const companies = ref<Company[]>(companies2);
 
 const sortedCompanies = computed(() => {
     return [...companies.value].sort((a, b) => a.name.localeCompare(b.name))
@@ -332,7 +292,7 @@ async function saveCard() {
             </button>
             <h1 class="title">{{
                 step === 'select-company' ? 'Select Company' : step === 'custom-card' ? 'Custom Card' : 'Add Card'
-                }}</h1>
+            }}</h1>
             <div style="width: 24px"></div>
         </header>
         <div v-if="step === 'select-company'" class="step-content">

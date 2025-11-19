@@ -1,0 +1,1752 @@
+[
+  {
+    "id": 1,
+    "name": "REWE",
+    "logo": "rewe.de",
+    "bgColor": "#D40511",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 2,
+    "name": "Payback",
+    "logo": "payback.de",
+    "bgColor": "#662483",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 3,
+    "name": "Lidl Plus",
+    "logo": "lidl.de",
+    "bgColor": "#0050AA",
+    "textColor": "#FFED00"
+  },
+  {
+    "id": 4,
+    "name": "IKEA Family",
+    "logo": "ikea.com",
+    "bgColor": "#0058A3",
+    "textColor": "#FFDA1A"
+  },
+  {
+    "id": 5,
+    "name": "dm Glückskind",
+    "logo": "dm.de",
+    "bgColor": "#005AA0",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 6,
+    "name": "Rossmann",
+    "logo": "rossmann.de",
+    "bgColor": "#E30613",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 7,
+    "name": "Media Markt",
+    "logo": "mediamarkt.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 8,
+    "name": "Saturn",
+    "logo": "saturn.de",
+    "bgColor": "#CC0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 9,
+    "name": "Müller",
+    "logo": "mueller.de",
+    "bgColor": "#E95B0C",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 10,
+    "name": "Thalia",
+    "logo": "thalia.de",
+    "bgColor": "#ED6B06",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 11,
+    "name": "Douglas",
+    "logo": "douglas.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 12,
+    "name": "Decathlon",
+    "logo": "decathlon.de",
+    "bgColor": "#0082C3",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 13,
+    "name": "Budni",
+    "logo": "budni.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 14,
+    "name": "Ihr Platz",
+    "logo": "ihr-platz.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 15,
+    "name": "Galeria",
+    "logo": "galeria.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 16,
+    "name": "Kaufland Card",
+    "logo": "kaufland.de",
+    "bgColor": "#E10915",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 17,
+    "name": "Real",
+    "logo": "real.de",
+    "bgColor": "#005AA0",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 18,
+    "name": "Edeka",
+    "logo": "edeka.de",
+    "bgColor": "#FFD100",
+    "textColor": "#005AA0"
+  },
+  {
+    "id": 19,
+    "name": "Netto",
+    "logo": "netto-online.de",
+    "bgColor": "#FFD200",
+    "textColor": "#000000"
+  },
+  {
+    "id": 20,
+    "name": "Penny",
+    "logo": "penny.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 21,
+    "name": "Aldi",
+    "logo": "aldi.de",
+    "bgColor": "#009FE3",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 22,
+    "name": "Norma",
+    "logo": "norma-online.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 23,
+    "name": "Toom",
+    "logo": "toom.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 24,
+    "name": "OBI",
+    "logo": "obi.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 25,
+    "name": "Bauhaus",
+    "logo": "bauhaus.info",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 26,
+    "name": "Hornbach",
+    "logo": "hornbach.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 27,
+    "name": "Dehner",
+    "logo": "dehner.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 28,
+    "name": "Fressnapf",
+    "logo": "fressnapf.de",
+    "bgColor": "#D6001C",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 29,
+    "name": "Futterhaus",
+    "logo": "futterhaus.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 30,
+    "name": "Zoo Zajac",
+    "logo": "zoo-zajac.de",
+    "bgColor": "#009FE3",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 31,
+    "name": "Deichmann",
+    "logo": "deichmann.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 32,
+    "name": "Reno",
+    "logo": "reno.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 33,
+    "name": "Runners Point",
+    "logo": "runnerspoint.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 34,
+    "name": "Snipes",
+    "logo": "snipes.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 35,
+    "name": "Sidestep",
+    "logo": "sidestep-shoes.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 36,
+    "name": "Görtz 17",
+    "logo": "goertz17.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 37,
+    "name": "Sport Scheck",
+    "logo": "sportscheck.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 38,
+    "name": "Intersport",
+    "logo": "intersport.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 39,
+    "name": "Sport 2000",
+    "logo": "sport2000.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 40,
+    "name": "Karstadt Sports",
+    "logo": "karstadt-sports.de",
+    "bgColor": "#005AA0",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 41,
+    "name": "Müllerland",
+    "logo": "mueller.de",
+    "bgColor": "#E95B0C",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 42,
+    "name": "Zoo & Co",
+    "logo": "zooplus.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 43,
+    "name": "Fressnapf Friends",
+    "logo": "fressnapf.de",
+    "bgColor": "#D6001C",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 44,
+    "name": "Das Futterhaus",
+    "logo": "futterhaus.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 45,
+    "name": "Bäckerei Kamps",
+    "logo": "kamps.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 46,
+    "name": "Ditsch",
+    "logo": "ditsch.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 47,
+    "name": "Dat Backhus",
+    "logo": "datbackhus.de",
+    "bgColor": "#8B4513",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 48,
+    "name": "Tchibo",
+    "logo": "tchibo.de",
+    "bgColor": "#003B7C",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 49,
+    "name": "Tchibo Privat Kaffee",
+    "logo": "tchibo.de",
+    "bgColor": "#003B7C",
+    "textColor": "#FFD100"
+  },
+  {
+    "id": 50,
+    "name": "Dallmayr",
+    "logo": "dallmayr.de",
+    "bgColor": "#8B4513",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 51,
+    "name": "Mestemacher",
+    "logo": "mestemacher.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 52,
+    "name": "Harry Brot",
+    "logo": "harry-brot.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 53,
+    "name": "Aral Supercard",
+    "logo": "aral.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 54,
+    "name": "Shell ClubSmart",
+    "logo": "shell.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 55,
+    "name": "BayWa",
+    "logo": "baywa.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 56,
+    "name": "Mayersche",
+    "logo": "mayersche.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 57,
+    "name": "Hugendubel",
+    "logo": "hugendubel.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 58,
+    "name": "Weltbild",
+    "logo": "weltbild.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 59,
+    "name": "Spielwaren Kurtz",
+    "logo": "spielwarenkurtz.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 60,
+    "name": "Spielzeugring",
+    "logo": "spielzeugring.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 61,
+    "name": "Idee Creativmarkt",
+    "logo": "idee-shop.com",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 62,
+    "name": "Vedes",
+    "logo": "vedes.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 63,
+    "name": "Baby Walz",
+    "logo": "baby-walz.de",
+    "bgColor": "#009FE3",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 64,
+    "name": "BabyOne",
+    "logo": "babyone.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 65,
+    "name": "Bartels-Langness",
+    "logo": "bela.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 66,
+    "name": "CITTI",
+    "logo": "citti.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 67,
+    "name": "Diska",
+    "logo": "diska.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 68,
+    "name": "Famila Nordost",
+    "logo": "famila.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 69,
+    "name": "Fristo",
+    "logo": "fristo.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 70,
+    "name": "Getränke Quelle",
+    "logo": "getraenke-quelle.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 71,
+    "name": "Hol'ab",
+    "logo": "holab.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 72,
+    "name": "Rebell",
+    "logo": "rebell-reutlingen.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 73,
+    "name": "Nah & Frisch",
+    "logo": "nah-und-frisch.at",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 74,
+    "name": "Spar",
+    "logo": "spar.at",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 75,
+    "name": "Billa",
+    "logo": "billa.at",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 76,
+    "name": "Merkur",
+    "logo": "merkurmarkt.at",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 77,
+    "name": "Hofer",
+    "logo": "hofer.at",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 78,
+    "name": "TK Maxx",
+    "logo": "tkmaxx.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 79,
+    "name": "Woolworth",
+    "logo": "woolworth.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 80,
+    "name": "TEDi",
+    "logo": "tedi.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 81,
+    "name": "KiK",
+    "logo": "kik.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 82,
+    "name": "Takko",
+    "logo": "takko.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 83,
+    "name": "NKD",
+    "logo": "nkd.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 84,
+    "name": "Ernsting's family",
+    "logo": "ernstings-family.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 85,
+    "name": "Penny Markt",
+    "logo": "penny.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 86,
+    "name": "Plus",
+    "logo": "plus.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 87,
+    "name": "Wasgau",
+    "logo": "wasgau.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 88,
+    "name": "Plaza",
+    "logo": "plaza-online.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 89,
+    "name": "Möbel Höffner",
+    "logo": "hoeffner.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 90,
+    "name": "Möbel Boss",
+    "logo": "moebel-boss.de",
+    "bgColor": "#FFD100",
+    "textColor": "#000000"
+  },
+  {
+    "id": 91,
+    "name": "Roller",
+    "logo": "roller.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 92,
+    "name": "Poco",
+    "logo": "poco.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 93,
+    "name": "XXXLutz",
+    "logo": "xxxlutz.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 94,
+    "name": "Segmüller",
+    "logo": "segmueller.de",
+    "bgColor": "#005AA0",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 95,
+    "name": "Dänisches Bettenlager",
+    "logo": "daenischesbettenlager.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 96,
+    "name": "Jysk",
+    "logo": "jysk.de",
+    "bgColor": "#005AA0",
+    "textColor": "#FFD100"
+  },
+  {
+    "id": 97,
+    "name": "Depot",
+    "logo": "depot-online.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 98,
+    "name": "Casa",
+    "logo": "casa.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 99,
+    "name": "Butlers",
+    "logo": "butlers.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 100,
+    "name": "WMF",
+    "logo": "wmf.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 101,
+    "name": "Villeroy & Boch",
+    "logo": "villeroy-boch.de",
+    "bgColor": "#005AA0",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 102,
+    "name": "Rosenthal",
+    "logo": "rosenthal.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 103,
+    "name": "Nespresso Club",
+    "logo": "nespresso.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 104,
+    "name": "Alnatura",
+    "logo": "alnatura.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 105,
+    "name": "Bio Company",
+    "logo": "biocompany.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 106,
+    "name": "Denn's Biomarkt",
+    "logo": "denns-biomarkt.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 107,
+    "name": "Basic",
+    "logo": "basic-ag.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 108,
+    "name": "Reformhaus",
+    "logo": "reformhaus.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 109,
+    "name": "Apotheken Kundenkarte",
+    "logo": "apotheke.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 110,
+    "name": "Easyapotheke",
+    "logo": "easyapotheke.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 111,
+    "name": "Zur Rose",
+    "logo": "zurrose.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 112,
+    "name": "Parfümerie Pieper",
+    "logo": "pieper.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 113,
+    "name": "Parfümerie Becker",
+    "logo": "parfuemerie-becker.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 114,
+    "name": "The Body Shop",
+    "logo": "thebodyshop.com",
+    "bgColor": "#006837",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 115,
+    "name": "Parfümerie Akzente",
+    "logo": "akzente.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 116,
+    "name": "Erwin Müller",
+    "logo": "erwinmueller.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 117,
+    "name": "Kodi",
+    "logo": "kodi.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 118,
+    "name": "Action",
+    "logo": "action.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 119,
+    "name": "Nanu-Nana",
+    "logo": "nanu-nana.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 120,
+    "name": "Juwelier Wempe",
+    "logo": "wempe.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 121,
+    "name": "Juwelier Kraemer",
+    "logo": "juwelier-kraemer.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 122,
+    "name": "Christ Juweliere",
+    "logo": "christ.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 123,
+    "name": "Bijou Brigitte",
+    "logo": "bijou-brigitte.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 124,
+    "name": "Six",
+    "logo": "six-accessoires.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 125,
+    "name": "Fielmann",
+    "logo": "fielmann.de",
+    "bgColor": "#005AA0",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 126,
+    "name": "Apollo Optik",
+    "logo": "apollo.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 127,
+    "name": "Optik Sagawe",
+    "logo": "sagawe.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 128,
+    "name": "Pearle",
+    "logo": "pearle.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 129,
+    "name": "Kieser Training",
+    "logo": "kieser-training.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 130,
+    "name": "Mrs. Sporty",
+    "logo": "mrssporty.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 131,
+    "name": "Fitness Company",
+    "logo": "fitness-company.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 132,
+    "name": "Injoy",
+    "logo": "injoy.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 133,
+    "name": "FitnessLoft",
+    "logo": "fitnessloft.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 134,
+    "name": "BackWerk",
+    "logo": "backwerk.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 135,
+    "name": "Backshop",
+    "logo": "backshop.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 136,
+    "name": "Backfactory",
+    "logo": "back-factory.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 137,
+    "name": "Schäfer's Brot",
+    "logo": "schaefers-brot.de",
+    "bgColor": "#8B4513",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 138,
+    "name": "Steinecke",
+    "logo": "steinecke.info",
+    "bgColor": "#8B4513",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 139,
+    "name": "Wiener Feinbäcker",
+    "logo": "wiener-feinbaecker.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 140,
+    "name": "Schäfershop",
+    "logo": "schaefershop.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 141,
+    "name": "Viking Direkt",
+    "logo": "viking.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 142,
+    "name": "Lyreco",
+    "logo": "lyreco.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 143,
+    "name": "Staples",
+    "logo": "staples.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 144,
+    "name": "McPaper",
+    "logo": "mcpaper.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 145,
+    "name": "Libro",
+    "logo": "libro.at",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 146,
+    "name": "Adler Modemärkte",
+    "logo": "adlermode.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 147,
+    "name": "Hunkemöller",
+    "logo": "hunkemoller.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 148,
+    "name": "Intimissimi",
+    "logo": "intimissimi.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 149,
+    "name": "Triumph",
+    "logo": "triumph.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 150,
+    "name": "Calzedonia",
+    "logo": "calzedonia.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 151,
+    "name": "Görtz",
+    "logo": "goertz.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 152,
+    "name": "Tamaris",
+    "logo": "tamaris.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 153,
+    "name": "Siemes Schuhcenter",
+    "logo": "siemes.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 154,
+    "name": "Schuh Mücke",
+    "logo": "schuhmuecke.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 155,
+    "name": "Quick Schuh",
+    "logo": "quick-schuh.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 156,
+    "name": "Humanic",
+    "logo": "humanic.net",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 157,
+    "name": "Vögele Shoes",
+    "logo": "voegele-shoes.com",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 158,
+    "name": "Mirapodo",
+    "logo": "mirapodo.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 159,
+    "name": "Orsay",
+    "logo": "orsay.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 160,
+    "name": "Promod",
+    "logo": "promod.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 161,
+    "name": "Street One",
+    "logo": "street-one.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 162,
+    "name": "Cecil",
+    "logo": "cecil.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 163,
+    "name": "Comma",
+    "logo": "comma-store.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 164,
+    "name": "Gerry Weber",
+    "logo": "gerryweber.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 165,
+    "name": "Strenesse",
+    "logo": "strenesse.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 166,
+    "name": "Breuninger",
+    "logo": "breuninger.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 167,
+    "name": "Engelhorn",
+    "logo": "engelhorn.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 168,
+    "name": "Oberpollinger",
+    "logo": "oberpollinger.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 169,
+    "name": "Alsterhaus",
+    "logo": "alsterhaus.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 170,
+    "name": "KaDeWe",
+    "logo": "kadewe.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 171,
+    "name": "Esprit Arena",
+    "logo": "esprit-arena.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 172,
+    "name": "Eventim",
+    "logo": "eventim.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 173,
+    "name": "Ticketmaster",
+    "logo": "ticketmaster.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 174,
+    "name": "Esso",
+    "logo": "esso.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 175,
+    "name": "Shell",
+    "logo": "shell.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 176,
+    "name": "Aral",
+    "logo": "aral.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 177,
+    "name": "Total",
+    "logo": "total.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 178,
+    "name": "OMV",
+    "logo": "omv.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 179,
+    "name": "Jet",
+    "logo": "jet-tankstellen.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 180,
+    "name": "Agip",
+    "logo": "agip.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 181,
+    "name": "ATU",
+    "logo": "atu.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 182,
+    "name": "Pitstop",
+    "logo": "pitstop.de",
+    "bgColor": "#FFD100",
+    "textColor": "#000000"
+  },
+  {
+    "id": 183,
+    "name": "Vergölst",
+    "logo": "vergoelst.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 184,
+    "name": "Reifen.com",
+    "logo": "reifen.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 185,
+    "name": "Carglass",
+    "logo": "carglass.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 186,
+    "name": "Auto-Teile-Unger",
+    "logo": "auto-teile-unger.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 187,
+    "name": "Mister Auto",
+    "logo": "mister-auto.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 188,
+    "name": "Louis",
+    "logo": "louis.de",
+    "bgColor": "#000000",
+    "textColor": "#FFD100"
+  },
+  {
+    "id": 189,
+    "name": "Polo Motorrad",
+    "logo": "polo-motorrad.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 190,
+    "name": "Hein Gericke",
+    "logo": "heingericke.de",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 191,
+    "name": "Fahrrad XXL",
+    "logo": "fahrrad-xxl.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 192,
+    "name": "Lucky Bike",
+    "logo": "lucky-bike.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 193,
+    "name": "Bike24",
+    "logo": "bike24.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 194,
+    "name": "Rose Bikes",
+    "logo": "rosebikes.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 195,
+    "name": "Canyon",
+    "logo": "canyon.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 196,
+    "name": "Zweirad Stadler",
+    "logo": "zweirad-stadler.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 197,
+    "name": "Velo de Ville",
+    "logo": "velo-de-ville.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 198,
+    "name": "Betten Rid",
+    "logo": "bettenrid.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 199,
+    "name": "Matratzen Concord",
+    "logo": "matratzen-concord.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 200,
+    "name": "Betten Reiter",
+    "logo": "bettenreiter.com",
+    "bgColor": "#005AA0",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 201,
+    "name": "Dänisches Betten Lager",
+    "logo": "daenischesbettenlager.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 202,
+    "name": "Schlafwelt",
+    "logo": "schlafwelt.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 203,
+    "name": "Emma Matratze",
+    "logo": "emma-matratze.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 204,
+    "name": "Casper",
+    "logo": "casper.com",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 205,
+    "name": "Bofrost",
+    "logo": "bofrost.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 206,
+    "name": "Eismann",
+    "logo": "eismann.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 207,
+    "name": "Costa",
+    "logo": "costa.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 208,
+    "name": "Bioladen",
+    "logo": "bioladen.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 209,
+    "name": "Naturata",
+    "logo": "naturata.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 210,
+    "name": "Vitalia Reformhaus",
+    "logo": "vitalia-reformhaus.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 211,
+    "name": "Biomare",
+    "logo": "biomare.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 212,
+    "name": "SuperBioMarkt",
+    "logo": "superbiomarkt.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 213,
+    "name": "Temma",
+    "logo": "temma.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 214,
+    "name": "BioBio",
+    "logo": "biobio.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 215,
+    "name": "Rewe Bio",
+    "logo": "rewe.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 216,
+    "name": "Edeka Bio",
+    "logo": "edeka.de",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 217,
+    "name": "Metro",
+    "logo": "metro.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 218,
+    "name": "Selgros",
+    "logo": "selgros.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 219,
+    "name": "Transgourmet",
+    "logo": "transgourmet.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 220,
+    "name": "Globus",
+    "logo": "globus.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 221,
+    "name": "V-Markt",
+    "logo": "v-markt.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 222,
+    "name": "Combi",
+    "logo": "combi.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 223,
+    "name": "Marktkauf",
+    "logo": "marktkauf.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 224,
+    "name": "Famila",
+    "logo": "famila.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 225,
+    "name": "Ratio",
+    "logo": "ratio-radebeul.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 226,
+    "name": "Konsum Leipzig",
+    "logo": "konsum-leipzig.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 227,
+    "name": "Tegut",
+    "logo": "tegut.com",
+    "bgColor": "#64A70B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 228,
+    "name": "Feneberg",
+    "logo": "feneberg.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 229,
+    "name": "Hit",
+    "logo": "hit.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 230,
+    "name": "Jibi",
+    "logo": "jibi.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 231,
+    "name": "Minimal",
+    "logo": "minimal.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 232,
+    "name": "K+K",
+    "logo": "kk-markt.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 233,
+    "name": "Nahkauf",
+    "logo": "nahkauf.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 234,
+    "name": "Trinkgut",
+    "logo": "trinkgut.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 235,
+    "name": "Getränke Hoffmann",
+    "logo": "getraenke-hoffmann.de",
+    "bgColor": "#FFD100",
+    "textColor": "#E2001A"
+  },
+  {
+    "id": 236,
+    "name": "Migros",
+    "logo": "migros.ch",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 237,
+    "name": "Coop",
+    "logo": "coop.ch",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 238,
+    "name": "Manor",
+    "logo": "manor.ch",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 239,
+    "name": "Interdiscount",
+    "logo": "interdiscount.ch",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 240,
+    "name": "Fust",
+    "logo": "fust.ch",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 241,
+    "name": "Microspot",
+    "logo": "microspot.ch",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 242,
+    "name": "Digitec",
+    "logo": "digitec.ch",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 243,
+    "name": "Galaxus",
+    "logo": "galaxus.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 244,
+    "name": "Alternate",
+    "logo": "alternate.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 245,
+    "name": "Notebooksbilliger",
+    "logo": "notebooksbilliger.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 246,
+    "name": "Cyberport",
+    "logo": "cyberport.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 247,
+    "name": "Expert",
+    "logo": "expert.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 248,
+    "name": "Euronics",
+    "logo": "euronics.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 249,
+    "name": "Conrad",
+    "logo": "conrad.de",
+    "bgColor": "#E2001A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 250,
+    "name": "Voelkner",
+    "logo": "voelkner.de",
+    "bgColor": "#0066CC",
+    "textColor": "#FFFFFF"
+  }
+]

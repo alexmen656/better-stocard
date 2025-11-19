@@ -1,0 +1,1586 @@
+[
+  { "id": 1, "name": "COOP", "logo": "coop.fr", "bgColor": "#E53935", "textColor": "#FFFFFF" },
+  {
+    "id": 2,
+    "name": "ESSELUNGA",
+    "logo": "esselunga.com",
+    "bgColor": "#1565C0",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 3,
+    "name": "Carrefour",
+    "logo": "carrefour.com",
+    "bgColor": "#0D47A1",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 4, "name": "CONAD", "logo": "conad.com", "bgColor": "#E53935", "textColor": "#FFFFFF" },
+  {
+    "id": 5,
+    "name": "Media•World",
+    "logo": "mediaworld.com",
+    "bgColor": "#C62828",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 6,
+    "name": "IKEA FAMILY",
+    "logo": "ikea.com",
+    "bgColor": "#FF9800",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 7,
+    "name": "DECATHLON",
+    "logo": "decathlon.com",
+    "bgColor": "#42A5F5",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 8, "name": "TIGOTA", "logo": "tigota.com", "bgColor": "#26A69A", "textColor": "#FFFFFF" },
+  { "id": 9, "name": "OVS", "logo": "ovs.com", "bgColor": "#212121", "textColor": "#FFFFFF" },
+  { "id": 10, "name": "TUFI", "logo": "tufi.com", "bgColor": "#F5F5F5", "textColor": "#E91E63" },
+  { "id": 11, "name": "Lidl", "logo": "lidl.com", "bgColor": "#F5F5F5", "textColor": "#E91E63" },
+  { "id": 12, "name": "REWE", "logo": "rewe.de", "bgColor": "#E30613", "textColor": "#FFFFFF" },
+  {
+    "id": 13,
+    "name": "ALDI SÜD",
+    "logo": "aldi-sued.de",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 14,
+    "name": "ALDI NORD",
+    "logo": "aldi-nord.de",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 15, "name": "EDEKA", "logo": "edeka.de", "bgColor": "#00539F", "textColor": "#FFFFFF" },
+  { "id": 16, "name": "PENNY", "logo": "penny.de", "bgColor": "#E30613", "textColor": "#FFFFFF" },
+  {
+    "id": 17,
+    "name": "ROSSMANN",
+    "logo": "rossmann.de",
+    "bgColor": "#E30613",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 18, "name": "DM", "logo": "dm.de", "bgColor": "#009639", "textColor": "#FFFFFF" },
+  { "id": 19, "name": "OBI", "logo": "obi.de", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  { "id": 20, "name": "SATURN", "logo": "saturn.de", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  {
+    "id": 21,
+    "name": "MEDIAMARKT",
+    "logo": "mediamarkt.de",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 22,
+    "name": "MÜLLER",
+    "logo": "mueller.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 23,
+    "name": "BAUHAUS",
+    "logo": "bauhaus.info",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 24,
+    "name": "Kaufland",
+    "logo": "kaufland.de",
+    "bgColor": "#0033A0",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 25, "name": "Globus", "logo": "globus.de", "bgColor": "#E30613", "textColor": "#FFFFFF" },
+  { "id": 26, "name": "real", "logo": "real.de", "bgColor": "#00703C", "textColor": "#FFFFFF" },
+  { "id": 27, "name": "Thalia", "logo": "thalia.de", "bgColor": "#5C2E91", "textColor": "#FFFFFF" },
+  { "id": 28, "name": "H&M", "logo": "hm.com", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  { "id": 29, "name": "C&A", "logo": "c-and-a.com", "bgColor": "#005BAB", "textColor": "#FFFFFF" },
+  {
+    "id": 30,
+    "name": "Peek & Cloppenburg",
+    "logo": "pundc.de",
+    "bgColor": "#212121",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 31,
+    "name": "Douglas",
+    "logo": "douglas.de",
+    "bgColor": "#E30613",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 32,
+    "name": "Fressnapf",
+    "logo": "fressnapf.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 33,
+    "name": "ZooRoyal",
+    "logo": "zooroyal.de",
+    "bgColor": "#009639",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 34,
+    "name": "Hagebau",
+    "logo": "hagebau.de",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 35,
+    "name": "Deichmann",
+    "logo": "deichmann.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 36, "name": "NKD", "logo": "nkd.com", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  { "id": 37, "name": "Sconto", "logo": "sconto.de", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  { "id": 38, "name": "Mömax", "logo": "moemax.de", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  { "id": 39, "name": "Roller", "logo": "roller.de", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  {
+    "id": 40,
+    "name": "Interspar",
+    "logo": "interspar.at",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 41, "name": "Spar", "logo": "spar.at", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  { "id": 42, "name": "Merkur", "logo": "merkur.at", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  { "id": 43, "name": "Bipa", "logo": "bipa.at", "bgColor": "#00A86B", "textColor": "#FFFFFF" },
+  { "id": 44, "name": "dm Austria", "logo": "dm.at", "bgColor": "#009639", "textColor": "#FFFFFF" },
+  {
+    "id": 45,
+    "name": "MediaMarkt Austria",
+    "logo": "mediamarkt.at",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 46,
+    "name": "Saturn Austria",
+    "logo": "saturn.at",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 47,
+    "name": "IKEA Austria",
+    "logo": "ikea.at",
+    "bgColor": "#FF9800",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 48,
+    "name": "Baumarkt König",
+    "logo": "baumarkt-koenig.at",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 49, "name": "OMV", "logo": "omv.at", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  { "id": 50, "name": "BP", "logo": "bp.com", "bgColor": "#005EB8", "textColor": "#FFFFFF" },
+  { "id": 51, "name": "Shell", "logo": "shell.com", "bgColor": "#FFD100", "textColor": "#000000" },
+  {
+    "id": 52,
+    "name": "TOTAL Energies",
+    "logo": "totalenergies.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 53,
+    "name": "Coop Switzerland",
+    "logo": "coop.ch",
+    "bgColor": "#CC0000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 54, "name": "Migros", "logo": "migros.ch", "bgColor": "#FF5900", "textColor": "#FFFFFF" },
+  { "id": 55, "name": "Manor", "logo": "manor.ch", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 56,
+    "name": "Globus Switzerland",
+    "logo": "globus.ch",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 57, "name": "Denner", "logo": "denner.ch", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  { "id": 58, "name": "Landi", "logo": "landi.ch", "bgColor": "#00A651", "textColor": "#FFFFFF" },
+  {
+    "id": 59,
+    "name": "Conforama",
+    "logo": "conforama.ch",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 60, "name": "Jumbo", "logo": "jumbo.ch", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  { "id": 61, "name": "Volg", "logo": "volg.ch", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  { "id": 62, "name": "Cora", "logo": "cora.fr", "bgColor": "#0D47A1", "textColor": "#FFFFFF" },
+  {
+    "id": 63,
+    "name": "Leclerc",
+    "logo": "e-leclerc.com",
+    "bgColor": "#0073C4",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 64,
+    "name": "Carrefour Express",
+    "logo": "carrefour.fr",
+    "bgColor": "#0D47A1",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 65, "name": "Auchan", "logo": "auchan.fr", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  {
+    "id": 66,
+    "name": "Casino",
+    "logo": "casinosupermarches.fr",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 67,
+    "name": "Intermarché",
+    "logo": "intermarche.com",
+    "bgColor": "#1E3A8A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 68,
+    "name": "Monoprix",
+    "logo": "monoprix.fr",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 69,
+    "name": "Carrefour Market",
+    "logo": "carrefourmarket.fr",
+    "bgColor": "#0D47A1",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 70,
+    "name": "Franprix",
+    "logo": "franprix.fr",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 71,
+    "name": "Auchan France",
+    "logo": "auchan.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 72, "name": "Fnac", "logo": "fnac.com", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  { "id": 73, "name": "Darty", "logo": "darty.com", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  {
+    "id": 74,
+    "name": "Sephora France",
+    "logo": "sephora.fr",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 75, "name": "Picard", "logo": "picard.fr", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 76,
+    "name": "Leclerc Travel",
+    "logo": "leclerc-voyages.com",
+    "bgColor": "#0073C4",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 77,
+    "name": "Priceline",
+    "logo": "priceline.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 78,
+    "name": "Booking.com",
+    "logo": "booking.com",
+    "bgColor": "#003580",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 79,
+    "name": "Expedia",
+    "logo": "expedia.com",
+    "bgColor": "#FFD700",
+    "textColor": "#000000"
+  },
+  {
+    "id": 80,
+    "name": "Marriott Bonvoy",
+    "logo": "marriott.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 81,
+    "name": "Hilton Honors",
+    "logo": "hilton.com",
+    "bgColor": "#003580",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 82,
+    "name": "IHG One Rewards",
+    "logo": "ihg.com",
+    "bgColor": "#005EB8",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 83,
+    "name": "Accor Plus",
+    "logo": "accor.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 84,
+    "name": "Wyndham Rewards",
+    "logo": "wyndhamhotels.com",
+    "bgColor": "#005BAB",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 85,
+    "name": "Lufthansa Miles & More",
+    "logo": "lufthansa.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 86,
+    "name": "KLM Flying Blue",
+    "logo": "klm.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 87,
+    "name": "British Airways Executive Club",
+    "logo": "britishairways.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 88,
+    "name": "Ryanair Loyalty",
+    "logo": "ryanair.com",
+    "bgColor": "#0099FF",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 89,
+    "name": "Swiss International Airlines",
+    "logo": "swiss.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 90,
+    "name": "Air France Frequent Flyer",
+    "logo": "airfrance.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 91,
+    "name": "Alitalia MilleMiglia",
+    "logo": "alitalia.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 92,
+    "name": "Eurowings",
+    "logo": "eurowings.com",
+    "bgColor": "#FF9900",
+    "textColor": "#000000"
+  },
+  {
+    "id": 93,
+    "name": "Turkish Airlines",
+    "logo": "turkishairlines.com",
+    "bgColor": "#C60C30",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 94,
+    "name": "LOT Polish Airlines",
+    "logo": "lot.com",
+    "bgColor": "#004B87",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 95,
+    "name": "Aeroflot",
+    "logo": "aeroflot.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 96,
+    "name": "SAS EuroBonus",
+    "logo": "sas.se",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 97, "name": "RENFE", "logo": "renfe.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  { "id": 98, "name": "DB Bahn", "logo": "bahn.de", "bgColor": "#EC1C24", "textColor": "#FFFFFF" },
+  { "id": 99, "name": "SNCF", "logo": "sncf.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 100,
+    "name": "Trenitalia",
+    "logo": "trenitalia.com",
+    "bgColor": "#00A651",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 101, "name": "ÖBB", "logo": "oebb.at", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  { "id": 102, "name": "SBB", "logo": "sbb.ch", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  { "id": 103, "name": "NS", "logo": "ns.nl", "bgColor": "#FFD700", "textColor": "#000000" },
+  { "id": 104, "name": "SNCB", "logo": "sncb.be", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  { "id": 105, "name": "PKP", "logo": "pkp.pl", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 106,
+    "name": "Vodafone",
+    "logo": "vodafone.com",
+    "bgColor": "#E60000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 107,
+    "name": "Deutsche Telekom",
+    "logo": "telekom.de",
+    "bgColor": "#E60000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 108,
+    "name": "Orange",
+    "logo": "orange.com",
+    "bgColor": "#FF8000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 109, "name": "BT Group", "logo": "bt.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 110,
+    "name": "Swisscom",
+    "logo": "swisscom.ch",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 111,
+    "name": "Telenor",
+    "logo": "telenor.com",
+    "bgColor": "#004EA0",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 112, "name": "Telia", "logo": "telia.se", "bgColor": "#00A99D", "textColor": "#FFFFFF" },
+  { "id": 113, "name": "KPN", "logo": "kpn.com", "bgColor": "#FF9900", "textColor": "#000000" },
+  {
+    "id": 114,
+    "name": "Proximus",
+    "logo": "proximus.be",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 115, "name": "Play", "logo": "play.pl", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  {
+    "id": 116,
+    "name": "T-Mobile Austria",
+    "logo": "t-mobile.at",
+    "bgColor": "#E60000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 117,
+    "name": "Vodafone Spain",
+    "logo": "vodafone.es",
+    "bgColor": "#E60000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 118,
+    "name": "Movistar",
+    "logo": "movistar.es",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 119,
+    "name": "Telefónica",
+    "logo": "telefonica.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 120,
+    "name": "Bankinter",
+    "logo": "bankinter.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 121, "name": "BBVA", "logo": "bbva.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 122,
+    "name": "CaixaBank",
+    "logo": "caixabank.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 123,
+    "name": "Banco Sabadell",
+    "logo": "bancsabadell.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 124,
+    "name": "Santander",
+    "logo": "santander.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 125, "name": "ING", "logo": "ing.com", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  {
+    "id": 126,
+    "name": "ABN AMRO",
+    "logo": "abnamro.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 127,
+    "name": "Rabobank",
+    "logo": "rabobank.nl",
+    "bgColor": "#FFCC00",
+    "textColor": "#000000"
+  },
+  {
+    "id": 128,
+    "name": "BNP Paribas",
+    "logo": "bnpparibas.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 129,
+    "name": "Société Générale",
+    "logo": "societegenerale.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 130,
+    "name": "Crédit Agricole",
+    "logo": "credit-agricole.com",
+    "bgColor": "#00A651",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 131,
+    "name": "Deutsche Bank",
+    "logo": "db.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 132,
+    "name": "Commerzbank",
+    "logo": "commerzbank.de",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 133,
+    "name": "Unicredit",
+    "logo": "unicredit.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 134,
+    "name": "Intesa Sanpaolo",
+    "logo": "intesasanpaolo.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 135,
+    "name": "Credit Suisse",
+    "logo": "credit-suisse.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 136, "name": "UBS", "logo": "ubs.com", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  {
+    "id": 137,
+    "name": "PKO Bank Polski",
+    "logo": "pkobp.pl",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 138,
+    "name": "Netflix",
+    "logo": "netflix.com",
+    "bgColor": "#E50914",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 139,
+    "name": "Spotify",
+    "logo": "spotify.com",
+    "bgColor": "#1DB954",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 140,
+    "name": "Amazon Prime Video",
+    "logo": "amazon.com",
+    "bgColor": "#FF9900",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 141,
+    "name": "Disney+",
+    "logo": "disneyplus.com",
+    "bgColor": "#113CCF",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 142,
+    "name": "Apple TV+",
+    "logo": "apple.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 143,
+    "name": "Now TV",
+    "logo": "nowtv.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 144, "name": "Sky Go", "logo": "sky.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 145,
+    "name": "PlayStation Plus",
+    "logo": "playstation.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 146,
+    "name": "Xbox Game Pass",
+    "logo": "xbox.com",
+    "bgColor": "#107C10",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 147, "name": "Gym", "logo": "thegym.com", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  {
+    "id": 148,
+    "name": "Fitbit",
+    "logo": "fitbit.com",
+    "bgColor": "#1A1A1A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 149,
+    "name": "Peloton",
+    "logo": "onepeloton.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 150,
+    "name": "Gold's Gym",
+    "logo": "goldsgym.com",
+    "bgColor": "#FFB81C",
+    "textColor": "#000000"
+  },
+  {
+    "id": 151,
+    "name": "ClassPass",
+    "logo": "classpass.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 152, "name": "ASOS", "logo": "asos.com", "bgColor": "#000000", "textColor": "#FFFFFF" },
+  {
+    "id": 153,
+    "name": "Zalando",
+    "logo": "zalando.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 154,
+    "name": "Farfetch",
+    "logo": "farfetch.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 155,
+    "name": "Vestiaire Collective",
+    "logo": "vestiairecollective.com",
+    "bgColor": "#4E4E4E",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 156, "name": "Depop", "logo": "depop.com", "bgColor": "#1E90FF", "textColor": "#FFFFFF" },
+  {
+    "id": 157,
+    "name": "Vinted",
+    "logo": "vinted.com",
+    "bgColor": "#00A651",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 158,
+    "name": "Urban Outfitters",
+    "logo": "urbanoutfitters.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 159, "name": "Zara", "logo": "zara.com", "bgColor": "#000000", "textColor": "#FFFFFF" },
+  {
+    "id": 160,
+    "name": "Uniqlo",
+    "logo": "uniqlo.com",
+    "bgColor": "#C41E3A",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 161, "name": "Gap", "logo": "gap.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 162,
+    "name": "Topshop",
+    "logo": "topshop.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 163,
+    "name": "River Island",
+    "logo": "riverisland.com",
+    "bgColor": "#C1121F",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 164,
+    "name": "Benetton",
+    "logo": "benetton.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 165,
+    "name": "Esprit",
+    "logo": "esprit.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 166,
+    "name": "Tommy Hilfiger",
+    "logo": "tommyhill.com",
+    "bgColor": "#0052CC",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 167,
+    "name": "Calvin Klein",
+    "logo": "calvinklein.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 168,
+    "name": "Hugo Boss",
+    "logo": "hugoboss.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 169, "name": "Gucci", "logo": "gucci.com", "bgColor": "#000000", "textColor": "#FFFFFF" },
+  { "id": 170, "name": "Prada", "logo": "prada.com", "bgColor": "#000000", "textColor": "#FFFFFF" },
+  {
+    "id": 171,
+    "name": "Louis Vuitton",
+    "logo": "louisvuitton.com",
+    "bgColor": "#8B7355",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 172,
+    "name": "Hermes",
+    "logo": "hermes.com",
+    "bgColor": "#FF9900",
+    "textColor": "#000000"
+  },
+  {
+    "id": 173,
+    "name": "Chanel",
+    "logo": "chanel.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 174,
+    "name": "Burberry",
+    "logo": "burberry.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 175,
+    "name": "Balenciaga",
+    "logo": "balenciaga.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 176,
+    "name": "Versace",
+    "logo": "versace.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 177,
+    "name": "Dolce & Gabbana",
+    "logo": "dolcegabbana.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 178, "name": "Fendi", "logo": "fendi.com", "bgColor": "#000000", "textColor": "#FFFFFF" },
+  {
+    "id": 179,
+    "name": "Givenchy",
+    "logo": "givenchy.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 180,
+    "name": "Saint Laurent",
+    "logo": "ysl.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 181,
+    "name": "Valentino",
+    "logo": "valentino.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 182,
+    "name": "Armani",
+    "logo": "armani.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 183,
+    "name": "Reebok",
+    "logo": "reebok.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 184, "name": "Nike", "logo": "nike.com", "bgColor": "#000000", "textColor": "#FFFFFF" },
+  {
+    "id": 185,
+    "name": "Adidas",
+    "logo": "adidas.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 186, "name": "Puma", "logo": "puma.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 187,
+    "name": "New Balance",
+    "logo": "newbalance.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 188,
+    "name": "Converse",
+    "logo": "converse.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 189, "name": "Vans", "logo": "vans.com", "bgColor": "#000000", "textColor": "#FFFFFF" },
+  {
+    "id": 190,
+    "name": "Timberland",
+    "logo": "timberland.com",
+    "bgColor": "#8B4513",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 191,
+    "name": "The North Face",
+    "logo": "thenorthface.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 192,
+    "name": "Columbia",
+    "logo": "columbia.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 193,
+    "name": "Salomon",
+    "logo": "salomon.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 194,
+    "name": "Jack Wolfskin",
+    "logo": "jack-wolfskin.com",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 195,
+    "name": "Arc'teryx",
+    "logo": "arcteryx.com",
+    "bgColor": "#1A1A1A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 196,
+    "name": "Patagonia",
+    "logo": "patagonia.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 197,
+    "name": "Quiksilver",
+    "logo": "quiksilver.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 198,
+    "name": "Rip Curl",
+    "logo": "ripcurl.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 199,
+    "name": "Billabong",
+    "logo": "billabong.com",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 200,
+    "name": "O'Neill",
+    "logo": "oneill.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 201,
+    "name": "Moncler",
+    "logo": "moncler.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 202,
+    "name": "Stone Island",
+    "logo": "stoneisland.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 203,
+    "name": "Canada Goose",
+    "logo": "canadagoose.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 204,
+    "name": "Barbour",
+    "logo": "barbour.com",
+    "bgColor": "#008000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 205,
+    "name": "Craghoppers",
+    "logo": "craghoppers.com",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 206,
+    "name": "Regatta",
+    "logo": "regatta.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 207,
+    "name": "Saucony",
+    "logo": "saucony.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 208,
+    "name": "Brooks",
+    "logo": "brooksrunning.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 209, "name": "Asics", "logo": "asics.com", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  {
+    "id": 210,
+    "name": "Mizuno",
+    "logo": "mizuno.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 211,
+    "name": "On Running",
+    "logo": "on-running.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 212, "name": "Hoka", "logo": "hoka.com", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  {
+    "id": 213,
+    "name": "Nike Running",
+    "logo": "nikerunning.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 214,
+    "name": "Under Armour",
+    "logo": "underarmour.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 215,
+    "name": "Lululemon",
+    "logo": "lululemon.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 216,
+    "name": "Gymshark",
+    "logo": "gymshark.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 217, "name": "Skims", "logo": "skims.com", "bgColor": "#000000", "textColor": "#FFFFFF" },
+  { "id": 218, "name": "Spanx", "logo": "spanx.com", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  {
+    "id": 219,
+    "name": "Victoria's Secret",
+    "logo": "victoriassecret.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 220,
+    "name": "La Vie en Rose",
+    "logo": "lavieenrose.com",
+    "bgColor": "#FF69B4",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 221,
+    "name": "Hunkemöller",
+    "logo": "hunkemoller.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 222,
+    "name": "Marks & Spencer",
+    "logo": "marksandspencer.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 223, "name": "Next", "logo": "next.co.uk", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 224,
+    "name": "Debenhams",
+    "logo": "debenhams.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 225,
+    "name": "John Lewis",
+    "logo": "johnlewis.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 226,
+    "name": "Selfridges",
+    "logo": "selfridges.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 227,
+    "name": "Harrods",
+    "logo": "harrods.com",
+    "bgColor": "#008000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 228,
+    "name": "Fortnum & Mason",
+    "logo": "fortnumandmason.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 229,
+    "name": "Waitrose",
+    "logo": "waitrose.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 230,
+    "name": "Sainsbury's",
+    "logo": "sainsburys.co.uk",
+    "bgColor": "#FF9900",
+    "textColor": "#000000"
+  },
+  { "id": 231, "name": "Tesco", "logo": "tesco.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  { "id": 232, "name": "Asda", "logo": "asda.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 233,
+    "name": "Morrisons",
+    "logo": "morrisons.co.uk",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 234,
+    "name": "Iceland",
+    "logo": "iceland.co.uk",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 235, "name": "Ocado", "logo": "ocado.com", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 236,
+    "name": "Tesco Extra",
+    "logo": "tesco.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 237,
+    "name": "Boots UK",
+    "logo": "boots.com",
+    "bgColor": "#FFD700",
+    "textColor": "#000000"
+  },
+  {
+    "id": 238,
+    "name": "Superdrug",
+    "logo": "superdrug.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 239,
+    "name": "Boots Ireland",
+    "logo": "boots.ie",
+    "bgColor": "#FFD700",
+    "textColor": "#000000"
+  },
+  {
+    "id": 240,
+    "name": "Carrefour Belgium",
+    "logo": "carrefour.be",
+    "bgColor": "#0D47A1",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 241,
+    "name": "Delhaize",
+    "logo": "delhaize.be",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 242,
+    "name": "Colruyt",
+    "logo": "colruyt.be",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 243,
+    "name": "Albert Heijn",
+    "logo": "albertheijn.nl",
+    "bgColor": "#FF9900",
+    "textColor": "#000000"
+  },
+  {
+    "id": 244,
+    "name": "Jumbo Netherlands",
+    "logo": "jumbo.com",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 245, "name": "Plus", "logo": "plus.nl", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 246,
+    "name": "Dirk van den Broek",
+    "logo": "dirk.nl",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 247, "name": "C1000", "logo": "c1000.nl", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  { "id": 248, "name": "Żabka", "logo": "zabka.pl", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  {
+    "id": 249,
+    "name": "Biedronka",
+    "logo": "biedronka.pl",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 250,
+    "name": "Carrefour Poland",
+    "logo": "carrefour.pl",
+    "bgColor": "#0D47A1",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 251,
+    "name": "Tesco Poland",
+    "logo": "tesco.pl",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 252,
+    "name": "Auchan Poland",
+    "logo": "auchan.pl",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 253,
+    "name": "Euroshop",
+    "logo": "euroshop.pl",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 254, "name": "Konto", "logo": "konto.pl", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  { "id": 255, "name": "Netto", "logo": "netto.dk", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  { "id": 256, "name": "Fakta", "logo": "fakta.dk", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  { "id": 257, "name": "Føtex", "logo": "foetex.dk", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  { "id": 258, "name": "Bilka", "logo": "bilka.dk", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  {
+    "id": 259,
+    "name": "Coop Denmark",
+    "logo": "coopdk.dk",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 260,
+    "name": "Aldi Norway",
+    "logo": "aldi.no",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 261,
+    "name": "Coop Norway",
+    "logo": "coop.no",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 262,
+    "name": "Rema 1000",
+    "logo": "rema1000.no",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 263, "name": "Meny", "logo": "meny.no", "bgColor": "#003087", "textColor": "#FFFFFF" },
+  {
+    "id": 264,
+    "name": "Coop Sweden",
+    "logo": "coop.se",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 265, "name": "Ica", "logo": "ica.se", "bgColor": "#FF6600", "textColor": "#FFFFFF" },
+  {
+    "id": 266,
+    "name": "Willys",
+    "logo": "willys.se",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 267,
+    "name": "Axfood",
+    "logo": "axfood.se",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 268,
+    "name": "McDonald's",
+    "logo": "mcdonalds.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 269,
+    "name": "Burger King",
+    "logo": "burgerking.com",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 270,
+    "name": "Subway",
+    "logo": "subway.com",
+    "bgColor": "#FFC72C",
+    "textColor": "#000000"
+  },
+  { "id": 271, "name": "KFC", "logo": "kfc.com", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  {
+    "id": 272,
+    "name": "Pizza Hut",
+    "logo": "pizzahut.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 273,
+    "name": "Domino's",
+    "logo": "dominos.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 274,
+    "name": "Starbucks",
+    "logo": "starbucks.com",
+    "bgColor": "#00704A",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 275,
+    "name": "Costa Coffee",
+    "logo": "costa.co.uk",
+    "bgColor": "#6B4423",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 276,
+    "name": "Caffè Nero",
+    "logo": "caffenero.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 277,
+    "name": "Pret A Manger",
+    "logo": "pretamanger.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  { "id": 278, "name": "Leon", "logo": "leon.co.uk", "bgColor": "#FF0000", "textColor": "#FFFFFF" },
+  {
+    "id": 279,
+    "name": "Chick-fil-A",
+    "logo": "chick-fil-a.com",
+    "bgColor": "#D32F2F",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 280,
+    "name": "Chipotle",
+    "logo": "chipotle.com",
+    "bgColor": "#8B0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 281,
+    "name": "Panera Bread",
+    "logo": "panerabread.com",
+    "bgColor": "#003087",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 282,
+    "name": "Shake Shack",
+    "logo": "shakeshack.com",
+    "bgColor": "#006DAA",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 283,
+    "name": "Five Guys",
+    "logo": "fiveguys.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 284,
+    "name": "Wendy's",
+    "logo": "wendys.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 285,
+    "name": "Taco Bell",
+    "logo": "tacobell.com",
+    "bgColor": "#8B008B",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 286,
+    "name": "In-N-Out Burger",
+    "logo": "in-n-out.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 287,
+    "name": "Popeyes",
+    "logo": "popeyes.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 288,
+    "name": "Smashburger",
+    "logo": "smashburger.com",
+    "bgColor": "#FF6600",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 289,
+    "name": "Applebee's",
+    "logo": "applebees.com",
+    "bgColor": "#FF9900",
+    "textColor": "#000000"
+  },
+  {
+    "id": 290,
+    "name": "Chili's",
+    "logo": "chilis.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 291,
+    "name": "TGI Friday's",
+    "logo": "tgifridays.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 292,
+    "name": "Outback Steakhouse",
+    "logo": "outbacksteakhouse.com",
+    "bgColor": "#8B4513",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 293,
+    "name": "Texas Roadhouse",
+    "logo": "texasroadhouse.com",
+    "bgColor": "#8B0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 294,
+    "name": "Red Lobster",
+    "logo": "redlobster.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 295,
+    "name": "Olive Garden",
+    "logo": "olivegarden.com",
+    "bgColor": "#008000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 296,
+    "name": "Brinker International",
+    "logo": "brinker.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 297,
+    "name": "Darden Restaurants",
+    "logo": "darden.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 298,
+    "name": "Ruth's Chris",
+    "logo": "ruthschris.com",
+    "bgColor": "#000000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 299,
+    "name": "Joe's Stone Crab",
+    "logo": "joesstonecrab.com",
+    "bgColor": "#FF0000",
+    "textColor": "#FFFFFF"
+  },
+  {
+    "id": 300,
+    "name": "The Cheesecake Factory",
+    "logo": "thecheesecakefactory.com",
+    "bgColor": "#8B0000",
+    "textColor": "#FFFFFF"
+  }
+]
