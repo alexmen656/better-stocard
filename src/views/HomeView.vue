@@ -24,9 +24,9 @@ const extractColorFromImage = (logoUrl: string): Promise<string> => {
       const ctx = canvas.getContext('2d')
       if (ctx) {
         ctx.drawImage(img, 0, 0)
-        const x = Math.floor(img.width - 1)
+        const x = Math.floor(img.width - 10)
         const y = Math.floor(img.height / 2)
-        const imageData = ctx.getImageData(x, y, 1, 1)
+        const imageData = ctx.getImageData(x, y, 10, 10)
         const data = imageData.data
         const color = `rgb(${data[0]}, ${data[1]}, ${data[2]})`
         resolve(color)
