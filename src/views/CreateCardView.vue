@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Preferences } from '@capacitor/preferences'
-import { BarcodeScanner } from '@capacitor-community/barcode-scanner'
+import { BarcodeScanner, BarcodeFormat } from '@capacitor-mlkit/barcode-scanning'
 import companies2 from './companies.json'
 
 interface Company {
@@ -58,12 +58,6 @@ const stopNativeScanner = async () => {
     }
 
     try {
-        await BarcodeScanner.showBackground()
-    } catch (error) {
-        console.warn('showBackground failed', error)
-    }
-
-    try {
         await BarcodeScanner.stopScan()
     } catch (error) {
         console.warn('stopScan failed', error)
@@ -71,6 +65,40 @@ const stopNativeScanner = async () => {
 
     isScanning.value = false
 }
+
+const cameraPermissionGranted = (state?: string) => state === 'granted' || state === 'limited'
+
+const ensureCameraPermission = async () => {
+    try {
+        const status = await BarcodeScanner.checkPermissions()
+        if (cameraPermissionGranted(status.camera)) {
+            return true
+        }
+
+        const request = await BarcodeScanner.requestPermissions()
+        if (cameraPermissionGranted(request.camera)) {
+            return true
+        }
+    } catch (error) {
+        console.warn('Permission request failed', error)
+    }
+
+    console.warn('Camera permission is required to scan barcodes')
+    return false
+}
+
+const SCAN_FORMATS: BarcodeFormat[] = [
+    BarcodeFormat.Code128,
+    BarcodeFormat.Code39,
+    BarcodeFormat.Code93,
+    BarcodeFormat.Ean13,
+    BarcodeFormat.Ean8,
+    BarcodeFormat.Itf,
+    BarcodeFormat.Pdf417,
+    BarcodeFormat.QrCode,
+    BarcodeFormat.UpcA,
+    BarcodeFormat.UpcE,
+]
 
 const extractColorFromImage = (logoUrl: string): Promise<string> => {
     return new Promise((resolve) => {
@@ -157,7 +185,6 @@ onMounted(async () => {
         company.bgColor = bgColor
         company.textColor = getTextColor(bgColor)
     }
-    await BarcodeScanner.prepare()
 })
 
 onUnmounted(() => {
@@ -190,40 +217,31 @@ function proceedWithCustomCard() {
 async function startScanning() {
     if (isScanning.value) return
 
-    let scannerActivated = false
+    const hasPermission = await ensureCameraPermission()
+    if (!hasPermission) {
+        return
+    }
 
     try {
         isScanning.value = true
-        const permission = await BarcodeScanner.checkPermission({ force: true })
-
-        if (!permission.granted) {
-            if (permission.denied) {
-                await BarcodeScanner.openAppSettings()
-            } else {
-                console.warn('Camera permission not granted')
-            }
-            return
-        }
-
-        await BarcodeScanner.prepare()
-        await BarcodeScanner.hideBackground()
         setScannerUiState(true)
-        scannerActivated = true
 
-        const result = await BarcodeScanner.startScan()
+        const { barcodes } = await BarcodeScanner.scan({
+            formats: SCAN_FORMATS,
+        })
 
-        if (result?.hasContent) {
-            barcode.value = result.content
+        const detectedValue = barcodes?.find((item) => item.displayValue || item.rawValue)
+        const nextValue = detectedValue?.displayValue || detectedValue?.rawValue || ''
+
+        if (nextValue) {
+            barcode.value = nextValue
+        } else {
+            console.warn('Scan completed but no readable value was returned', barcodes)
         }
     } catch (error) {
         console.error('Scanning error:', error)
     } finally {
-        if (scannerActivated) {
-            await stopNativeScanner()
-        } else {
-            isScanning.value = false
-            setScannerUiState(false)
-        }
+        await stopNativeScanner()
     }
 }
 
@@ -291,7 +309,7 @@ async function saveCard() {
             </button>
             <h1 class="title">{{
                 step === 'select-company' ? 'Select Company' : step === 'custom-card' ? 'Custom Card' : 'Add Card'
-                }}</h1>
+            }}</h1>
             <div style="width: 24px"></div>
         </header>
         <div v-if="step === 'select-company'" class="step-content">
