@@ -27,11 +27,12 @@ const isScanning = ref(false)
 const searchQuery = ref('')
 const customCompanyName = ref('')
 
-const BRAND_FETCH_TOKEN = '1idPcHNqxG9p9gPyoFm'
+//const BRAND_FETCH_TOKEN = '1idPcHNqxG9p9gPyoFm'
 const SCANNER_ACTIVE_CLASS = 'scanner-active'
 
 const getLogoUrl = (domain: string, size = 256) =>
-    `https://cdn.brandfetch.io/${domain}?c=${BRAND_FETCH_TOKEN}&format=png&w=${size}&h=${size}&fit=contain`
+    `https://cdn.brandfetch.io/${domain}?c=1idPcHNqxG9p9gPyoFm`
+//`https://cdn.brandfetch.io/${domain}?c=${BRAND_FETCH_TOKEN}&format=png&w=${size}&h=${size}&fit=contain`
 
 const withDocument = (fn: (doc: Document) => void) => {
     if (typeof document !== 'undefined') {
@@ -316,12 +317,6 @@ async function saveCard() {
             <div class="search-section">
                 <input v-model="searchQuery" type="text" class="search-input" placeholder="Search companies..." />
             </div>
-            <button class="custom-card-button" @click="createCustomCard">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                </svg>
-                Create Custom Card
-            </button>
             <div class="companies-list">
                 <div v-for="group in groupedCompanies" :key="group.letter" class="company-group">
                     <div class="section-header">{{ group.letter }}</div>
@@ -380,6 +375,14 @@ async function saveCard() {
                 Save Card
             </button>
         </div>
+        <nav class="bottom-nav" v-if="step === 'select-company'">
+            <button class="custom-card-button" @click="createCustomCard">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                Create Custom Card
+            </button>
+        </nav>
     </div>
 </template>
 
@@ -389,6 +392,21 @@ async function saveCard() {
     -webkit-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-top: 1px solid #E0E0E0;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
 }
 
 .create-card-container {
@@ -406,13 +424,13 @@ async function saveCard() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 5px 20px;
     background-color: #FFFFFF;
     border-bottom: 1px solid #E0E0E0;
     position: sticky;
     top: 0;
     z-index: 10;
-    padding-top: calc(15px + max(0px, env(safe-area-inset-top)));
+    padding-top: calc(5px + max(0px, env(safe-area-inset-top)));
 }
 
 .back-button {
@@ -491,8 +509,10 @@ async function saveCard() {
 }
 
 .companies-list {
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 250px);
     overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 
 .company-group {

@@ -4,6 +4,8 @@ import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { CapacitorPassToWallet } from 'capacitor-pass-to-wallet';
 //import AppleWalletBadge from './icons/AppleWalletBadge.vue';
+//import VueBarcode from 'vue-barcode';
+import VueBarcode from '@chenfengyuan/vue-barcode';
 
 interface Props {
     card: {
@@ -72,9 +74,6 @@ async function addToWallet() {
             throw new Error('Unable to convert pass to base64');
         }
 
-        //backend failed with 500 error
-        //console.log('base64', base64);
-
         await CapacitorPassToWallet.addToWallet({ base64: base64 });
     } catch (error) {
         console.error('Error adding to wallet:', error);
@@ -88,21 +87,13 @@ const emit = defineEmits<{
     updateCard: [card: any]
 }>()
 
-const barcodePattern = ref(props.card.barcode)//generateBarcodePattern()
+const barcodePattern = ref(props.card.barcode)
 const showMenu = ref(false)
 const showPhotosSection = ref(false)
 const photoFront = ref(props.card.photoFront || '')
 const photoBack = ref(props.card.photoBack || '')
 const fileInputFront = ref<HTMLInputElement | null>(null)
 const fileInputBack = ref<HTMLInputElement | null>(null)
-
-/*function generateBarcodePattern(): number[] {
-    const pattern = []
-    for (let i = 0; i < 50; i++) {
-        pattern.push(Math.random() > 0.5 ? 1 : 0)
-    }
-    return pattern
-}*/
 
 const cardNumber = ref(props.card.cardNumber || '')// || generateCardNumber()
 const memberNumber = ref(props.card.memberNumber || '') // || generateMemberNumber()
@@ -368,19 +359,24 @@ async function removePhotoBack() {
                     </div>
                     <div class="barcode-section">
                         <div class="barcode">
-                            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" class="barcode-svg">
+                            <!--   <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" class="barcode-svg">
                                 <g>
                                     <rect v-for="(bar, index) in barcodePattern" :key="index" :x="index * 4" y="0"
                                         :width="bar ? 3 : 1" height="60" fill="#000" />
                                 </g>
-                            </svg>
+                            </svg>-->
+                            <vue-barcode :value="barcodePattern"
+                                :options="{ format: 'CODE128', lineColor: '#000', width: 2, height: 70, displayValue: false }"
+                                class="barcode-svg" />
                         </div>
                         <div class="card-number">{{ cardNumber }}</div>
-                        <div class="member-number">{{ memberNumber }}</div>
+                        <!--<div class="member-number">{{ memberNumber }}</div>-->
                     </div>
-                    <button class="add-to-wallet-btn" @click="addToWallet">
-                        <img src="./icons/wallet.svg" alt="Add to Wallet" style="width: 200px; height: auto;" />
-                    </button>
+                    <div class="add-to-wallet-section">
+                        <button class="add-to-wallet-btn" @click="addToWallet">
+                            <img src="./icons/wallet.svg" alt="Add to Wallet" style="width: 200px; height: auto;" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -388,6 +384,12 @@ async function removePhotoBack() {
 </template>
 
 <style scoped>
+.add-to-wallet-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .add-to-wallet-btn {
     border: none;
     background-color: transparent;
@@ -531,6 +533,7 @@ async function removePhotoBack() {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .card-logo {
@@ -563,6 +566,7 @@ async function removePhotoBack() {
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    margin-bottom: 20px;
 }
 
 .barcode {

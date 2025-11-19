@@ -90,7 +90,7 @@ const getCards = async (): Promise<Card[]> => {
   return cardsData;
 };
 
-const setCards = async () => {
+/*const setCards = async () => {
   const cards2 = ref<Card[]>([
     { id: 1, name: 'COOP', logo: 'coop.fr', bgColor: '#E53935', textColor: '#FFFFFF' },
     { id: 2, name: 'ESSELUNGA', logo: 'esselunga.com', bgColor: '#1565C0', textColor: '#FFFFFF' },
@@ -132,12 +132,12 @@ const setCards = async () => {
     { id: 39, name: 'Mömax', logo: 'moemax.de', bgColor: '#FF6600', textColor: '#FFFFFF' },
   ]);
 
-  await Preferences.set({
-    key: 'cards',
-    value: JSON.stringify(cards2.value),
-  });
+await Preferences.set({
+  key: 'cards',
+  value: JSON.stringify(cards2.value),
+});
 };
-
+*/
 onMounted(async () => {
   //await setCards();
   cards.value = await getCards();

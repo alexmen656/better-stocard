@@ -4,7 +4,7 @@ import { Preferences } from '@capacitor/preferences'
 import TouchBar from '@/components/TouchBar.vue'
 import SettingsHeader from '@/components/SettingsHeader.vue'
 
-const APP_VERSION = '0.0.0'
+const APP_VERSION = '1.0.0'
 const APP_BUILD = '1'
 const GITHUB_URL = 'https://github.com/alexmen656/better-stocard'
 
@@ -118,8 +118,7 @@ const addDemoData = async () => {
 }
 
 .settings-content {
-  padding: 0 16px;
-  padding-top: max(20px, env(safe-area-inset-top));
+  padding: 0px 20px 10px 20px;
 }
 
 .section-title {
