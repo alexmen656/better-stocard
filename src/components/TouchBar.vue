@@ -29,12 +29,12 @@ const route = useRoute()
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #FFFFFF;
-    border-top: 1px solid #E0E0E0;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: space-around;
     padding-top: 8px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 -2px 10px var(--shadow-light);
     padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -47,7 +47,7 @@ const route = useRoute()
     border: none;
     cursor: pointer;
     padding: 8px 24px 0 24px;
-    color: #999;
+    color: var(--text-muted);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.5px;

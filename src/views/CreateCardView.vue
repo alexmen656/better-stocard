@@ -331,7 +331,7 @@ async function saveCard() {
             </button>
             <h1 class="title">{{
                 step === 'select-company' ? 'Select Company' : step === 'custom-card' ? 'Custom Card' : 'Add Card'
-            }}</h1>
+                }}</h1>
             <div style="width: 24px"></div>
         </header>
         <div v-if="step === 'select-company'" class="step-content">
@@ -423,8 +423,8 @@ async function saveCard() {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #FFFFFF;
-    border-top: 1px solid #E0E0E0;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
     padding: 10px 20px;
     box-sizing: border-box;
     display: flex;
@@ -435,7 +435,7 @@ async function saveCard() {
 
 .create-card-container {
     min-height: 100vh;
-    background-color: #F5F5F5;
+    background-color: var(--bg-primary);
     display: flex;
     flex-direction: column;
     padding-bottom: 20px;
@@ -449,8 +449,8 @@ async function saveCard() {
     justify-content: space-between;
     align-items: center;
     padding: 5px 20px;
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #E0E0E0;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -467,13 +467,13 @@ async function saveCard() {
     align-items: center;
     justify-content: center;
     padding: 0;
-    color: #000;
+    color: var(--text-primary);
 }
 
 .title {
     font-size: 18px;
     font-weight: 600;
-    color: #000;
+    color: var(--text-primary);
 }
 
 .step-content {
@@ -484,7 +484,7 @@ async function saveCard() {
 .step-title {
     font-size: 16px;
     font-weight: 600;
-    color: #000;
+    color: var(--text-primary);
     margin-bottom: 20px;
 }
 
@@ -496,9 +496,10 @@ async function saveCard() {
     width: 100%;
     padding: 12px 16px;
     font-size: 16px;
-    border: 1px solid #E0E0E0;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
     box-sizing: border-box;
     transition: border-color 0.2s;
 }
@@ -565,7 +566,7 @@ async function saveCard() {
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--shadow-light);
     padding: 20px;
     text-align: center;
     display: flex;
@@ -578,7 +579,7 @@ async function saveCard() {
 }
 
 .company-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow-medium);
 }
 
 .selected-company {
@@ -591,7 +592,7 @@ async function saveCard() {
     text-align: center;
     font-size: 24px;
     font-weight: 700;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--shadow-light);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -611,7 +612,7 @@ async function saveCard() {
     display: block;
     font-size: 14px;
     font-weight: 600;
-    color: #000;
+    color: var(--text-primary);
     margin-bottom: 8px;
 }
 
@@ -619,9 +620,10 @@ async function saveCard() {
     width: 100%;
     padding: 12px;
     font-size: 16px;
-    border: 1px solid #E0E0E0;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
     box-sizing: border-box;
     transition: border-color 0.2s;
 }
@@ -634,7 +636,7 @@ async function saveCard() {
 
 .form-hint {
     font-size: 12px;
-    color: #999;
+    color: var(--text-muted);
     margin-top: 8px;
 }
 
@@ -656,9 +658,9 @@ async function saveCard() {
 }
 
 .scan-button:disabled {
-    color: #999;
-    border-color: #E0E0E0;
-    background-color: #F5F5F5;
+    color: var(--text-muted);
+    border-color: var(--border-color);
+    background-color: var(--bg-primary);
     cursor: not-allowed;
 }
 

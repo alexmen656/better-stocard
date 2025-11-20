@@ -461,7 +461,7 @@ function getInitials(name: string): string {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #F5F5F5;
+    background-color: var(--bg-primary);
     animation: slideUp 0.3s ease-out;
     display: flex;
     flex-direction: column;
@@ -482,8 +482,8 @@ function getInitials(name: string): string {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #E0E0E0;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
     padding-top: calc(15px + max(0px, env(safe-area-inset-top)));
 }
 
@@ -508,9 +508,9 @@ function getInitials(name: string): string {
     position: absolute;
     top: 40px;
     right: 0;
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow-medium);
     min-width: 200px;
     z-index: 100;
     overflow: hidden;
@@ -537,7 +537,7 @@ function getInitials(name: string): string {
     cursor: pointer;
     text-align: left;
     font-size: 14px;
-    color: #333;
+    color: var(--text-secondary);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -545,13 +545,13 @@ function getInitials(name: string): string {
 }
 
 .menu-item:hover {
-    background-color: #F5F5F5;
+    background-color: var(--border-subtle);
 }
 
 .detail-title {
     font-size: 18px;
     font-weight: 600;
-    color: #000;
+    color: var(--text-primary);
 }
 
 .card-content {
@@ -566,7 +566,7 @@ function getInitials(name: string): string {
 .card-display {
     border-radius: 16px;
     padding: 40px 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow-medium);
     min-height: 220px;
     display: flex;
     flex-direction: column;
@@ -610,10 +610,10 @@ function getInitials(name: string): string {
 
 /* Barcode Section */
 .barcode-section {
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
     border-radius: 16px;
     padding: 30px 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--shadow-light);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -638,13 +638,13 @@ function getInitials(name: string): string {
 .card-number {
     font-size: 20px;
     font-weight: 600;
-    color: #000;
+    color: var(--text-primary);
     letter-spacing: 1px;
 }
 
 .member-number {
     font-size: 16px;
-    color: #999;
+    color: var(--text-muted);
     letter-spacing: 0.5px;
 }
 
@@ -658,13 +658,13 @@ function getInitials(name: string): string {
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #E0E0E0;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .photos-header h2 {
     font-size: 18px;
     font-weight: 600;
-    color: #000;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -687,16 +687,16 @@ function getInitials(name: string): string {
 }
 
 .photo-item {
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--shadow-light);
 }
 
 .photo-item h3 {
     font-size: 14px;
     font-weight: 600;
-    color: #666;
+    color: var(--text-tertiary);
     margin: 0 0 15px 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -740,9 +740,9 @@ function getInitials(name: string): string {
 .upload-btn {
     width: 100%;
     padding: 30px 20px;
-    border: 2px dashed #D0D0D0;
+    border: 2px dashed var(--border-color);
     border-radius: 8px;
-    background-color: #FAFAFA;
+    background-color: var(--bg-secondary);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -750,24 +750,24 @@ function getInitials(name: string): string {
     justify-content: center;
     gap: 10px;
     font-size: 14px;
-    color: #666;
+    color: var(--text-tertiary);
     transition: all 0.2s;
 }
 
 .upload-btn:hover {
-    border-color: #999;
-    background-color: #F5F5F5;
+    border-color: var(--text-muted);
+    background-color: var(--border-subtle);
 }
 
 .upload-btn:active {
-    background-color: #EFEFEF;
+    background-color: var(--border-subtle);
 }
 
 .photos-gallery-section {
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--shadow-light);
     margin-bottom: 20px;
 }
 
@@ -782,12 +782,12 @@ function getInitials(name: string): string {
     align-items: center;
     font-size: 16px;
     font-weight: 600;
-    color: #333;
+    color: var(--text-secondary);
     transition: background-color 0.2s;
 }
 
 .photos-gallery-header:hover {
-    background-color: #F9F9F9;
+    background-color: var(--border-subtle);
 }
 
 .photos-gallery-title {
@@ -797,7 +797,7 @@ function getInitials(name: string): string {
 
 .expand-icon {
     transition: transform 0.3s ease;
-    color: #666;
+    color: var(--text-tertiary);
 }
 
 .expand-icon.expanded {
@@ -806,7 +806,7 @@ function getInitials(name: string): string {
 
 .photos-gallery-content {
     padding: 0 20px 20px 20px;
-    border-top: 1px solid #E8E8E8;
+    border-top: 1px solid var(--border-subtle);
 }
 
 .photos-grid {
@@ -822,13 +822,13 @@ function getInitials(name: string): string {
     overflow: hidden;
     aspect-ratio: 1;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px var(--shadow-light);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .photo-gallery-item:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow-medium);
 }
 
 .photo-gallery-item img {

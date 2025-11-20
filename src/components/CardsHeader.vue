@@ -12,17 +12,16 @@
     padding: 8px 20px 0px 20px;
     /*14px*/
     /*14px 20px 20px 20px*/
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
     /* border-bottom: 1px solid #E0E0E0;*/
     padding-top: calc(20px + max(0px, env(safe-area-inset-top)));
-    background-color: #F5F5F5;
-
+    background-color: var(--bg-primary);
 }
 
 .title {
     font-size: 36px;
     font-weight: 700;
-    color: #000000;
+    color: var(--text-primary);
     letter-spacing: -0.5px;
 }
 

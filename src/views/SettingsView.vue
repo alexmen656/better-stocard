@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Preferences } from '@capacitor/preferences'
 import TouchBar from '@/components/TouchBar.vue'
 import SettingsHeader from '@/components/SettingsHeader.vue'
+import { useDarkMode } from '@/composables/useDarkMode'
+
+const { isDarkMode, toggleDarkMode } = useDarkMode()
 
 const APP_VERSION = '1.0.0'
 const APP_BUILD = '1'
@@ -61,6 +64,15 @@ const addDemoData = async () => {
   <div class="settings-container">
     <SettingsHeader />
     <div class="settings-content">
+      <h2 class="section-title">APPEARANCE</h2>
+      <div class="settings-section">
+        <div class="settings-item">
+          <div class="item-label">Dark Mode</div>
+          <div class="toggle-switch" :class="{ active: isDarkMode }" @click="toggleDarkMode">
+            <div class="toggle-circle"></div>
+          </div>
+        </div>
+      </div>
       <h2 class="section-title">INFORMATION</h2>
       <div class="settings-section">
         <div class="settings-item">
@@ -107,7 +119,7 @@ const addDemoData = async () => {
 
 .settings-container {
   min-height: 100vh;
-  background-color: #F5F5F5;
+  background-color: var(--bg-primary);
   padding-bottom: 70px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   -webkit-user-select: none;
@@ -125,17 +137,17 @@ const addDemoData = async () => {
   padding: 20px 4px 12px 4px;
   font-size: 12px;
   font-weight: 600;
-  color: #999999;
+  color: var(--text-muted);
   letter-spacing: 0.5px;
   margin: 0;
   background-color: transparent;
 }
 
 .settings-section {
-  background: white;
+  background: var(--bg-secondary);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px var(--shadow-light);
   margin-bottom: 20px;
 }
 
@@ -144,7 +156,7 @@ const addDemoData = async () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .settings-item:last-child {
@@ -154,12 +166,12 @@ const addDemoData = async () => {
 .item-label {
   font-size: 16px;
   font-weight: 500;
-  color: #333333;
+  color: var(--text-secondary);
 }
 
 .item-value {
   font-size: 16px;
-  color: #666666;
+  color: var(--text-tertiary);
   font-weight: 400;
 }
 
@@ -171,7 +183,7 @@ const addDemoData = async () => {
 }
 
 .item-value.clickable:active {
-  background-color: #e0e0e0;
+  background-color: var(--border-subtle);
 }
 
 .open-source-info {
@@ -184,7 +196,7 @@ const addDemoData = async () => {
 .info-text {
   margin: 0;
   font-size: 16px;
-  color: #333333;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -218,6 +230,38 @@ const addDemoData = async () => {
   text-align: left;
 }
 
+/* Toggle Switch */
+.toggle-switch {
+  width: 51px;
+  height: 31px;
+  background-color: #ccc;
+  border-radius: 16px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+}
+
+.toggle-switch.active {
+  background-color: #34C759;
+}
+
+.toggle-circle {
+  width: 27px;
+  height: 27px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+  position: absolute;
+  left: 2px;
+}
+
+.toggle-switch.active .toggle-circle {
+  transform: translateX(20px);
+}
+
 /* Debug Menu Styles */
 .debug-menu {
   position: fixed;
@@ -242,12 +286,12 @@ const addDemoData = async () => {
 
 .debug-content {
   position: relative;
-  background: white;
+  background: var(--bg-secondary);
   border-radius: 16px;
   padding: 24px;
   max-width: 300px;
   width: 90%;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 40px var(--shadow-dark);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -257,7 +301,7 @@ const addDemoData = async () => {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #333333;
+  color: var(--text-secondary);
 }
 
 .debug-button {
@@ -279,12 +323,12 @@ const addDemoData = async () => {
 }
 
 .debug-button.secondary {
-  background-color: #e0e0e0;
-  color: #333333;
+  background-color: var(--border-color);
+  color: var(--text-secondary);
 }
 
 .debug-button.secondary:active {
-  background-color: #d0d0d0;
+  background-color: var(--border-subtle);
 }
 
 @media (min-width: 1024px) {

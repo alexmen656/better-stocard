@@ -8,16 +8,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px 10px 20px;
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #E0E0E0;
-    padding-top: calc(15px + max(0px, env(safe-area-inset-top)));
+    padding: 8px 20px 0px 20px;
+    /*14px*/
+    /*14px 20px 20px 20px*/
+    background-color: var(--bg-secondary);
+    /* border-bottom: 1px solid #E0E0E0;*/
+    padding-top: calc(20px + max(0px, env(safe-area-inset-top)));
+    background-color: var(--bg-primary);
 }
 
 .title {
-    font-size: 20px;
-    font-weight: 400;
-    color: #999999;
-    letter-spacing: 0.5px;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
 }
 </style>
