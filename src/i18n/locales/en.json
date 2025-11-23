@@ -1,0 +1,46 @@
+{
+  "home": {
+    "title": "Cards"
+  },
+  "createCard": {
+    "selectCompany": "Select Company",
+    "customCard": "Custom Card",
+    "addCard": "Add Card",
+    "searchCompanies": "Search companies...",
+    "createCustomCard": "Create Custom Card",
+    "companyName": "Company Name",
+    "enterCompanyName": "Enter company name",
+    "companyNameHint": "Enter the name of the company or store for your custom card.",
+    "continue": "Continue",
+    "cardNumberBarcode": "Card Number / Barcode",
+    "enterBarcode": "Enter barcode or card number",
+    "barcodeHint": "Enter the barcode manually or use the scanner below to capture it with your camera.",
+    "scanBarcode": "Scan Barcode",
+    "scanning": "Scanning...",
+    "back": "Back",
+    "saveCard": "Save Card"
+  },
+  "cardDetail": {
+    "addPhotos": "Add Photos",
+    "cardPhotos": "Card Photos",
+    "front": "Front",
+    "back": "Back",
+    "uploadPhoto": "Upload Photo",
+    "failedToAddToWallet": "Failed to add card to wallet. Please try again."
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "APPEARANCE",
+    "darkMode": "Dark Mode",
+    "information": "INFORMATION",
+    "appVersion": "App Version",
+    "appBuild": "App Build",
+    "openSource": "OPEN SOURCE",
+    "openSourceInfo": "This App is Open Source",
+    "viewOnGithub": "View on GitHub",
+    "debugMenu": "Debug Menu",
+    "addDemoData": "Add Demo Data",
+    "demoDataAdded": "Demo data added!",
+    "close": "Close"
+  }
+}

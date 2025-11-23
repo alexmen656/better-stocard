@@ -1,0 +1,46 @@
+{
+  "home": {
+    "title": "Karty"
+  },
+  "createCard": {
+    "selectCompany": "Vybrat společnost",
+    "customCard": "Vlastní karta",
+    "addCard": "Přidat kartu",
+    "searchCompanies": "Hledat společnosti...",
+    "createCustomCard": "Vytvořit vlastní kartu",
+    "companyName": "Název společnosti",
+    "enterCompanyName": "Zadejte název společnosti",
+    "companyNameHint": "Zadejte název společnosti nebo obchodu pro vaši vlastní kartu.",
+    "continue": "Pokračovat",
+    "cardNumberBarcode": "Číslo karty / Čárový kód",
+    "enterBarcode": "Zadejte čárový kód nebo číslo karty",
+    "barcodeHint": "Zadejte čárový kód ručně nebo použijte skener níže k zachycení pomocí fotoaparátu.",
+    "scanBarcode": "Naskenovat čárový kód",
+    "scanning": "Skenuji...",
+    "back": "Zpět",
+    "saveCard": "Uložit kartu"
+  },
+  "cardDetail": {
+    "addPhotos": "Přidat fotky",
+    "cardPhotos": "Fotky karty",
+    "front": "Přední strana",
+    "back": "Zadní strana",
+    "uploadPhoto": "Nahrát fotku",
+    "failedToAddToWallet": "Nepodařilo se přidat kartu do peněženky. Zkuste to prosím znovu."
+  },
+  "settings": {
+    "title": "Nastavení",
+    "appearance": "VZHLED",
+    "darkMode": "Tmavý režim",
+    "information": "INFORMACE",
+    "appVersion": "Verze aplikace",
+    "appBuild": "Build aplikace",
+    "openSource": "OPEN SOURCE",
+    "openSourceInfo": "Tato aplikace je Open Source",
+    "viewOnGithub": "Zobrazit na GitHub",
+    "debugMenu": "Ladicí menu",
+    "addDemoData": "Přidat demo data",
+    "demoDataAdded": "Demo data přidána!",
+    "close": "Zavřít"
+  }
+}

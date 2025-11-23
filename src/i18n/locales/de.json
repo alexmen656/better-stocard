@@ -1,0 +1,46 @@
+{
+  "home": {
+    "title": "Karten"
+  },
+  "createCard": {
+    "selectCompany": "Unternehmen auswählen",
+    "customCard": "Benutzerdefinierte Karte",
+    "addCard": "Karte hinzufügen",
+    "searchCompanies": "Unternehmen suchen...",
+    "createCustomCard": "Benutzerdefinierte Karte erstellen",
+    "companyName": "Unternehmensname",
+    "enterCompanyName": "Unternehmensname eingeben",
+    "companyNameHint": "Geben Sie den Namen des Unternehmens oder Geschäfts für Ihre benutzerdefinierte Karte ein.",
+    "continue": "Weiter",
+    "cardNumberBarcode": "Kartennummer / Barcode",
+    "enterBarcode": "Barcode oder Kartennummer eingeben",
+    "barcodeHint": "Geben Sie den Barcode manuell ein oder verwenden Sie den Scanner unten, um ihn mit Ihrer Kamera zu erfassen.",
+    "scanBarcode": "Barcode scannen",
+    "scanning": "Scanne...",
+    "back": "Zurück",
+    "saveCard": "Karte speichern"
+  },
+  "cardDetail": {
+    "addPhotos": "Fotos hinzufügen",
+    "cardPhotos": "Kartenfotos",
+    "front": "Vorderseite",
+    "back": "Rückseite",
+    "uploadPhoto": "Foto hochladen",
+    "failedToAddToWallet": "Karte konnte nicht zur Wallet hinzugefügt werden. Bitte versuchen Sie es erneut."
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "appearance": "DARSTELLUNG",
+    "darkMode": "Dunkler Modus",
+    "information": "INFORMATIONEN",
+    "appVersion": "App-Version",
+    "appBuild": "App-Build",
+    "openSource": "OPEN SOURCE",
+    "openSourceInfo": "Diese App ist Open Source",
+    "viewOnGithub": "Auf GitHub ansehen",
+    "debugMenu": "Debug-Menü",
+    "addDemoData": "Demo-Daten hinzufügen",
+    "demoDataAdded": "Demo-Daten hinzugefügt!",
+    "close": "Schließen"
+  }
+}
