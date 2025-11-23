@@ -4,8 +4,11 @@ import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { CapacitorPassToWallet } from 'capacitor-pass-to-wallet';
 import VueBarcode from '@chenfengyuan/vue-barcode';
-import QrcodeVue from 'qrcode.vue';
+//import QrcodeVue from 'qrcode.vue';
 import { useI18n } from 'vue-i18n';
+import nacl from 'tweetnacl';
+import naclUtil from 'tweetnacl-util';
+import QRCode from 'qrcode';
 
 const { t } = useI18n();
 
@@ -86,6 +89,8 @@ const showPhotosSection = ref(false)
 const showShareScreen = ref(false)
 const showPhotosGallery = ref(false)
 const expandPhotos = ref(false)
+const qrCanvas = ref<HTMLCanvasElement | null>(null)
+const shareUrl = ref('')
 const selectedPhotoModal = ref<string | null>(null)
 const photoFront = ref(props.card.photoFront || '')
 const photoBack = ref(props.card.photoBack || '')
@@ -94,17 +99,62 @@ const fileInputBack = ref<HTMLInputElement | null>(null)
 const cardNumber = ref(props.card.cardNumber || '')
 //const memberNumber = ref(props.card.memberNumber || '')
 
-const shareData = computed(() => {
-    return JSON.stringify({
-        name: props.card.name,
-        logo: props.card.logo,
-        bgColor: props.card.bgColor,
-        textColor: props.card.textColor,
-        barcode: props.card.barcode || cardNumber.value.replace(/\s/g, ''),
-        cardNumber: cardNumber.value,
-        isCustomCard: props.card.isCustomCard
-    })
-})
+async function generateShareLink() {
+    try {
+        const key = nacl.randomBytes(nacl.secretbox.keyLength)
+
+        const cardData = {
+            name: props.card.name,
+            logo: props.card.logo,
+            bgColor: props.card.bgColor,
+            textColor: props.card.textColor,
+            barcode: props.card.barcode || cardNumber.value.replace(/\s/g, ''),
+            cardNumber: cardNumber.value,
+            isCustomCard: props.card.isCustomCard
+        }
+
+        const messageBytes = naclUtil.decodeUTF8(JSON.stringify(cardData))
+        const nonce = nacl.randomBytes(nacl.secretbox.nonceLength)
+        const encrypted = nacl.secretbox(messageBytes, nonce, key)
+
+        const fullMessage = new Uint8Array(nonce.length + encrypted.length)
+        fullMessage.set(nonce)
+        fullMessage.set(encrypted, nonce.length)
+
+        const base64 = naclUtil.encodeBase64(fullMessage)
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=/g, '')
+
+        const keyBase64 = naclUtil.encodeBase64(key)
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=/g, '')
+
+        shareUrl.value = `https://better-stocard.reelmia.com/share?d=${base64}#${keyBase64}`
+
+        if (qrCanvas.value) {
+            await QRCode.toCanvas(qrCanvas.value, shareUrl.value, {
+                width: 280,
+                margin: 2,
+                color: {
+                    dark: '#000000',
+                    light: '#FFFFFF'
+                }
+            })
+        }
+    } catch (error) {
+        console.error('Error generating share link:', error)
+        alert(t('cardDetail.failedToGenerateShare'))
+    }
+}
+
+function copyLink() {
+    if (shareUrl.value) {
+        navigator.clipboard.writeText(shareUrl.value)
+        alert(t('cardDetail.linkCopied'))
+    }
+}
 
 onMounted(async () => {
     try {
@@ -323,7 +373,7 @@ function getInitials(name: string): string {
                 <div v-if="showShareScreen && !showPhotosSection" class="photos-section">
                     <div class="photos-header">
                         <h2>{{ t('cardDetail.shareCard') }}</h2>
-                        <button class="close-photos-btn" @click="showShareScreen = false">
+                        <button class="close-photos-btn" @click="showShareScreen = false; shareUrl = ''">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M18 6L6 18M6 6l12 12" stroke="#000" stroke-width="2" stroke-linecap="round"
@@ -331,11 +381,25 @@ function getInitials(name: string): string {
                             </svg>
                         </button>
                     </div>
-                    <div class="qr-code-container">
-                        <div class="qr-code-wrapper">
-                            <QrcodeVue :value="shareData" :size="280" level="H" />
+                    <div class="share-content">
+                        <div v-if="!shareUrl" class="generate-section">
+                            <p class="share-description">{{ t('cardDetail.generateShareDescription') }}</p>
+                            <button class="generate-btn" @click="generateShareLink">
+                                {{ t('cardDetail.generateQRCode') }}
+                            </button>
                         </div>
-                        <p class="qr-code-description">{{ t('cardDetail.scanQRCode') }}</p>
+                        <div v-else class="qr-code-container">
+                            <div class="qr-code-wrapper">
+                                <canvas ref="qrCanvas"></canvas>
+                            </div>
+                            <p class="qr-code-description">{{ t('cardDetail.scanQRCode') }}</p>
+                            <div class="share-link">
+                                <input :value="shareUrl" readonly class="share-input" />
+                                <button class="copy-btn" @click="copyLink">
+                                    {{ t('cardDetail.copyLink') }}
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div v-if="showPhotosSection && !showShareScreen" class="photos-section">
@@ -730,6 +794,44 @@ function getInitials(name: string): string {
     gap: 20px;
 }
 
+.share-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.generate-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 20px;
+}
+
+.share-description {
+    font-size: 16px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+}
+
+.generate-btn {
+    padding: 15px 30px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
 .qr-code-container {
     display: flex;
     flex-direction: column;
@@ -737,6 +839,7 @@ function getInitials(name: string): string {
     justify-content: center;
     padding: 40px 20px;
     gap: 20px;
+    width: 100%;
 }
 
 .qr-code-wrapper {
@@ -749,11 +852,53 @@ function getInitials(name: string): string {
     justify-content: center;
 }
 
+.qr-code-wrapper canvas {
+    display: block;
+    border-radius: 8px;
+}
+
 .qr-code-description {
     font-size: 16px;
     color: var(--text-secondary);
     text-align: center;
     margin: 0;
+}
+
+.share-link {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.share-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.copy-btn {
+    padding: 12px 20px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 }
 
 .photo-item {

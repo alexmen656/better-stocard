@@ -13,6 +13,7 @@ def capacitor_pods
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCommunityScreenBrightness', :path => '../../node_modules/@capacitor-community/screen-brightness'
   pod 'CapacitorMlkitBarcodeScanning', :path => '../../node_modules/@capacitor-mlkit/barcode-scanning'
+  pod 'CapacitorApp', :path => '../../node_modules/@capacitor/app'
   pod 'CapacitorFilesystem', :path => '../../node_modules/@capacitor/filesystem'
   pod 'CapacitorPreferences', :path => '../../node_modules/@capacitor/preferences'
   pod 'CapacitorPassToWallet', :path => '../../node_modules/capacitor-pass-to-wallet'

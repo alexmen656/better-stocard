@@ -26,6 +26,11 @@
     "saveCard": "Save Card"
   },
   "cardDetail": {
+    "generateShareDescription": "Generate a secure, encrypted link to share this card.",
+    "generateQRCode": "Generate QR Code",
+    "copyLink": "Copy Link",
+    "linkCopied": "Link copied to clipboard!",
+    "failedToGenerateShare": "Failed to generate share link. Please try again.",
     "addPhotos": "Add Photos",
     "shareCard": "Share Card",
     "scanQRCode": "Scan this QR code to share the card",
@@ -34,6 +39,19 @@
     "back": "Back",
     "uploadPhoto": "Upload Photo",
     "failedToAddToWallet": "Failed to add card to wallet. Please try again."
+  },
+  "shareReceive": {
+    "decrypting": "Decrypting card...",
+    "errorTitle": "Error",
+    "decryptionError": "Error decrypting the card.",
+    "invalidLink": "Invalid share link.",
+    "missingKey": "Encryption key missing.",
+    "decryptionFailed": "Decryption failed. The link might be corrupted.",
+    "backToHome": "Back to Home",
+    "cardReceived": "Card Received!",
+    "cardReceivedDescription": "Would you like to add this card to your collection?",
+    "saveCard": "Save Card",
+    "cancel": "Cancel"
   },
   "settings": {
     "title": "Settings",

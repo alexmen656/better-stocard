@@ -1,4 +1,5 @@
-import { App as CapacitorApp, URLOpenListenerEvent } from '@capacitor/app'
+import { App as CapacitorApp } from '@capacitor/app'
+import type { URLOpenListenerEvent } from '@capacitor/app'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
@@ -23,6 +24,11 @@ const router = createRouter({
     {
       path: '/share/card/:id',
       component: () => import('../views/CardImportView.vue'),
+    },
+    {
+      path: '/share',
+      name: 'share-receive',
+      component: () => import('../views/ShareReceiveView.vue'),
     },
   ],
 })

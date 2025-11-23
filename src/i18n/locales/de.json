@@ -33,7 +33,25 @@
     "front": "Vorderseite",
     "back": "Rückseite",
     "uploadPhoto": "Foto hochladen",
-    "failedToAddToWallet": "Karte konnte nicht zur Wallet hinzugefügt werden. Bitte versuchen Sie es erneut."
+    "failedToAddToWallet": "Karte konnte nicht zur Wallet hinzugefügt werden. Bitte versuchen Sie es erneut.",
+    "generateShareDescription": "Generieren Sie einen sicheren, verschlüsselten Link, um diese Karte zu teilen.",
+    "generateQRCode": "QR-Code generieren",
+    "copyLink": "Link kopieren",
+    "linkCopied": "Link in die Zwischenablage kopiert!",
+    "failedToGenerateShare": "Fehler beim Generieren des Teilen-Links. Bitte versuchen Sie es erneut."
+  },
+  "shareReceive": {
+    "decrypting": "Entschlüssele Karte...",
+    "errorTitle": "Fehler",
+    "decryptionError": "Fehler beim Entschlüsseln der Karte.",
+    "invalidLink": "Ungültiger Teilen-Link.",
+    "missingKey": "Verschlüsselungsschlüssel fehlt.",
+    "decryptionFailed": "Entschlüsselung fehlgeschlagen. Der Link könnte beschädigt sein.",
+    "backToHome": "Zurück zur Startseite",
+    "cardReceived": "Karte erhalten!",
+    "cardReceivedDescription": "Möchten Sie diese Karte zu Ihrer Sammlung hinzufügen?",
+    "saveCard": "Karte speichern",
+    "cancel": "Abbrechen"
   },
   "settings": {
     "title": "Einstellungen",
