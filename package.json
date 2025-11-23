@@ -26,6 +26,7 @@
     "@capacitor/preferences": "^7.0.2",
     "@chenfengyuan/vue-barcode": "^2.0.2",
     "capacitor-pass-to-wallet": "^4.0.1",
+    "i18n": "^0.15.3",
     "jsbarcode": "^3.12.1",
     "pinia": "^3.0.3",
     "vue": "^3.5.22",
