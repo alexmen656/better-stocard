@@ -5,6 +5,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:better-stocard.reelmia.com</string>
+		<string>applinks:share.pocketz.reelmia.com</string>
 	</array>
 </dict>
 </plist>
