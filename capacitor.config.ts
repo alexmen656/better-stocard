@@ -1,9 +1,9 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
   appId: 'com.reelmia.bs',
   appName: 'better-stocard',
-  webDir: 'dist'
-};
+  webDir: 'dist',
+}
 
-export default config;
+export default config
