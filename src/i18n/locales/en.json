@@ -1,6 +1,11 @@
 {
   "home": {
-    "title": "Cards"
+    "title": "Cards",
+    "allCards": "ALL CARDS"
+  },
+  "nav": {
+    "cards": "Cards",
+    "settings": "Settings"
   },
   "createCard": {
     "selectCompany": "Select Company",

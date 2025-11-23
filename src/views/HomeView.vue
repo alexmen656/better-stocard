@@ -4,6 +4,9 @@ import CardDetail from '@/components/CardDetail.vue'
 import { Preferences } from '@capacitor/preferences';
 import TouchBar from '@/components/TouchBar.vue'
 import CardsHeader from '@/components/CardsHeader.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface Card {
   id: number
@@ -117,7 +120,7 @@ onMounted(async () => {
 <template>
   <div class="app-container">
     <CardsHeader />
-    <div class="section-title">ALL CARDS</div>
+    <div class="section-title">{{ t('home.allCards') }}</div>
     <div class="cards-grid">
       <div v-for="card in cards" :key="card.id" class="card"
         :style="{ backgroundColor: card.bgColor, color: card.textColor }" @click="openCard(card)">

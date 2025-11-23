@@ -4,6 +4,9 @@ import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { CapacitorPassToWallet } from 'capacitor-pass-to-wallet';
 import VueBarcode from '@chenfengyuan/vue-barcode';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 interface Props {
     card: {
@@ -66,7 +69,7 @@ async function addToWallet() {
         await CapacitorPassToWallet.addToWallet({ base64: base64 });
     } catch (error) {
         console.error('Error adding to wallet:', error);
-        alert('Failed to add card to wallet. Please try again.');
+        alert(t('cardDetail.failedToAddToWallet'));
     }
 }
 
@@ -287,7 +290,7 @@ function getInitials(name: string): string {
                                     stroke="currentColor" stroke-width="2" />
                                 <circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2" />
                             </svg>
-                            Add Photos
+                            {{ t('cardDetail.addPhotos') }}
                         </button>
                     </div>
                 </div>
@@ -295,7 +298,7 @@ function getInitials(name: string): string {
             <div class="card-content">
                 <div v-if="showPhotosSection" class="photos-section">
                     <div class="photos-header">
-                        <h2>Card Photos</h2>
+                        <h2>{{ t('cardDetail.cardPhotos') }}</h2>
                         <button class="close-photos-btn" @click="showPhotosSection = false">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -306,7 +309,7 @@ function getInitials(name: string): string {
                     </div>
                     <div class="photo-upload-container">
                         <div class="photo-item">
-                            <h3>Front</h3>
+                            <h3>{{ t('cardDetail.front') }}</h3>
                             <div v-if="photoFront" class="photo-preview">
                                 <img :src="photoFront" alt="Front" />
                                 <button class="remove-photo-btn" @click="removePhotoFront">
@@ -323,13 +326,13 @@ function getInitials(name: string): string {
                                     <path d="M12 5v14M5 12h14" stroke="#999" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                                <span>Upload Photo</span>
+                                <span>{{ t('cardDetail.uploadPhoto') }}</span>
                             </button>
                             <input ref="fileInputFront" type="file" accept="image/*" @change="handlePhotoFrontChange"
                                 style="display: none" />
                         </div>
                         <div class="photo-item">
-                            <h3>Back</h3>
+                            <h3>{{ t('cardDetail.back') }}</h3>
                             <div v-if="photoBack" class="photo-preview">
                                 <img :src="photoBack" alt="Back" />
                                 <button class="remove-photo-btn" @click="removePhotoBack">
@@ -346,7 +349,7 @@ function getInitials(name: string): string {
                                     <path d="M12 5v14M5 12h14" stroke="#999" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                                <span>Upload Photo</span>
+                                <span>{{ t('cardDetail.uploadPhoto') }}</span>
                             </button>
                             <input ref="fileInputBack" type="file" accept="image/*" @change="handlePhotoBackChange"
                                 style="display: none" />
@@ -377,7 +380,7 @@ function getInitials(name: string): string {
                     </div>
                     <div v-if="hasPhotos()" class="photos-gallery-section">
                         <button class="photos-gallery-header" @click="expandPhotos = !expandPhotos">
-                            <span class="photos-gallery-title">Card Photos</span>
+                            <span class="photos-gallery-title">{{ t('cardDetail.cardPhotos') }}</span>
                             <svg class="expand-icon" :class="{ expanded: expandPhotos }" width="20" height="20"
                                 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -389,11 +392,11 @@ function getInitials(name: string): string {
                                 <div class="photos-grid">
                                     <div v-if="photoFront" class="photo-gallery-item">
                                         <img :src="photoFront" alt="Front" @click="openPhotoModal(photoFront)" />
-                                        <span class="photo-label">Front</span>
+                                        <span class="photo-label">{{ t('cardDetail.front') }}</span>
                                     </div>
                                     <div v-if="photoBack" class="photo-gallery-item">
                                         <img :src="photoBack" alt="Back" @click="openPhotoModal(photoBack)" />
-                                        <span class="photo-label">Back</span>
+                                        <span class="photo-label">{{ t('cardDetail.back') }}</span>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,11 @@
 {
   "home": {
-    "title": "Karty"
+    "title": "Karty",
+    "allCards": "VŠECHNY KARTY"
+  },
+  "nav": {
+    "cards": "Karty",
+    "settings": "Nastavení"
   },
   "createCard": {
     "selectCompany": "Vybrat společnost",

@@ -3,7 +3,10 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Preferences } from '@capacitor/preferences'
 import { BarcodeScanner, BarcodeFormat } from '@capacitor-mlkit/barcode-scanning'
+import { useI18n } from 'vue-i18n'
 import companies2 from './companies.json'
+
+const { t } = useI18n()
 
 interface Company {
     id: number
@@ -330,13 +333,15 @@ async function saveCard() {
                 </svg>
             </button>
             <h1 class="title">{{
-                step === 'select-company' ? 'Select Company' : step === 'custom-card' ? 'Custom Card' : 'Add Card'
-                }}</h1>
+                step === 'select-company' ? t('createCard.selectCompany') : step === 'custom-card' ?
+                    t('createCard.customCard') : t('createCard.addCard')
+            }}</h1>
             <div style="width: 24px"></div>
         </header>
         <div v-if="step === 'select-company'" class="step-content">
             <div class="search-section">
-                <input v-model="searchQuery" type="text" class="search-input" placeholder="Search companies..." />
+                <input v-model="searchQuery" type="text" class="search-input"
+                    :placeholder="t('createCard.searchCompanies')" />
             </div>
             <div class="companies-list">
                 <div v-for="group in groupedCompanies" :key="group.letter" class="company-group">
@@ -353,16 +358,17 @@ async function saveCard() {
             </div>
         </div>
         <div v-else-if="step === 'custom-card'" class="step-content">
-            <div class="step-title">Create a Custom Card</div>
+            <div class="step-title">{{ t('createCard.createCustomCard') }}</div>
             <div class="form-section">
-                <label for="customName" class="form-label">Company Name</label>
+                <label for="customName" class="form-label">{{ t('createCard.companyName') }}</label>
                 <input id="customName" v-model="customCompanyName" type="text" class="form-input"
-                    placeholder="Enter company name" @keyup.enter="isFormValid && proceedWithCustomCard()" />
-                <p class="form-hint">Enter the name of the company or store for your custom card.</p>
+                    :placeholder="t('createCard.enterCompanyName')"
+                    @keyup.enter="isFormValid && proceedWithCustomCard()" />
+                <p class="form-hint">{{ t('createCard.companyNameHint') }}</p>
             </div>
             <button :disabled="!isFormValid" :class="['btn', 'btn-primary', { disabled: !isFormValid }]"
                 @click="proceedWithCustomCard">
-                Continue
+                {{ t('createCard.continue') }}
             </button>
         </div>
         <div v-else-if="step === 'enter-barcode'" class="step-content">
@@ -377,26 +383,24 @@ async function saveCard() {
                 </div>
             </div>
             <div class="form-section">
-                <label for="barcode" class="form-label">Card Number / Barcode</label>
+                <label for="barcode" class="form-label">{{ t('createCard.cardNumberBarcode') }}</label>
                 <input id="barcode" v-model="barcode" type="text" class="form-input"
-                    placeholder="Enter barcode or card number" @keyup.enter="isFormValid && saveCard()" />
-                <p class="form-hint">Enter the barcode manually or use the scanner below to capture it with your
-                    camera.
-                </p>
+                    :placeholder="t('createCard.enterBarcode')" @keyup.enter="isFormValid && saveCard()" />
+                <p class="form-hint">{{ t('createCard.barcodeHint') }}</p>
             </div>
             <button class="scan-button" @click="startScanning" :disabled="isScanning">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 3h6v6H3V3zm12 0h6v6h-6V3zM3 15h6v6H3v-6zm10-5h2v4h-2v-4zm4-2h2v2h-2v-2zm0 6h2v2h-2v-2z"
                         fill="currentColor" />
                 </svg>
-                {{ isScanning ? 'Scanning...' : 'Scan Barcode' }}
+                {{ isScanning ? t('createCard.scanning') : t('createCard.scanBarcode') }}
             </button>
         </div>
         <div class="action-buttons" v-if="step === 'enter-barcode'">
-            <button class="btn btn-secondary" @click="goBack">Back</button>
+            <button class="btn btn-secondary" @click="goBack">{{ t('createCard.back') }}</button>
             <button :disabled="!isFormValid" :class="['btn', 'btn-primary', { disabled: !isFormValid }]"
                 @click="saveCard">
-                Save Card
+                {{ t('createCard.saveCard') }}
             </button>
         </div>
         <nav class="bottom-nav" v-if="step === 'select-company'">
@@ -404,7 +408,7 @@ async function saveCard() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                 </svg>
-                Create Custom Card
+                {{ t('createCard.createCustomCard') }}
             </button>
         </nav>
     </div>

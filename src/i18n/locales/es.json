@@ -1,6 +1,11 @@
 {
   "home": {
-    "title": "Tarjetas"
+    "title": "Tarjetas",
+    "allCards": "TODAS LAS TARJETAS"
+  },
+  "nav": {
+    "cards": "Tarjetas",
+    "settings": "Ajustes"
   },
   "createCard": {
     "selectCompany": "Seleccionar empresa",

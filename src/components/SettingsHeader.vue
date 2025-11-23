@@ -1,6 +1,10 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
 <template>
     <header class="header">
-        <h1 class="title">Settings</h1>
+        <h1 class="title">{{ t('settings.title') }}</h1>
     </header>
 </template>
 <style scoped>

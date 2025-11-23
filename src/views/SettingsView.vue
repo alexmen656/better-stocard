@@ -4,8 +4,26 @@ import { Preferences } from '@capacitor/preferences'
 import TouchBar from '@/components/TouchBar.vue'
 import SettingsHeader from '@/components/SettingsHeader.vue'
 import { useDarkMode } from '@/composables/useDarkMode'
+import { useI18n } from 'vue-i18n'
 
 const { isDarkMode, toggleDarkMode } = useDarkMode()
+const { t, locale } = useI18n()
+
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'de', name: 'Deutsch' },
+  { code: 'es', name: 'Español' },
+  { code: 'sk', name: 'Slovenčina' },
+  { code: 'cz', name: 'Čeština' },
+]
+
+const currentLanguage = ref(locale.value)
+
+const changeLanguage = async (langCode: string) => {
+  locale.value = langCode
+  currentLanguage.value = langCode
+  localStorage.setItem('app-locale', langCode)
+}
 
 const APP_VERSION = '1.0.0'
 const APP_BUILD = '1'
@@ -56,7 +74,7 @@ const addDemoData = async () => {
   })
 
   showDebugMenu.value = false
-  alert('Demo-Daten hinzugefügt!')
+  alert(t('settings.demoDataAdded'))
 }
 </script>
 
@@ -64,44 +82,52 @@ const addDemoData = async () => {
   <div class="settings-container">
     <SettingsHeader />
     <div class="settings-content">
-      <h2 class="section-title">APPEARANCE</h2>
+      <h2 class="section-title">{{ t('settings.appearance') }}</h2>
       <div class="settings-section">
         <div class="settings-item">
-          <div class="item-label">Dark Mode</div>
+          <div class="item-label">{{ t('settings.darkMode') }}</div>
           <div class="toggle-switch" :class="{ active: isDarkMode }" @click="toggleDarkMode">
             <div class="toggle-circle"></div>
           </div>
         </div>
+        <div class="settings-item">
+          <div class="item-label">Language</div>
+          <select v-model="currentLanguage" @change="changeLanguage(currentLanguage)" class="language-select">
+            <option v-for="lang in languages" :key="lang.code" :value="lang.code">
+              {{ lang.name }}
+            </option>
+          </select>
+        </div>
       </div>
-      <h2 class="section-title">INFORMATION</h2>
+      <h2 class="section-title">{{ t('settings.information') }}</h2>
       <div class="settings-section">
         <div class="settings-item">
-          <div class="item-label">App Version</div>
+          <div class="item-label">{{ t('settings.appVersion') }}</div>
           <div class="item-value">{{ APP_VERSION }}</div>
         </div>
         <div class="settings-item">
-          <div class="item-label">App Build</div>
+          <div class="item-label">{{ t('settings.appBuild') }}</div>
           <div class="item-value clickable" @click="handleBuildClick">
             {{ APP_BUILD }}
           </div>
         </div>
       </div>
-      <h2 class="section-title">OPEN SOURCE</h2>
+      <h2 class="section-title">{{ t('settings.openSource') }}</h2>
       <div class="settings-section">
         <div class="open-source-info">
-          <p class="info-text">This App is Open Source</p>
+          <p class="info-text">{{ t('settings.openSourceInfo') }}</p>
           <a :href="GITHUB_URL" target="_blank" rel="noopener noreferrer" class="github-link">
             <span class="github-icon">GitHub</span>
-            <span class="link-text">View on GitHub</span>
+            <span class="link-text">{{ t('settings.viewOnGithub') }}</span>
           </a>
         </div>
       </div>
       <div v-if="showDebugMenu" class="debug-menu">
         <div class="debug-overlay" @click="showDebugMenu = false"></div>
         <div class="debug-content">
-          <h3>Debug Menu</h3>
-          <button class="debug-button" @click="addDemoData">Add Demo Data</button>
-          <button class="debug-button secondary" @click="showDebugMenu = false">Close</button>
+          <h3>{{ t('settings.debugMenu') }}</h3>
+          <button class="debug-button" @click="addDemoData">{{ t('settings.addDemoData') }}</button>
+          <button class="debug-button secondary" @click="showDebugMenu = false">{{ t('settings.close') }}</button>
         </div>
       </div>
     </div>
@@ -230,7 +256,28 @@ const addDemoData = async () => {
   text-align: left;
 }
 
-/* Toggle Switch */
+.language-select {
+  padding: 6px 12px;
+  font-size: 16px;
+  color: var(--text-tertiary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 400;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 30px;
+}
+
+.language-select:focus {
+  outline: none;
+  border-color: #007AFF;
+}
+
 .toggle-switch {
   width: 51px;
   height: 31px;
@@ -262,7 +309,6 @@ const addDemoData = async () => {
   transform: translateX(20px);
 }
 
-/* Debug Menu Styles */
 .debug-menu {
   position: fixed;
   top: 0;

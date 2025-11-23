@@ -1,9 +1,15 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
+
 <template>
     <header class="header">
-        <h1 class="title">Cards</h1>
+        <h1 class="title">{{ t('home.title') }}</h1>
         <button class="add-button" @click="$router.push('/create-card')">+</button>
     </header>
 </template>
+
 <style scoped>
 .header {
     display: flex;
