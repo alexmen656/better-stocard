@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { CapacitorPassToWallet } from 'capacitor-pass-to-wallet';
 import VueBarcode from '@chenfengyuan/vue-barcode';
+import QrcodeVue from 'qrcode.vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -82,6 +83,7 @@ const emit = defineEmits<{
 const barcodePattern = ref(props.card.barcode)
 const showMenu = ref(false)
 const showPhotosSection = ref(false)
+const showShareScreen = ref(false)
 const showPhotosGallery = ref(false)
 const expandPhotos = ref(false)
 const selectedPhotoModal = ref<string | null>(null)
@@ -91,6 +93,18 @@ const fileInputFront = ref<HTMLInputElement | null>(null)
 const fileInputBack = ref<HTMLInputElement | null>(null)
 const cardNumber = ref(props.card.cardNumber || '')
 //const memberNumber = ref(props.card.memberNumber || '')
+
+const shareData = computed(() => {
+    return JSON.stringify({
+        name: props.card.name,
+        logo: props.card.logo,
+        bgColor: props.card.bgColor,
+        textColor: props.card.textColor,
+        barcode: props.card.barcode || cardNumber.value.replace(/\s/g, ''),
+        cardNumber: cardNumber.value,
+        isCustomCard: props.card.isCustomCard
+    })
+})
 
 onMounted(async () => {
     try {
@@ -292,11 +306,39 @@ function getInitials(name: string): string {
                             </svg>
                             {{ t('cardDetail.addPhotos') }}
                         </button>
+                        <button class="menu-item" @click="showShareScreen = true; showMenu = false">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                                    stroke="currentColor" stroke-width="2" />
+                                <circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                            {{ t('cardDetail.shareCard') }}
+                        </button>
                     </div>
                 </div>
             </header>
             <div class="card-content">
-                <div v-if="showPhotosSection" class="photos-section">
+                <div v-if="showShareScreen && !showPhotosSection" class="photos-section">
+                    <div class="photos-header">
+                        <h2>{{ t('cardDetail.shareCard') }}</h2>
+                        <button class="close-photos-btn" @click="showShareScreen = false">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 6L6 18M6 6l12 12" stroke="#000" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="qr-code-container">
+                        <div class="qr-code-wrapper">
+                            <QrcodeVue :value="shareData" :size="280" level="H" />
+                        </div>
+                        <p class="qr-code-description">{{ t('cardDetail.scanQRCode') }}</p>
+                    </div>
+                </div>
+                <div v-if="showPhotosSection && !showShareScreen" class="photos-section">
                     <div class="photos-header">
                         <h2>{{ t('cardDetail.cardPhotos') }}</h2>
                         <button class="close-photos-btn" @click="showPhotosSection = false">
@@ -356,7 +398,7 @@ function getInitials(name: string): string {
                         </div>
                     </div>
                 </div>
-                <div v-if="!showPhotosSection">
+                <div v-if="!showPhotosSection && !showShareScreen">
                     <div class="card-display" :style="{ backgroundColor: card.bgColor, color: card.textColor }">
                         <div class="card-logo">
                             <div v-if="card.isCustomCard" class="logo-initials">
@@ -687,6 +729,32 @@ function getInitials(name: string): string {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 20px;
+}
+
+.qr-code-wrapper {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-code-description {
+    font-size: 16px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
 }
 
 .photo-item {

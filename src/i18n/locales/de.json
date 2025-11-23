@@ -27,6 +27,8 @@
   },
   "cardDetail": {
     "addPhotos": "Fotos hinzufügen",
+    "shareCard": "Karte teilen",
+    "scanQRCode": "Scannen Sie diesen QR-Code, um die Karte zu teilen",
     "cardPhotos": "Kartenfotos",
     "front": "Vorderseite",
     "back": "Rückseite",

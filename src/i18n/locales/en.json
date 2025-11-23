@@ -27,6 +27,8 @@
   },
   "cardDetail": {
     "addPhotos": "Add Photos",
+    "shareCard": "Share Card",
+    "scanQRCode": "Scan this QR code to share the card",
     "cardPhotos": "Card Photos",
     "front": "Front",
     "back": "Back",

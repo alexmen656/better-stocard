@@ -27,6 +27,8 @@
   },
   "cardDetail": {
     "addPhotos": "Pridať fotky",
+    "shareCard": "Zdieľať kartu",
+    "scanQRCode": "Naskenujte tento QR kód na zdieľanie karty",
     "cardPhotos": "Fotky karty",
     "front": "Predná strana",
     "back": "Zadná strana",
