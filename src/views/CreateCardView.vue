@@ -443,7 +443,6 @@ async function saveCard() {
     display: flex;
     flex-direction: column;
     padding-bottom: 20px;
-    /*padding-top: max(0px, env(safe-area-inset-top));*/
     -webkit-user-select: none;
     user-select: none;
 }

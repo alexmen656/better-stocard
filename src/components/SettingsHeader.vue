@@ -13,10 +13,7 @@ const { t } = useI18n()
     justify-content: space-between;
     align-items: center;
     padding: 8px 20px 0px 20px;
-    /*14px*/
-    /*14px 20px 20px 20px*/
     background-color: var(--bg-secondary);
-    /* border-bottom: 1px solid #E0E0E0;*/
     padding-top: calc(20px + max(0px, env(safe-area-inset-top)));
     background-color: var(--bg-primary);
 }

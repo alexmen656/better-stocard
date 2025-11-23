@@ -653,7 +653,6 @@ function getInitials(name: string): string {
     text-align: center;
 }
 
-/* Barcode Section */
 .barcode-section {
     background-color: var(--bg-secondary);
     border-radius: 16px;
