@@ -131,7 +131,7 @@ async function generateShareLink() {
             .replace(/\//g, '_')
             .replace(/=/g, '')
 
-        shareUrl.value = `https://better-stocard.reelmia.com/share?d=${base64}#${keyBase64}`
+        shareUrl.value = `https://share.pocketz.reelmia.com/share?d=${base64}#${keyBase64}`
 
         if (qrCanvas.value) {
             await QRCode.toCanvas(qrCanvas.value, shareUrl.value, {

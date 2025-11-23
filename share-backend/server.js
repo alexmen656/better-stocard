@@ -7,6 +7,35 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+const aasaFile = {
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appIDs": [
+                    "AS5BHHK5AW.com.reelmia.bs"
+                ],
+                "components": [
+                    {
+                        "/": "/share/card/*",
+                        "comment": "Matches card sharing URLs"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+app.get('/.well-known/apple-app-site-association', (req, res) => {
+    res.set('Content-Type', 'application/json')
+    res.json(aasaFile)
+})
+
+app.get('/apple-app-site-association', (req, res) => {
+    res.set('Content-Type', 'application/json')
+    res.json(aasaFile)
+})
+
 app.get('/share', (req, res) => {
     const encryptedData = req.query.d;
     const fragment = req.url.split('#')[1] || '';
