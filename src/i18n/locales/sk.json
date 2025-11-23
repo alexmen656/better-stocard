@@ -33,7 +33,25 @@
     "front": "Predná strana",
     "back": "Zadná strana",
     "uploadPhoto": "Nahrať fotku",
-    "failedToAddToWallet": "Nepodarilo sa pridať kartu do peňaženky. Skúste to prosím znova."
+    "failedToAddToWallet": "Nepodarilo sa pridať kartu do peňaženky. Skúste to prosím znova.",
+    "generateShareDescription": "Vytvorte bezpečný, zašifrovaný odkaz na zdieľanie tejto karty.",
+    "generateQRCode": "Generovať QR kód",
+    "copyLink": "Kopírovať odkaz",
+    "linkCopied": "Odkaz skopírovaný do schránky!",
+    "failedToGenerateShare": "Chyba pri generovaní odkazu na zdieľanie. Skúste to prosím znova."
+  },
+  "shareReceive": {
+    "decrypting": "Dešifrovanie karty...",
+    "errorTitle": "Chyba",
+    "decryptionError": "Chyba pri dešifrovaní karty.",
+    "invalidLink": "Neplatný odkaz na zdieľanie.",
+    "missingKey": "Chýba šifrovací kľúč.",
+    "decryptionFailed": "Dešifrovanie zlyhalo. Odkaz môže byť poškodený.",
+    "backToHome": "Späť na domovskú stránku",
+    "cardReceived": "Karta prijatá!",
+    "cardReceivedDescription": "Chcete pridať túto kartu do svojej kolekcie?",
+    "saveCard": "Uložiť kartu",
+    "cancel": "Zrušiť"
   },
   "settings": {
     "title": "Nastavenia",

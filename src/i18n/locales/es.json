@@ -33,7 +33,25 @@
     "front": "Frontal",
     "back": "Trasera",
     "uploadPhoto": "Subir foto",
-    "failedToAddToWallet": "No se pudo añadir la tarjeta a la billetera. Por favor, inténtelo de nuevo."
+    "failedToAddToWallet": "No se pudo añadir la tarjeta a la billetera. Por favor, inténtelo de nuevo.",
+    "generateShareDescription": "Genere un enlace seguro y encriptado para compartir esta tarjeta.",
+    "generateQRCode": "Generar código QR",
+    "copyLink": "Copiar enlace",
+    "linkCopied": "¡Enlace copiado al portapapeles!",
+    "failedToGenerateShare": "Error al generar el enlace compartido. Por favor, inténtelo de nuevo."
+  },
+  "shareReceive": {
+    "decrypting": "Descifrando tarjeta...",
+    "errorTitle": "Error",
+    "decryptionError": "Error al descifrar la tarjeta.",
+    "invalidLink": "Enlace compartido inválido.",
+    "missingKey": "Falta la clave de encriptación.",
+    "decryptionFailed": "Error en el descifrado. El enlace podría estar corrupto.",
+    "backToHome": "Volver al inicio",
+    "cardReceived": "¡Tarjeta recibida!",
+    "cardReceivedDescription": "¿Desea agregar esta tarjeta a su colección?",
+    "saveCard": "Guardar tarjeta",
+    "cancel": "Cancelar"
   },
   "settings": {
     "title": "Ajustes",
