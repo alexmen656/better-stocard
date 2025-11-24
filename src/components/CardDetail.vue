@@ -51,7 +51,7 @@ async function addToWallet() {
             memberNumber: cardNumber.value //memberNumber.value
         };
 
-        const response = await fetch('https://better-stocard.pocketz.app/generate-pass', {
+        const response = await fetch('https://api.pocketz.app/generate-pass', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

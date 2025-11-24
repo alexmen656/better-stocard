@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:better-stocard.pocketz.app</string>
+		<string>applinks:api.pocketz.app</string>
 		<string>applinks:share.pocketz.app</string>
 	</array>
 </dict>

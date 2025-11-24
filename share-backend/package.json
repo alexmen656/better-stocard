@@ -1,5 +1,5 @@
 {
-  "name": "better-stocard-share-backend",
+  "name": "pocketz-share-backend",
   "version": "1.0.0",
   "description": "Backend server for Better Stocard card sharing with end-to-end encryption",
   "main": "server.js",
