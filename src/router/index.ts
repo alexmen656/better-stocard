@@ -34,12 +34,21 @@ const router = createRouter({
 })
 
 CapacitorApp.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
-  console.log('App opened with URL:', event.url)
+  //console.log('App opened with URL:', event.url)
+  let slug = ''
 
-  const slug = event.url.split('.com').pop()
+  //only depp links lol
+  if (event.url.startsWith('pocketz://')) {
+    slug = event.url.replace('pocketz://', '')
+  }
+  //else {
+  //slug = event.url.split('.com').pop() || ''
+  //}
+
+  console.log('Navigating to slug:', slug)
 
   if (slug) {
-    router.push(slug)
+    router.push('/' + slug)
   }
 })
 export default router
