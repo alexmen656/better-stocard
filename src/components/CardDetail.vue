@@ -51,7 +51,7 @@ async function addToWallet() {
             memberNumber: cardNumber.value //memberNumber.value
         };
 
-        const response = await fetch('https://better-stocard.reelmia.com/generate-pass', {
+        const response = await fetch('https://better-stocard.pocketz.app/generate-pass', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ async function generateShareLink() {
             .replace(/\//g, '_')
             .replace(/=/g, '')
 
-        shareUrl.value = `https://share.pocketz.reelmia.com/share?d=${base64}#${keyBase64}`
+        shareUrl.value = `https://share.pocketz.app/share?d=${base64}#${keyBase64}`
 
         await new Promise((resolve) => {
             setTimeout(async () => {

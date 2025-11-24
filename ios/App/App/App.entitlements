@@ -4,8 +4,8 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:better-stocard.reelmia.com</string>
-		<string>applinks:share.pocketz.reelmia.com</string>
+		<string>applinks:better-stocard.pocketz.app</string>
+		<string>applinks:share.pocketz.app</string>
 	</array>
 </dict>
 </plist>
