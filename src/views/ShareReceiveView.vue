@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { Preferences } from '@capacitor/preferences'
 import nacl from 'tweetnacl'
 import naclUtil from 'tweetnacl-util'
 import VueBarcode from '@chenfengyuan/vue-barcode'
@@ -73,26 +74,41 @@ async function decryptCard() {
 function saveCard() {
     if (!cardData.value) return
 
-    const existingCards = JSON.parse(localStorage.getItem('cards') || '[]')
-    const newId = existingCards.length > 0
-        ? Math.max(...existingCards.map((c: any) => c.id)) + 1
-        : 1
+    saveCardToPreferences()
+}
 
-    const newCard = {
-        id: newId,
-        name: cardData.value.name,
-        logo: cardData.value.logo,
-        bgColor: cardData.value.bgColor,
-        textColor: cardData.value.textColor,
-        barcode: cardData.value.barcode,
-        cardNumber: cardData.value.cardNumber,
-        isCustomCard: cardData.value.isCustomCard || false
+async function saveCardToPreferences() {
+    if (!cardData.value) return
+
+    try {
+        const existingCardsJson = await Preferences.get({ key: 'cards' })
+        const existingCards = existingCardsJson.value ? JSON.parse(existingCardsJson.value) : []
+
+        const newId = existingCards.length > 0
+            ? Math.max(...existingCards.map((c: any) => c.id)) + 1
+            : 1
+
+        const newCard = {
+            id: newId,
+            name: cardData.value.name,
+            logo: cardData.value.logo,
+            bgColor: cardData.value.bgColor,
+            textColor: cardData.value.textColor,
+            barcode: cardData.value.barcode,
+            cardNumber: cardData.value.cardNumber,
+            isCustomCard: cardData.value.isCustomCard || false
+        }
+
+        existingCards.push(newCard)
+        await Preferences.set({
+            key: 'cards',
+            value: JSON.stringify(existingCards),
+        })
+
+        router.push('/')
+    } catch (err) {
+        console.error('Error saving card:', err)
     }
-
-    existingCards.push(newCard)
-    localStorage.setItem('cards', JSON.stringify(existingCards))
-
-    router.push('/')
 }
 
 function getInitials(name: string): string {
