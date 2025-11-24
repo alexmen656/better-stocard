@@ -28,6 +28,9 @@
   "cardDetail": {
     "addPhotos": "Fotos hinzufügen",
     "shareCard": "Karte teilen",
+    "deleteCard": "Karte löschen",
+    "confirmDelete": "Möchten Sie diese Karte wirklich löschen?",
+    "failedToDeleteCard": "Karte konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.",
     "scanQRCode": "Scannen Sie diesen QR-Code, um die Karte zu teilen",
     "cardPhotos": "Kartenfotos",
     "front": "Vorderseite",

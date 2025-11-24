@@ -305,6 +305,52 @@ function closePhotoModal() {
     selectedPhotoModal.value = null
 }
 
+async function deleteCard() {
+    if (confirm(t('cardDetail.confirmDelete'))) {
+        try {
+            const cardFolderId = `card_${props.card.id}`
+
+            try {
+                await Filesystem.deleteFile({
+                    path: `${cardFolderId}/front.jpg`,
+                    directory: Directory.Data,
+                })
+            } catch (error) {
+                //console.error('Error deleting front photo:', error)
+            }
+
+            try {
+                await Filesystem.deleteFile({
+                    path: `${cardFolderId}/back.jpg`,
+                    directory: Directory.Data,
+                })
+            } catch (error) {
+                //console.error('Error deleting back photo:', error)
+            }
+
+            try {
+                await Filesystem.rmdir({
+                    path: cardFolderId,
+                    directory: Directory.Data,
+                    recursive: true,
+                })
+            } catch (error) {
+                //console.error('Error deleting card folder:', error)
+            }
+
+
+            emit('updateCard', {
+                ...props.card,
+                deleted: true
+            })
+            emit('close')
+        } catch (error) {
+            console.error('Error deleting card:', error)
+            alert(t('cardDetail.failedToDeleteCard'))
+        }
+    }
+}
+
 function hasPhotos(): boolean {
     return !!(photoFront.value || photoBack.value)
 }
@@ -359,12 +405,29 @@ function getInitials(name: string): string {
                         <button class="menu-item" @click="showShareScreen = true; showMenu = false">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
-                                    stroke="currentColor" stroke-width="2" />
-                                <circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2" />
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <polyline points="16 6 12 2 8 6" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <line x1="12" y1="2" x2="12" y2="15" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                             {{ t('cardDetail.shareCard') }}
+                        </button>
+                        <button class="menu-item menu-item-delete" @click="deleteCard(); showMenu = false">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <line x1="10" y1="11" x2="10" y2="17" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <line x1="14" y1="11" x2="14" y2="17" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            {{ t('cardDetail.deleteCard') }}
                         </button>
                     </div>
                 </div>
@@ -655,6 +718,18 @@ function getInitials(name: string): string {
 
 .menu-item:hover {
     background-color: var(--border-subtle);
+}
+
+.menu-item-delete {
+    color: #FF4444 !important;
+}
+
+.menu-item-delete:hover {
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+.menu-item-delete svg {
+    stroke: #FF4444;
 }
 
 .detail-title {

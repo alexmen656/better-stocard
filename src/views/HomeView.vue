@@ -15,6 +15,7 @@ interface Card {
   bgColor: string
   textColor: string
   isCustomCard?: boolean
+  deleted?: boolean
 }
 
 const extractColorFromImage = (logoUrl: string): Promise<string> => {
@@ -81,10 +82,18 @@ function closeCard() {
 }
 
 function updateCard(updatedCard: Card) {
-  const cardIndex = cards.value.findIndex(c => c.id === updatedCard.id)
-  if (cardIndex !== -1) {
-    cards.value[cardIndex] = updatedCard
-    saveCards()
+  if (updatedCard.deleted) {
+    const cardIndex = cards.value.findIndex(c => c.id === updatedCard.id)
+    if (cardIndex !== -1) {
+      cards.value.splice(cardIndex, 1)
+      saveCards()
+    }
+  } else {
+    const cardIndex = cards.value.findIndex(c => c.id === updatedCard.id)
+    if (cardIndex !== -1) {
+      cards.value[cardIndex] = updatedCard
+      saveCards()
+    }
   }
 }
 

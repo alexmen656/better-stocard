@@ -28,6 +28,9 @@
   "cardDetail": {
     "addPhotos": "Přidat fotky",
     "shareCard": "Sdílet kartu",
+    "deleteCard": "Smazat kartu",
+    "confirmDelete": "Opravdu chcete tuto kartu smazat?",
+    "failedToDeleteCard": "Nepodařilo se smazat kartu. Zkuste to prosím znovu.",
     "scanQRCode": "Naskenujte tento QR kód pro sdílení karty",
     "cardPhotos": "Fotky karty",
     "front": "Přední strana",

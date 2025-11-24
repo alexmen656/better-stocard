@@ -28,6 +28,9 @@
   "cardDetail": {
     "addPhotos": "Añadir fotos",
     "shareCard": "Compartir tarjeta",
+    "deleteCard": "Eliminar tarjeta",
+    "failedToDeleteCard": "No se pudo eliminar la tarjeta. Por favor, inténtelo de nuevo.",
+    "confirmDelete": "¿Está seguro de que desea eliminar esta tarjeta?",
     "scanQRCode": "Escanea este código QR para compartir la tarjeta",
     "cardPhotos": "Fotos de la tarjeta",
     "front": "Frontal",
