@@ -27,6 +27,7 @@
   },
   "cardDetail": {
     "addPhotos": "Přidat fotky",
+    "editCard": "Upravit kartu",
     "shareCard": "Sdílet kartu",
     "deleteCard": "Smazat kartu",
     "confirmDelete": "Opravdu chcete tuto kartu smazat?",
@@ -41,7 +42,11 @@
     "generateQRCode": "Generovat QR kód",
     "copyLink": "Kopírovat odkaz",
     "linkCopied": "Odkaz zkopírován do schránky!",
-    "failedToGenerateShare": "Chyba při generování odkazu na sdílení. Zkuste to prosím znovu."
+    "failedToGenerateShare": "Chyba při generování odkazu na sdílení. Zkuste to prosím znovu.",
+    "cardName": "Název karty",
+    "cardNumber": "Číslo karty",
+    "save": "Uložit",
+    "cancel": "Zrušit"
   },
   "shareReceive": {
     "decrypting": "Dešifrování karty...",

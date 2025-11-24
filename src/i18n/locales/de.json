@@ -27,6 +27,7 @@
   },
   "cardDetail": {
     "addPhotos": "Fotos hinzufügen",
+    "editCard": "Karte bearbeiten",
     "shareCard": "Karte teilen",
     "deleteCard": "Karte löschen",
     "confirmDelete": "Möchten Sie diese Karte wirklich löschen?",
@@ -41,7 +42,11 @@
     "generateQRCode": "QR-Code generieren",
     "copyLink": "Link kopieren",
     "linkCopied": "Link in die Zwischenablage kopiert!",
-    "failedToGenerateShare": "Fehler beim Generieren des Teilen-Links. Bitte versuchen Sie es erneut."
+    "failedToGenerateShare": "Fehler beim Generieren des Teilen-Links. Bitte versuchen Sie es erneut.",
+    "cardName": "Kartenname",
+    "cardNumber": "Kartennummer",
+    "save": "Speichern",
+    "cancel": "Abbrechen"
   },
   "shareReceive": {
     "decrypting": "Entschlüssele Karte...",

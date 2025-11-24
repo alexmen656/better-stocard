@@ -27,6 +27,7 @@
   },
   "cardDetail": {
     "addPhotos": "Añadir fotos",
+    "editCard": "Editar tarjeta",
     "shareCard": "Compartir tarjeta",
     "deleteCard": "Eliminar tarjeta",
     "failedToDeleteCard": "No se pudo eliminar la tarjeta. Por favor, inténtelo de nuevo.",
@@ -41,7 +42,11 @@
     "generateQRCode": "Generar código QR",
     "copyLink": "Copiar enlace",
     "linkCopied": "¡Enlace copiado al portapapeles!",
-    "failedToGenerateShare": "Error al generar el enlace compartido. Por favor, inténtelo de nuevo."
+    "failedToGenerateShare": "Error al generar el enlace compartido. Por favor, inténtelo de nuevo.",
+    "cardName": "Nombre de la tarjeta",
+    "cardNumber": "Número de tarjeta",
+    "save": "Guardar",
+    "cancel": "Cancelar"
   },
   "shareReceive": {
     "decrypting": "Descifrando tarjeta...",

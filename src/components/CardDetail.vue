@@ -97,6 +97,9 @@ const photoBack = ref(props.card.photoBack || '')
 const fileInputFront = ref<HTMLInputElement | null>(null)
 const fileInputBack = ref<HTMLInputElement | null>(null)
 const cardNumber = ref(props.card.cardNumber || '')
+const isEditMode = ref(false)
+const editedName = ref(props.card.name)
+const editedCardNumber = ref(props.card.cardNumber || '')
 //const memberNumber = ref(props.card.memberNumber || '')
 
 async function generateShareLink() {
@@ -351,6 +354,25 @@ async function deleteCard() {
     }
 }
 
+function startEditMode() {
+    isEditMode.value = true
+    editedName.value = props.card.name
+    editedCardNumber.value = cardNumber.value
+}
+
+function cancelEdit() {
+    isEditMode.value = false
+}
+
+function saveEdit() {
+    emit('updateCard', {
+        ...props.card,
+        name: editedName.value,
+        cardNumber: editedCardNumber.value
+    })
+    isEditMode.value = false
+}
+
 function hasPhotos(): boolean {
     return !!(photoFront.value || photoBack.value)
 }
@@ -414,6 +436,14 @@ function getInitials(name: string): string {
                             </svg>
                             {{ t('cardDetail.shareCard') }}
                         </button>
+                        <button class="menu-item" @click="startEditMode(); showMenu = false">
+                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                            </svg>
+                            {{ t('cardDetail.editCard') }}
+                        </button>
                         <button class="menu-item menu-item-delete" @click="deleteCard(); showMenu = false">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -433,7 +463,26 @@ function getInitials(name: string): string {
                 </div>
             </header>
             <div class="card-content">
-                <div v-if="showShareScreen && !showPhotosSection" class="photos-section">
+                <div v-if="isEditMode" class="edit-section">
+                    <div class="edit-header">
+                        <h2>{{ t('cardDetail.editCard') }}</h2>
+                    </div>
+                    <div class="edit-form">
+                        <div class="form-group">
+                            <label>{{ t('cardDetail.cardName') }}</label>
+                            <input v-model="editedName" type="text" class="form-input" />
+                        </div>
+                        <div class="form-group">
+                            <label>{{ t('cardDetail.cardNumber') }}</label>
+                            <input v-model="editedCardNumber" type="text" class="form-input" />
+                        </div>
+                        <div class="edit-actions">
+                            <button class="btn-cancel" @click="cancelEdit">{{ t('cardDetail.cancel') }}</button>
+                            <button class="btn-save" @click="saveEdit">{{ t('cardDetail.save') }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div v-else-if="showShareScreen && !showPhotosSection" class="photos-section">
                     <div class="photos-header">
                         <h2>{{ t('cardDetail.shareCard') }}</h2>
                         <button class="close-photos-btn" @click="showShareScreen = false; shareUrl = ''">
@@ -736,6 +785,109 @@ function getInitials(name: string): string {
     font-size: 18px;
     font-weight: 600;
     color: var(--text-primary);
+}
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.edit-section {
+    animation: fadeIn 0.2s ease-out;
+}
+
+.edit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.edit-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-input {
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.edit-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-cancel,
+.btn-save {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-cancel {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-cancel:hover {
+    background: var(--border-subtle);
+}
+
+.btn-save {
+    background: #667eea;
+    color: white;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 }
 
 .card-content {

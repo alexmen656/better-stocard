@@ -32,6 +32,7 @@
     "linkCopied": "Link copied to clipboard!",
     "failedToGenerateShare": "Failed to generate share link. Please try again.",
     "addPhotos": "Add Photos",
+    "editCard": "Edit Card",
     "shareCard": "Share Card",
     "deleteCard": "Delete Card",
     "failedToDeleteCard": "Failed to delete card. Please try again.",
@@ -41,7 +42,11 @@
     "front": "Front",
     "back": "Back",
     "uploadPhoto": "Upload Photo",
-    "failedToAddToWallet": "Failed to add card to wallet. Please try again."
+    "failedToAddToWallet": "Failed to add card to wallet. Please try again.",
+    "cardName": "Card Name",
+    "cardNumber": "Card Number",
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "shareReceive": {
     "decrypting": "Decrypting card...",
