@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { CapacitorPassToWallet } from 'capacitor-pass-to-wallet';
@@ -136,16 +136,25 @@ async function generateShareLink() {
 
         shareUrl.value = `https://share.pocketz.reelmia.com/share?d=${base64}#${keyBase64}`
 
-        if (qrCanvas.value) {
-            await QRCode.toCanvas(qrCanvas.value, shareUrl.value, {
-                width: 280,
-                margin: 2,
-                color: {
-                    dark: '#000000',
-                    light: '#FFFFFF'
+        await new Promise((resolve) => {
+            setTimeout(async () => {
+                if (qrCanvas.value) {
+                    try {
+                        await QRCode.toCanvas(qrCanvas.value, shareUrl.value, {
+                            width: 280,
+                            margin: 2,
+                            color: {
+                                dark: '#000000',
+                                light: '#FFFFFF'
+                            }
+                        })
+                    } catch (err) {
+                        console.error('Error rendering QR code:', err)
+                    }
                 }
-            })
-        }
+                resolve(null)
+            }, 100)
+        })
     } catch (error) {
         console.error('Error generating share link:', error)
         alert(t('cardDetail.failedToGenerateShare'))
@@ -169,6 +178,12 @@ onMounted(async () => {
         console.error('Error setting screen brightness:', error);
     }
 });
+
+watch(showShareScreen, async (newVal) => {
+    if (newVal && !shareUrl.value) {
+        await generateShareLink()
+    }
+})
 
 function handlePhotoFrontChange(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0]
@@ -494,13 +509,7 @@ function getInitials(name: string): string {
                         </button>
                     </div>
                     <div class="share-content">
-                        <div v-if="!shareUrl" class="generate-section">
-                            <p class="share-description">{{ t('cardDetail.generateShareDescription') }}</p>
-                            <button class="generate-btn" @click="generateShareLink">
-                                {{ t('cardDetail.generateQRCode') }}
-                            </button>
-                        </div>
-                        <div v-else class="qr-code-container">
+                        <div class="qr-code-container">
                             <div class="qr-code-wrapper">
                                 <canvas ref="qrCanvas"></canvas>
                             </div>
