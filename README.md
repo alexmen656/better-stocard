@@ -11,7 +11,7 @@ Pocketz is a simple card manager that transforms your physical cards into digita
 ## Special Features
 
 - Apple Wallet support
-- Barcode Scanner for easier adding method
+- Barcode Scanner as easier adding method
 
 ## Recommended IDE Setup
 
