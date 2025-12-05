@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { CapacitorPassToWallet } from 'capacitor-pass-to-wallet';
 import VueBarcode from '@chenfengyuan/vue-barcode';
+//import QrcodeVue from 'qrcode.vue';
+import { useI18n } from 'vue-i18n';
+import nacl from 'tweetnacl';
+import naclUtil from 'tweetnacl-util';
+import QRCode from 'qrcode';
+
+const { t } = useI18n();
 
 interface Props {
     card: {
@@ -44,7 +51,7 @@ async function addToWallet() {
             memberNumber: cardNumber.value //memberNumber.value
         };
 
-        const response = await fetch('https://better-stocard.reelmia.com/generate-pass', {
+        const response = await fetch('https://api.pocketz.app/generate-pass', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,7 +73,7 @@ async function addToWallet() {
         await CapacitorPassToWallet.addToWallet({ base64: base64 });
     } catch (error) {
         console.error('Error adding to wallet:', error);
-        alert('Failed to add card to wallet. Please try again.');
+        alert(t('cardDetail.failedToAddToWallet'));
     }
 }
 
@@ -79,15 +86,87 @@ const emit = defineEmits<{
 const barcodePattern = ref(props.card.barcode)
 const showMenu = ref(false)
 const showPhotosSection = ref(false)
+const showShareScreen = ref(false)
 const showPhotosGallery = ref(false)
 const expandPhotos = ref(false)
+const qrCanvas = ref<HTMLCanvasElement | null>(null)
+const shareUrl = ref('')
 const selectedPhotoModal = ref<string | null>(null)
 const photoFront = ref(props.card.photoFront || '')
 const photoBack = ref(props.card.photoBack || '')
 const fileInputFront = ref<HTMLInputElement | null>(null)
 const fileInputBack = ref<HTMLInputElement | null>(null)
 const cardNumber = ref(props.card.cardNumber || '')
+const isEditMode = ref(false)
+const editedName = ref(props.card.name)
+const editedCardNumber = ref(props.card.cardNumber || '')
 //const memberNumber = ref(props.card.memberNumber || '')
+
+async function generateShareLink() {
+    try {
+        const key = nacl.randomBytes(nacl.secretbox.keyLength)
+
+        const cardData = {
+            name: props.card.name,
+            logo: props.card.logo,
+            bgColor: props.card.bgColor,
+            textColor: props.card.textColor,
+            barcode: props.card.barcode || cardNumber.value.replace(/\s/g, ''),
+            cardNumber: cardNumber.value,
+            isCustomCard: props.card.isCustomCard
+        }
+
+        const messageBytes = naclUtil.decodeUTF8(JSON.stringify(cardData))
+        const nonce = nacl.randomBytes(nacl.secretbox.nonceLength)
+        const encrypted = nacl.secretbox(messageBytes, nonce, key)
+
+        const fullMessage = new Uint8Array(nonce.length + encrypted.length)
+        fullMessage.set(nonce)
+        fullMessage.set(encrypted, nonce.length)
+
+        const base64 = naclUtil.encodeBase64(fullMessage)
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=/g, '')
+
+        const keyBase64 = naclUtil.encodeBase64(key)
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=/g, '')
+
+        shareUrl.value = `https://share.pocketz.app/share?d=${base64}#${keyBase64}`
+
+        await new Promise((resolve) => {
+            setTimeout(async () => {
+                if (qrCanvas.value) {
+                    try {
+                        await QRCode.toCanvas(qrCanvas.value, shareUrl.value, {
+                            width: 280,
+                            margin: 2,
+                            color: {
+                                dark: '#000000',
+                                light: '#FFFFFF'
+                            }
+                        })
+                    } catch (err) {
+                        console.error('Error rendering QR code:', err)
+                    }
+                }
+                resolve(null)
+            }, 100)
+        })
+    } catch (error) {
+        console.error('Error generating share link:', error)
+        alert(t('cardDetail.failedToGenerateShare'))
+    }
+}
+
+function copyLink() {
+    if (shareUrl.value) {
+        navigator.clipboard.writeText(shareUrl.value)
+        alert(t('cardDetail.linkCopied'))
+    }
+}
 
 onMounted(async () => {
     try {
@@ -99,6 +178,12 @@ onMounted(async () => {
         console.error('Error setting screen brightness:', error);
     }
 });
+
+watch(showShareScreen, async (newVal) => {
+    if (newVal && !shareUrl.value) {
+        await generateShareLink()
+    }
+})
 
 function handlePhotoFrontChange(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0]
@@ -238,6 +323,71 @@ function closePhotoModal() {
     selectedPhotoModal.value = null
 }
 
+async function deleteCard() {
+    if (confirm(t('cardDetail.confirmDelete'))) {
+        try {
+            const cardFolderId = `card_${props.card.id}`
+
+            try {
+                await Filesystem.deleteFile({
+                    path: `${cardFolderId}/front.jpg`,
+                    directory: Directory.Data,
+                })
+            } catch (error) {
+                //console.error('Error deleting front photo:', error)
+            }
+
+            try {
+                await Filesystem.deleteFile({
+                    path: `${cardFolderId}/back.jpg`,
+                    directory: Directory.Data,
+                })
+            } catch (error) {
+                //console.error('Error deleting back photo:', error)
+            }
+
+            try {
+                await Filesystem.rmdir({
+                    path: cardFolderId,
+                    directory: Directory.Data,
+                    recursive: true,
+                })
+            } catch (error) {
+                //console.error('Error deleting card folder:', error)
+            }
+
+
+            emit('updateCard', {
+                ...props.card,
+                deleted: true
+            })
+            emit('close')
+        } catch (error) {
+            console.error('Error deleting card:', error)
+            alert(t('cardDetail.failedToDeleteCard'))
+        }
+    }
+}
+
+function startEditMode() {
+    isEditMode.value = true
+    editedName.value = props.card.name
+    editedCardNumber.value = cardNumber.value
+}
+
+function cancelEdit() {
+    isEditMode.value = false
+}
+
+function saveEdit() {
+    emit('updateCard', {
+        ...props.card,
+        name: editedName.value,
+        cardNumber: editedCardNumber.value
+    })
+    isEditMode.value = false
+}
+
 function hasPhotos(): boolean {
     return !!(photoFront.value || photoBack.value)
 }
@@ -287,15 +437,95 @@ function getInitials(name: string): string {
                                     stroke="currentColor" stroke-width="2" />
                                 <circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2" />
                             </svg>
-                            Add Photos
+                            {{ t('cardDetail.addPhotos') }}
+                        </button>
+                        <button class="menu-item" @click="showShareScreen = true; showMenu = false">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <polyline points="16 6 12 2 8 6" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <line x1="12" y1="2" x2="12" y2="15" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            {{ t('cardDetail.shareCard') }}
+                        </button>
+                        <button class="menu-item" @click="startEditMode(); showMenu = false">
+                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                            </svg>
+                            {{ t('cardDetail.editCard') }}
+                        </button>
+                        <button class="menu-item menu-item-delete" @click="deleteCard(); showMenu = false">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <line x1="10" y1="11" x2="10" y2="17" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <line x1="14" y1="11" x2="14" y2="17" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            {{ t('cardDetail.deleteCard') }}
                         </button>
                     </div>
                 </div>
             </header>
             <div class="card-content">
-                <div v-if="showPhotosSection" class="photos-section">
+                <div v-if="isEditMode" class="edit-section">
+                    <div class="edit-header">
+                        <h2>{{ t('cardDetail.editCard') }}</h2>
+                    </div>
+                    <div class="edit-form">
+                        <div class="form-group">
+                            <label>{{ t('cardDetail.cardName') }}</label>
+                            <input v-model="editedName" type="text" class="form-input" />
+                        </div>
+                        <div class="form-group">
+                            <label>{{ t('cardDetail.cardNumber') }}</label>
+                            <input v-model="editedCardNumber" type="text" class="form-input" />
+                        </div>
+                        <div class="edit-actions">
+                            <button class="btn-cancel" @click="cancelEdit">{{ t('cardDetail.cancel') }}</button>
+                            <button class="btn-save" @click="saveEdit">{{ t('cardDetail.save') }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div v-else-if="showShareScreen && !showPhotosSection" class="photos-section">
                     <div class="photos-header">
-                        <h2>Card Photos</h2>
+                        <h2>{{ t('cardDetail.shareCard') }}</h2>
+                        <button class="close-photos-btn" @click="showShareScreen = false; shareUrl = ''">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 6L6 18M6 6l12 12" stroke="#000" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="share-content">
+                        <div class="qr-code-container">
+                            <div class="qr-code-wrapper">
+                                <canvas ref="qrCanvas"></canvas>
+                            </div>
+                            <p class="qr-code-description">{{ t('cardDetail.scanQRCode') }}</p>
+                            <div class="share-link">
+                                <input :value="shareUrl" readonly class="share-input" />
+                                <button class="copy-btn" @click="copyLink">
+                                    {{ t('cardDetail.copyLink') }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="showPhotosSection && !showShareScreen" class="photos-section">
+                    <div class="photos-header">
+                        <h2>{{ t('cardDetail.cardPhotos') }}</h2>
                         <button class="close-photos-btn" @click="showPhotosSection = false">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -306,7 +536,7 @@ function getInitials(name: string): string {
                     </div>
                     <div class="photo-upload-container">
                         <div class="photo-item">
-                            <h3>Front</h3>
+                            <h3>{{ t('cardDetail.front') }}</h3>
                             <div v-if="photoFront" class="photo-preview">
                                 <img :src="photoFront" alt="Front" />
                                 <button class="remove-photo-btn" @click="removePhotoFront">
@@ -323,13 +553,13 @@ function getInitials(name: string): string {
                                     <path d="M12 5v14M5 12h14" stroke="#999" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                                <span>Upload Photo</span>
+                                <span>{{ t('cardDetail.uploadPhoto') }}</span>
                             </button>
                             <input ref="fileInputFront" type="file" accept="image/*" @change="handlePhotoFrontChange"
                                 style="display: none" />
                         </div>
                         <div class="photo-item">
-                            <h3>Back</h3>
+                            <h3>{{ t('cardDetail.back') }}</h3>
                             <div v-if="photoBack" class="photo-preview">
                                 <img :src="photoBack" alt="Back" />
                                 <button class="remove-photo-btn" @click="removePhotoBack">
@@ -346,14 +576,14 @@ function getInitials(name: string): string {
                                     <path d="M12 5v14M5 12h14" stroke="#999" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                                <span>Upload Photo</span>
+                                <span>{{ t('cardDetail.uploadPhoto') }}</span>
                             </button>
                             <input ref="fileInputBack" type="file" accept="image/*" @change="handlePhotoBackChange"
                                 style="display: none" />
                         </div>
                     </div>
                 </div>
-                <div v-if="!showPhotosSection">
+                <div v-if="!showPhotosSection && !showShareScreen">
                     <div class="card-display" :style="{ backgroundColor: card.bgColor, color: card.textColor }">
                         <div class="card-logo">
                             <div v-if="card.isCustomCard" class="logo-initials">
@@ -377,7 +607,7 @@ function getInitials(name: string): string {
                     </div>
                     <div v-if="hasPhotos()" class="photos-gallery-section">
                         <button class="photos-gallery-header" @click="expandPhotos = !expandPhotos">
-                            <span class="photos-gallery-title">Card Photos</span>
+                            <span class="photos-gallery-title">{{ t('cardDetail.cardPhotos') }}</span>
                             <svg class="expand-icon" :class="{ expanded: expandPhotos }" width="20" height="20"
                                 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -389,11 +619,11 @@ function getInitials(name: string): string {
                                 <div class="photos-grid">
                                     <div v-if="photoFront" class="photo-gallery-item">
                                         <img :src="photoFront" alt="Front" @click="openPhotoModal(photoFront)" />
-                                        <span class="photo-label">Front</span>
+                                        <span class="photo-label">{{ t('cardDetail.front') }}</span>
                                     </div>
                                     <div v-if="photoBack" class="photo-gallery-item">
                                         <img :src="photoBack" alt="Back" @click="openPhotoModal(photoBack)" />
-                                        <span class="photo-label">Back</span>
+                                        <span class="photo-label">{{ t('cardDetail.back') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -461,7 +691,7 @@ function getInitials(name: string): string {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #F5F5F5;
+    background-color: var(--bg-primary);
     animation: slideUp 0.3s ease-out;
     display: flex;
     flex-direction: column;
@@ -482,8 +712,8 @@ function getInitials(name: string): string {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #E0E0E0;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
     padding-top: calc(15px + max(0px, env(safe-area-inset-top)));
 }
 
@@ -508,9 +738,9 @@ function getInitials(name: string): string {
     position: absolute;
     top: 40px;
     right: 0;
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow-medium);
     min-width: 200px;
     z-index: 100;
     overflow: hidden;
@@ -537,7 +767,7 @@ function getInitials(name: string): string {
     cursor: pointer;
     text-align: left;
     font-size: 14px;
-    color: #333;
+    color: var(--text-secondary);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -545,13 +775,128 @@ function getInitials(name: string): string {
 }
 
 .menu-item:hover {
-    background-color: #F5F5F5;
+    background-color: var(--border-subtle);
+}
+
+.menu-item-delete {
+    color: #FF4444 !important;
+}
+
+.menu-item-delete:hover {
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+.menu-item-delete svg {
+    stroke: #FF4444;
 }
 
 .detail-title {
     font-size: 18px;
     font-weight: 600;
-    color: #000;
+    color: var(--text-primary);
+}
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.edit-section {
+    animation: fadeIn 0.2s ease-out;
+}
+
+.edit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.edit-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-input {
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.edit-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-cancel,
+.btn-save {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-cancel {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-cancel:hover {
+    background: var(--border-subtle);
+}
+
+.btn-save {
+    background: #667eea;
+    color: white;
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 }
 
 .card-content {
@@ -566,7 +911,7 @@ function getInitials(name: string): string {
 .card-display {
     border-radius: 16px;
     padding: 40px 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow-medium);
     min-height: 220px;
     display: flex;
     flex-direction: column;
@@ -608,12 +953,11 @@ function getInitials(name: string): string {
     text-align: center;
 }
 
-/* Barcode Section */
 .barcode-section {
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
     border-radius: 16px;
     padding: 30px 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--shadow-light);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -638,13 +982,13 @@ function getInitials(name: string): string {
 .card-number {
     font-size: 20px;
     font-weight: 600;
-    color: #000;
+    color: var(--text-primary);
     letter-spacing: 1px;
 }
 
 .member-number {
     font-size: 16px;
-    color: #999;
+    color: var(--text-muted);
     letter-spacing: 0.5px;
 }
 
@@ -658,13 +1002,13 @@ function getInitials(name: string): string {
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #E0E0E0;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .photos-header h2 {
     font-size: 18px;
     font-weight: 600;
-    color: #000;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -686,17 +1030,124 @@ function getInitials(name: string): string {
     gap: 20px;
 }
 
+.share-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.generate-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 20px;
+}
+
+.share-description {
+    font-size: 16px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+}
+
+.generate-btn {
+    padding: 15px 30px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 20px;
+    width: 100%;
+}
+
+.qr-code-wrapper {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-code-wrapper canvas {
+    display: block;
+    border-radius: 8px;
+}
+
+.qr-code-description {
+    font-size: 16px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+}
+
+.share-link {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.share-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.copy-btn {
+    padding: 12px 20px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
 .photo-item {
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--shadow-light);
 }
 
 .photo-item h3 {
     font-size: 14px;
     font-weight: 600;
-    color: #666;
+    color: var(--text-tertiary);
     margin: 0 0 15px 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -740,9 +1191,9 @@ function getInitials(name: string): string {
 .upload-btn {
     width: 100%;
     padding: 30px 20px;
-    border: 2px dashed #D0D0D0;
+    border: 2px dashed var(--border-color);
     border-radius: 8px;
-    background-color: #FAFAFA;
+    background-color: var(--bg-secondary);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -750,24 +1201,24 @@ function getInitials(name: string): string {
     justify-content: center;
     gap: 10px;
     font-size: 14px;
-    color: #666;
+    color: var(--text-tertiary);
     transition: all 0.2s;
 }
 
 .upload-btn:hover {
-    border-color: #999;
-    background-color: #F5F5F5;
+    border-color: var(--text-muted);
+    background-color: var(--border-subtle);
 }
 
 .upload-btn:active {
-    background-color: #EFEFEF;
+    background-color: var(--border-subtle);
 }
 
 .photos-gallery-section {
-    background-color: #FFFFFF;
+    background-color: var(--bg-secondary);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--shadow-light);
     margin-bottom: 20px;
 }
 
@@ -782,12 +1233,12 @@ function getInitials(name: string): string {
     align-items: center;
     font-size: 16px;
     font-weight: 600;
-    color: #333;
+    color: var(--text-secondary);
     transition: background-color 0.2s;
 }
 
 .photos-gallery-header:hover {
-    background-color: #F9F9F9;
+    background-color: var(--border-subtle);
 }
 
 .photos-gallery-title {
@@ -797,7 +1248,7 @@ function getInitials(name: string): string {
 
 .expand-icon {
     transition: transform 0.3s ease;
-    color: #666;
+    color: var(--text-tertiary);
 }
 
 .expand-icon.expanded {
@@ -806,7 +1257,7 @@ function getInitials(name: string): string {
 
 .photos-gallery-content {
     padding: 0 20px 20px 20px;
-    border-top: 1px solid #E8E8E8;
+    border-top: 1px solid var(--border-subtle);
 }
 
 .photos-grid {
@@ -822,13 +1273,13 @@ function getInitials(name: string): string {
     overflow: hidden;
     aspect-ratio: 1;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px var(--shadow-light);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .photo-gallery-item:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--shadow-medium);
 }
 
 .photo-gallery-item img {

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">better-stocard</string>
-    <string name="title_activity_main">better-stocard</string>
+    <string name="app_name">pocketz</string>
+    <string name="title_activity_main">pocketz</string>
     <string name="package_name">com.reelmia.bs</string>
     <string name="custom_url_scheme">com.reelmia.bs</string>
 </resources>

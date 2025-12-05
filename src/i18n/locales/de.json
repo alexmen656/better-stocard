@@ -1,0 +1,79 @@
+{
+  "home": {
+    "title": "Karten",
+    "allCards": "ALLE KARTEN"
+  },
+  "nav": {
+    "cards": "Karten",
+    "settings": "Einstellungen"
+  },
+  "createCard": {
+    "selectCompany": "Unternehmen auswählen",
+    "customCard": "Benutzerdefinierte Karte",
+    "addCard": "Karte hinzufügen",
+    "searchCompanies": "Unternehmen suchen...",
+    "createCustomCard": "Benutzerdefinierte Karte erstellen",
+    "companyName": "Unternehmensname",
+    "enterCompanyName": "Unternehmensname eingeben",
+    "companyNameHint": "Geben Sie den Namen des Unternehmens oder Geschäfts für Ihre benutzerdefinierte Karte ein.",
+    "continue": "Weiter",
+    "cardNumberBarcode": "Kartennummer / Barcode",
+    "enterBarcode": "Barcode oder Kartennummer eingeben",
+    "barcodeHint": "Geben Sie den Barcode manuell ein oder verwenden Sie den Scanner unten, um ihn mit Ihrer Kamera zu erfassen.",
+    "scanBarcode": "Barcode scannen",
+    "scanning": "Scanne...",
+    "back": "Zurück",
+    "saveCard": "Karte speichern"
+  },
+  "cardDetail": {
+    "addPhotos": "Fotos hinzufügen",
+    "editCard": "Karte bearbeiten",
+    "shareCard": "Karte teilen",
+    "deleteCard": "Karte löschen",
+    "confirmDelete": "Möchten Sie diese Karte wirklich löschen?",
+    "failedToDeleteCard": "Karte konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.",
+    "scanQRCode": "Scannen Sie diesen QR-Code, um die Karte zu teilen",
+    "cardPhotos": "Kartenfotos",
+    "front": "Vorderseite",
+    "back": "Rückseite",
+    "uploadPhoto": "Foto hochladen",
+    "failedToAddToWallet": "Karte konnte nicht zur Wallet hinzugefügt werden. Bitte versuchen Sie es erneut.",
+    "generateShareDescription": "Generieren Sie einen sicheren, verschlüsselten Link, um diese Karte zu teilen.",
+    "generateQRCode": "QR-Code generieren",
+    "copyLink": "Link kopieren",
+    "linkCopied": "Link in die Zwischenablage kopiert!",
+    "failedToGenerateShare": "Fehler beim Generieren des Teilen-Links. Bitte versuchen Sie es erneut.",
+    "cardName": "Kartenname",
+    "cardNumber": "Kartennummer",
+    "save": "Speichern",
+    "cancel": "Abbrechen"
+  },
+  "shareReceive": {
+    "decrypting": "Entschlüssele Karte...",
+    "errorTitle": "Fehler",
+    "decryptionError": "Fehler beim Entschlüsseln der Karte.",
+    "invalidLink": "Ungültiger Teilen-Link.",
+    "missingKey": "Verschlüsselungsschlüssel fehlt.",
+    "decryptionFailed": "Entschlüsselung fehlgeschlagen. Der Link könnte beschädigt sein.",
+    "backToHome": "Zurück zur Startseite",
+    "cardReceived": "Karte erhalten!",
+    "cardReceivedDescription": "Möchten Sie diese Karte zu Ihrer Sammlung hinzufügen?",
+    "saveCard": "Karte speichern",
+    "cancel": "Abbrechen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "appearance": "DARSTELLUNG",
+    "darkMode": "Dunkler Modus",
+    "information": "INFORMATIONEN",
+    "appVersion": "App-Version",
+    "appBuild": "App-Build",
+    "openSource": "OPEN SOURCE",
+    "openSourceInfo": "Diese App ist Open Source",
+    "viewOnGithub": "Auf GitHub ansehen",
+    "debugMenu": "Debug-Menü",
+    "addDemoData": "Demo-Daten hinzufügen",
+    "demoDataAdded": "Demo-Daten hinzugefügt!",
+    "close": "Schließen"
+  }
+}

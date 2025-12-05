@@ -4,6 +4,9 @@ import CardDetail from '@/components/CardDetail.vue'
 import { Preferences } from '@capacitor/preferences';
 import TouchBar from '@/components/TouchBar.vue'
 import CardsHeader from '@/components/CardsHeader.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface Card {
   id: number
@@ -12,6 +15,7 @@ interface Card {
   bgColor: string
   textColor: string
   isCustomCard?: boolean
+  deleted?: boolean
 }
 
 const extractColorFromImage = (logoUrl: string): Promise<string> => {
@@ -78,10 +82,18 @@ function closeCard() {
 }
 
 function updateCard(updatedCard: Card) {
-  const cardIndex = cards.value.findIndex(c => c.id === updatedCard.id)
-  if (cardIndex !== -1) {
-    cards.value[cardIndex] = updatedCard
-    saveCards()
+  if (updatedCard.deleted) {
+    const cardIndex = cards.value.findIndex(c => c.id === updatedCard.id)
+    if (cardIndex !== -1) {
+      cards.value.splice(cardIndex, 1)
+      saveCards()
+    }
+  } else {
+    const cardIndex = cards.value.findIndex(c => c.id === updatedCard.id)
+    if (cardIndex !== -1) {
+      cards.value[cardIndex] = updatedCard
+      saveCards()
+    }
   }
 }
 
@@ -117,7 +129,7 @@ onMounted(async () => {
 <template>
   <div class="app-container">
     <CardsHeader />
-    <div class="section-title">ALL CARDS</div>
+    <div class="section-title">{{ t('home.allCards') }}</div>
     <div class="cards-grid">
       <div v-for="card in cards" :key="card.id" class="card"
         :style="{ backgroundColor: card.bgColor, color: card.textColor }" @click="openCard(card)">
@@ -148,7 +160,7 @@ onMounted(async () => {
 
 .app-container {
   min-height: 100vh;
-  background-color: #F5F5F5;
+  background-color: var(--bg-primary);
   padding-bottom: 70px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   -webkit-user-select: none;
@@ -162,9 +174,9 @@ onMounted(async () => {
   padding: 15px 20px 10px 20px;
   font-size: 12px;
   font-weight: 500;
-  color: #999999;
+  color: var(--text-muted);
   letter-spacing: 0.5px;
-  background-color: #F5F5F5;
+  background-color: var(--bg-primary);
 }
 
 .cards-grid {
@@ -184,7 +196,7 @@ onMounted(async () => {
   justify-content: center;
   cursor: pointer;
   transition: transform 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--shadow-medium);
   width: 100%;
   min-width: 0;
 }

@@ -15,3 +15,12 @@ for week 2:
 
 - offline mode
 - big barcode mode
+
+Little journal:
+I wanted to encrypt card data in URL params for sharing, but then I remembered you could reverse engineer the binary and get the encryption key lol.
+Seems like I need to store them in backend :((((
+
+Fragmented key via # maybe???
+
+todo:
+-add missing translations in some languages

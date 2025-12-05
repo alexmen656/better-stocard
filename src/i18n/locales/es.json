@@ -1,0 +1,79 @@
+{
+  "home": {
+    "title": "Tarjetas",
+    "allCards": "TODAS LAS TARJETAS"
+  },
+  "nav": {
+    "cards": "Tarjetas",
+    "settings": "Ajustes"
+  },
+  "createCard": {
+    "selectCompany": "Seleccionar empresa",
+    "customCard": "Tarjeta personalizada",
+    "addCard": "Añadir tarjeta",
+    "searchCompanies": "Buscar empresas...",
+    "createCustomCard": "Crear tarjeta personalizada",
+    "companyName": "Nombre de la empresa",
+    "enterCompanyName": "Ingrese el nombre de la empresa",
+    "companyNameHint": "Ingrese el nombre de la empresa o tienda para su tarjeta personalizada.",
+    "continue": "Continuar",
+    "cardNumberBarcode": "Número de tarjeta / Código de barras",
+    "enterBarcode": "Ingrese el código de barras o número de tarjeta",
+    "barcodeHint": "Ingrese el código de barras manualmente o use el escáner a continuación para capturarlo con su cámara.",
+    "scanBarcode": "Escanear código de barras",
+    "scanning": "Escaneando...",
+    "back": "Atrás",
+    "saveCard": "Guardar tarjeta"
+  },
+  "cardDetail": {
+    "addPhotos": "Añadir fotos",
+    "editCard": "Editar tarjeta",
+    "shareCard": "Compartir tarjeta",
+    "deleteCard": "Eliminar tarjeta",
+    "failedToDeleteCard": "No se pudo eliminar la tarjeta. Por favor, inténtelo de nuevo.",
+    "confirmDelete": "¿Está seguro de que desea eliminar esta tarjeta?",
+    "scanQRCode": "Escanea este código QR para compartir la tarjeta",
+    "cardPhotos": "Fotos de la tarjeta",
+    "front": "Frontal",
+    "back": "Trasera",
+    "uploadPhoto": "Subir foto",
+    "failedToAddToWallet": "No se pudo añadir la tarjeta a la billetera. Por favor, inténtelo de nuevo.",
+    "generateShareDescription": "Genere un enlace seguro y encriptado para compartir esta tarjeta.",
+    "generateQRCode": "Generar código QR",
+    "copyLink": "Copiar enlace",
+    "linkCopied": "¡Enlace copiado al portapapeles!",
+    "failedToGenerateShare": "Error al generar el enlace compartido. Por favor, inténtelo de nuevo.",
+    "cardName": "Nombre de la tarjeta",
+    "cardNumber": "Número de tarjeta",
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  },
+  "shareReceive": {
+    "decrypting": "Descifrando tarjeta...",
+    "errorTitle": "Error",
+    "decryptionError": "Error al descifrar la tarjeta.",
+    "invalidLink": "Enlace compartido inválido.",
+    "missingKey": "Falta la clave de encriptación.",
+    "decryptionFailed": "Error en el descifrado. El enlace podría estar corrupto.",
+    "backToHome": "Volver al inicio",
+    "cardReceived": "¡Tarjeta recibida!",
+    "cardReceivedDescription": "¿Desea agregar esta tarjeta a su colección?",
+    "saveCard": "Guardar tarjeta",
+    "cancel": "Cancelar"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "appearance": "APARIENCIA",
+    "darkMode": "Modo oscuro",
+    "information": "INFORMACIÓN",
+    "appVersion": "Versión de la aplicación",
+    "appBuild": "Build de la aplicación",
+    "openSource": "CÓDIGO ABIERTO",
+    "openSourceInfo": "Esta aplicación es de código abierto",
+    "viewOnGithub": "Ver en GitHub",
+    "debugMenu": "Menú de depuración",
+    "addDemoData": "Añadir datos de demostración",
+    "demoDataAdded": "¡Datos de demostración añadidos!",
+    "close": "Cerrar"
+  }
+}

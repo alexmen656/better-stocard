@@ -3,3 +3,6 @@ declare module 'vue-barcode' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+declare module 'tweetnacl'
+declare module 'tweetnacl-util'

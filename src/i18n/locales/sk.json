@@ -1,0 +1,79 @@
+{
+  "home": {
+    "title": "Karty",
+    "allCards": "VŠETKY KARTY"
+  },
+  "nav": {
+    "cards": "Karty",
+    "settings": "Nastavenia"
+  },
+  "createCard": {
+    "selectCompany": "Vybrať spoločnosť",
+    "customCard": "Vlastná karta",
+    "addCard": "Pridať kartu",
+    "searchCompanies": "Hľadať spoločnosti...",
+    "createCustomCard": "Vytvoriť vlastnú kartu",
+    "companyName": "Názov spoločnosti",
+    "enterCompanyName": "Zadajte názov spoločnosti",
+    "companyNameHint": "Zadajte názov spoločnosti alebo obchodu pre vašu vlastnú kartu.",
+    "continue": "Pokračovať",
+    "cardNumberBarcode": "Číslo karty / Čiarový kód",
+    "enterBarcode": "Zadajte čiarový kód alebo číslo karty",
+    "barcodeHint": "Zadajte čiarový kód manuálne alebo použite skener nižšie na zachytenie pomocou fotoaparátu.",
+    "scanBarcode": "Naskenovať čiarový kód",
+    "scanning": "Skenujem...",
+    "back": "Späť",
+    "saveCard": "Uložiť kartu"
+  },
+  "cardDetail": {
+    "addPhotos": "Pridať fotky",
+    "editCard": "Upraviť kartu",
+    "shareCard": "Zdieľať kartu",
+    "deleteCard": "Vymazať kartu",
+    "failedToDeleteCard": "Nepodarilo sa vymazať kartu. Skúste to prosím znova.",
+    "confirmDelete": "Naozaj chcete túto kartu vymazať?",
+    "scanQRCode": "Naskenujte tento QR kód na zdieľanie karty",
+    "cardPhotos": "Fotky karty",
+    "front": "Predná strana",
+    "back": "Zadná strana",
+    "uploadPhoto": "Nahrať fotku",
+    "failedToAddToWallet": "Nepodarilo sa pridať kartu do peňaženky. Skúste to prosím znova.",
+    "generateShareDescription": "Vytvorte bezpečný, zašifrovaný odkaz na zdieľanie tejto karty.",
+    "generateQRCode": "Generovať QR kód",
+    "copyLink": "Kopírovať odkaz",
+    "linkCopied": "Odkaz skopírovaný do schránky!",
+    "failedToGenerateShare": "Chyba pri generovaní odkazu na zdieľanie. Skúste to prosím znova.",
+    "cardName": "Názov karty",
+    "cardNumber": "Číslo karty",
+    "save": "Uložiť",
+    "cancel": "Zrušiť"
+  },
+  "shareReceive": {
+    "decrypting": "Dešifrovanie karty...",
+    "errorTitle": "Chyba",
+    "decryptionError": "Chyba pri dešifrovaní karty.",
+    "invalidLink": "Neplatný odkaz na zdieľanie.",
+    "missingKey": "Chýba šifrovací kľúč.",
+    "decryptionFailed": "Dešifrovanie zlyhalo. Odkaz môže byť poškodený.",
+    "backToHome": "Späť na domovskú stránku",
+    "cardReceived": "Karta prijatá!",
+    "cardReceivedDescription": "Chcete pridať túto kartu do svojej kolekcie?",
+    "saveCard": "Uložiť kartu",
+    "cancel": "Zrušiť"
+  },
+  "settings": {
+    "title": "Nastavenia",
+    "appearance": "VZHĽAD",
+    "darkMode": "Tmavý režim",
+    "information": "INFORMÁCIE",
+    "appVersion": "Verzia aplikácie",
+    "appBuild": "Build aplikácie",
+    "openSource": "OPEN SOURCE",
+    "openSourceInfo": "Táto aplikácia je Open Source",
+    "viewOnGithub": "Zobraziť na GitHub",
+    "debugMenu": "Ladiace menu",
+    "addDemoData": "Pridať demo dáta",
+    "demoDataAdded": "Demo dáta pridané!",
+    "close": "Zavrieť"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "home": {
+    "title": "Cards",
+    "allCards": "ALL CARDS"
+  },
+  "nav": {
+    "cards": "Cards",
+    "settings": "Settings"
+  },
+  "createCard": {
+    "selectCompany": "Select Company",
+    "customCard": "Custom Card",
+    "addCard": "Add Card",
+    "searchCompanies": "Search companies...",
+    "createCustomCard": "Create Custom Card",
+    "companyName": "Company Name",
+    "enterCompanyName": "Enter company name",
+    "companyNameHint": "Enter the name of the company or store for your custom card.",
+    "continue": "Continue",
+    "cardNumberBarcode": "Card Number / Barcode",
+    "enterBarcode": "Enter barcode or card number",
+    "barcodeHint": "Enter the barcode manually or use the scanner below to capture it with your camera.",
+    "scanBarcode": "Scan Barcode",
+    "scanning": "Scanning...",
+    "back": "Back",
+    "saveCard": "Save Card"
+  },
+  "cardDetail": {
+    "generateShareDescription": "Generate a secure, encrypted link to share this card.",
+    "generateQRCode": "Generate QR Code",
+    "copyLink": "Copy Link",
+    "linkCopied": "Link copied to clipboard!",
+    "failedToGenerateShare": "Failed to generate share link. Please try again.",
+    "addPhotos": "Add Photos",
+    "editCard": "Edit Card",
+    "shareCard": "Share Card",
+    "deleteCard": "Delete Card",
+    "failedToDeleteCard": "Failed to delete card. Please try again.",
+    "confirmDelete": "Are you sure you want to delete this card?",
+    "scanQRCode": "Scan this QR code to share the card",
+    "cardPhotos": "Card Photos",
+    "front": "Front",
+    "back": "Back",
+    "uploadPhoto": "Upload Photo",
+    "failedToAddToWallet": "Failed to add card to wallet. Please try again.",
+    "cardName": "Card Name",
+    "cardNumber": "Card Number",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "shareReceive": {
+    "decrypting": "Decrypting card...",
+    "errorTitle": "Error",
+    "decryptionError": "Error decrypting the card.",
+    "invalidLink": "Invalid share link.",
+    "missingKey": "Encryption key missing.",
+    "decryptionFailed": "Decryption failed. The link might be corrupted.",
+    "backToHome": "Back to Home",
+    "cardReceived": "Card Received!",
+    "cardReceivedDescription": "Would you like to add this card to your collection?",
+    "saveCard": "Save Card",
+    "cancel": "Cancel"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "APPEARANCE",
+    "darkMode": "Dark Mode",
+    "information": "INFORMATION",
+    "appVersion": "App Version",
+    "appBuild": "App Build",
+    "openSource": "OPEN SOURCE",
+    "openSourceInfo": "This App is Open Source",
+    "viewOnGithub": "View on GitHub",
+    "debugMenu": "Debug Menu",
+    "addDemoData": "Add Demo Data",
+    "demoDataAdded": "Demo data added!",
+    "close": "Close"
+  }
+}
