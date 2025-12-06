@@ -2,16 +2,31 @@
 
 ## What is Pocketz? (About the project)
 
-Pocketz is a simple card manager that transforms your physical cards into digital ones. Additionally, it supports Apple Wallet so you can have all your cards in one place
+Pocketz is a simple card manager that turns your physical cards into digital ones. It also supports Apple Wallet, allowing you to keep all your cards in one place. Additionally, it includes a sharing feature, so you can digitally share your physical cards with family and friends.
+A new feature I added is support for QR codes and GS1-based cards. Pocketz currently supports 5 languages.
 
 ## Demo
 
-[YouTube](https://youtube.com/shorts/HbPc2MwK0nQ)
+[YouTube](https://youtu.be/ANMNPKKc5Yc)
 
 ## Special Features
 
 - Apple Wallet support
 - Barcode Scanner as easier adding method
+- Multi-language support
+- Card sharing functionality
+- Support for multiple card types (Barcode, QR Code, GS1)
+
+## Changes since 1. Siege submission:
+
+Since I already submitted this project to Siege once, here are the changes I made during this week (week 12):
+
+- Added share feature: You can share your cards with other people via a QR code and/or a link
+- Multilang support: Added support for 5 languages (translations themselves were mostly by AI to be fair)
+- Added delete card feature
+- Added edit card feature
+- Many minor improvements, such as padding tweaks, general code optimizations, UI bugs, etc
+- You can find everything in siege-week-11 branch (the name is wrong it should have been week 12)
 
 ## Recommended IDE Setup
 
@@ -36,11 +51,15 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
+Install all dependencies defined in `package.json`:
+
 ```sh
 npm install
 ```
 
 ### Compile and Hot-Reload for Development
+
+Start the development server with hot module replacement for rapid iteration:
 
 ```sh
 npm run dev
@@ -48,18 +67,20 @@ npm run dev
 
 ### Type-Check, Compile and Minify for Production
 
+Build an optimized production bundle:
+
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+Synchronize the web build with Capacitor native platforms:
 
 ```sh
-npm run test:unit
+npx cap sync
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Open the iOS project in Xcode:
 
 ```sh
-npm run lint
+npx cap open ios
 ```
